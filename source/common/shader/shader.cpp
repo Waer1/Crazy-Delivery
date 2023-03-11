@@ -21,10 +21,29 @@ bool our::ShaderProgram::attach(const std::string &filename, GLenum type) const 
     file.close();
 
     //TODO: Complete this function
+		GLuint shader = glCreateShader(type);
+		// Send the source code to the shader and compile it
+		glShaderSource(shader, 1, &sourceCStr, nullptr);
+		glCompileShader(shader);
+
     //Note: The function "checkForShaderCompilationErrors" checks if there is
     // an error in the given shader. You should use it to check if there is a
     // compilation error and print it so that you can know what is wrong with
     // the shader. The returned string will be empty if there is no errors.
+
+		std::string shaderError = checkForShaderCompilationErrors(shader);
+		if (shaderError.size() != 0) {
+			std::cerr << "ERROR IN " << filename << std::endl;
+			std::cerr << shaderError << std::endl;
+
+			// Delete the created shader then return false
+			glDeleteShader(shader);
+			return false;
+		}
+
+		// Attach the shader to the program then delete the shader
+		glAttachShader(program, shader);
+		glDeleteShader(shader);
 
     //We return true if the compilation succeeded
     return true;
@@ -39,6 +58,17 @@ bool our::ShaderProgram::link() const {
     // linking error and print it so that you can know what is wrong with the
     // program. The returned string will be empty if there is no errors.
 
+		// Call OpenGL to link the program
+		glLinkProgram(program);
+
+		std::string linkingError = checkForLinkingErrors(program); 
+		if (linkingError.size() != 0){
+			std::cerr << "LINKING ERROR" << std::endl;
+			std::cerr << linkingError << std::endl;
+
+			return false;
+    }
+
     return true;
 }
 
@@ -47,7 +77,7 @@ bool our::ShaderProgram::link() const {
 ////////////////////////////////////////////////////////////////////
 
 std::string checkForShaderCompilationErrors(GLuint shader){
-     //Check and return any error in the compilation process
+    //Check and return any error in the compilation process
     GLint status;
     glGetShaderiv(shader, GL_COMPILE_STATUS, &status);
     if (!status) {
@@ -63,7 +93,7 @@ std::string checkForShaderCompilationErrors(GLuint shader){
 }
 
 std::string checkForLinkingErrors(GLuint program){
-     //Check and return any error in the linking process
+    //Check and return any error in the linking process
     GLint status;
     glGetProgramiv(program, GL_LINK_STATUS, &status);
     if (!status) {
