@@ -12,5 +12,16 @@ uniform int size = 32;
 uniform vec3 colors[2];
 
 void main(){
-    frag_color = vec4(colors[0], 1.0);
+    // Calculate the position of the current fragment in screen space
+    vec2 position = gl_FragCoord.xy;
+
+    // Calculate which tile this fragment belongs to
+    int xTile = int(position.x) / size;
+    int yTile = int(position.y) / size;
+
+    // Determine which color this tile should be based on its position
+    vec3 tileColor = colors[ (xTile + yTile) % 2 ];
+
+    // Set the fragment color to the determined tile color
+    frag_color = vec4(tileColor, 1.0);
 }
