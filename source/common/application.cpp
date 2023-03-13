@@ -239,19 +239,10 @@ int our::Application::run(int run_for_frames) {
     double last_frame_time = glfwGetTime();
     int current_frame = 0;
 
-
-		// REMOVE AFTER PHASE 0
-		// =======================================
-		int id = 9206348;
-		float colorR = ((id /   1) % 16) / 16.0;
-		float colorG = ((id /  16) % 16) / 16.0;
-		float colorB = ((id / 256) % 16) / 16.0;
-		// =======================================
-
     //Game loop
     while(!glfwWindowShouldClose(window)){
         if(run_for_frames != 0 && current_frame >= run_for_frames) break;
-        glfwPollEvents(); // Read   all the user events and call relevant callbacks.
+        glfwPollEvents(); // Read all the user events and call relevant callbacks.
 
         // Start a new ImGui frame
         ImGui_ImplOpenGL3_NewFrame();
@@ -313,12 +304,6 @@ int our::Application::run(int run_for_frames) {
                 requested_screenshots.pop();
             } else break;
         }
-
-				// REMOVE AFTER PHASE 0
-				// =======================================
-				glClearColor(colorR, colorG, colorB, 1.0);
-				glClear(GL_COLOR_BUFFER_BIT);
-				// =======================================
 
         // Swap the frame buffers
         glfwSwapBuffers(window);
