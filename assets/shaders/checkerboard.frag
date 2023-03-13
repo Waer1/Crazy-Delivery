@@ -20,7 +20,7 @@ void main(){
     int yTile = int(position.y) / size;
 
     // Determine which color this tile should be based on its position
-    vec3 tileColor = colors[ (xTile + yTile) % 2 ];
+    vec3 tileColor = colors[(xTile + yTile) % 2];
 
     // Set the fragment color to the determined tile color
     frag_color = vec4(tileColor, 1.0);
