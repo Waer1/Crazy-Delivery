@@ -28,75 +28,57 @@ namespace our {
         // a vertex array object to define how to read the vertex & element buffer during rendering 
         Mesh(const std::vector<Vertex>& vertices, const std::vector<unsigned int>& elements)
         {
-            //TODO: (Req 2) Write this function
-            // remember to store the number of elements in "elementCount" since you will need it for drawing
-						elementCount = elements.size();
-            // For the attribute locations, use the constants defined above: ATTRIB_LOC_POSITION, ATTRIB_LOC_COLOR, etc
-            
-						// ============================================================================
-						// Vertex Buffer
-						// ============================================================================
-						// (Number of vertex buffers, Vertex buffer name)
-						glGenBuffers(1, &VBO);
-						// (Binding Target , Vertex buffer name)
-						glBindBuffer(GL_ARRAY_BUFFER, VBO);
-						// (target, size, data, usage)
-						glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
-						// ============================================================================
+            // Generate the VAO, VBO and EBO
+            glGenVertexArrays(1, &VAO);
+            glGenBuffers(1, &VBO);
+            glGenBuffers(1, &EBO);
+
+            // Bind the VAO
+            glBindVertexArray(VAO);
+
+            // Bind the VBO and copy the vertex data to it
+            glBindBuffer(GL_ARRAY_BUFFER, VBO);
+            glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+
+            // Bind the EBO and copy the element data to it
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
 
 						// ============================================================================
-						// Elements Buffer
-						// ============================================================================
-						glGenBuffers(1, &EBO);
-						glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-						glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementCount * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
-						// ============================================================================
-
-						// ============================================================================
-						// Vertex Array
-						// ============================================================================
-						// Define the vertex array that will be used for drawing vertices and bind it
-						glGenVertexArrays(1, &VAO);
-						glBindVertexArray(VAO);
-
-						// Rebind the vertex buffer
-						glBindBuffer(GL_ARRAY_BUFFER, VBO);
-						// ============================================================================
-
-						// ============================================================================
+            // Set the attribute pointers for the vertex data
 						// Position
-						glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
-						glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, false, sizeof(Vertex), (void*)0);
+            glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
+            glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
 
 						// Color
-						glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
-						glVertexAttribPointer(ATTRIB_LOC_COLOR, 4, GL_UNSIGNED_BYTE, true, sizeof(Vertex), (void*)offsetof(Vertex, color));
+            glVertexAttribPointer(ATTRIB_LOC_COLOR, 3, GL_UNSIGNED_BYTE, GL_TRUE, sizeof(Vertex), (void*)offsetof(Vertex, color));
+            glEnableVertexAttribArray(ATTRIB_LOC_COLOR);
 
 						// Texture Coordinates
-						glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
-						glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
+            glVertexAttribPointer(ATTRIB_LOC_TEXCOORD, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, tex_coord));
+            glEnableVertexAttribArray(ATTRIB_LOC_TEXCOORD);
 
 						// Normal
-						glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
-						glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+            glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, normal));
+            glEnableVertexAttribArray(ATTRIB_LOC_NORMAL);
 						// ============================================================================
 
-						// Rebind the element buffer
-						glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+            // Unbind the VAO, VBO and EBO
+            glBindVertexArray(0);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-						// Unbind the vertex array
-						glBindVertexArray(0);
+            // Store the number of elements
+            elementCount = elements.size();
         }
 
         // this function should render the mesh
         void draw() 
         {
-            //TODO: (Req 2) Write this function
-
-						// Bind the vertex array then draw
-						glBindVertexArray(VAO);
-						// Render primitives from array data
-						glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_SHORT, (void*)0);
+            // Bind the VAO and draw the elements
+            glBindVertexArray(VAO);
+            glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
+            glBindVertexArray(0);
         }
 
         // this function should delete the vertex & element buffers and the vertex array object
