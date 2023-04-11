@@ -41,7 +41,15 @@ namespace our {
 						// (Binding Target , Vertex buffer name)
 						glBindBuffer(GL_ARRAY_BUFFER, VBO);
 						// (target, size, data, usage)
-						glBufferData(GL_ARRAY_BUFFER, vertices.size()*sizeof(Vertex), &vertices[0], GL_STATIC_DRAW);
+						glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
+						// ============================================================================
+
+						// ============================================================================
+						// Elements Buffer
+						// ============================================================================
+						glGenBuffers(1, &EBO);
+						glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+						glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementCount * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
 						// ============================================================================
 
 						// ============================================================================
@@ -50,6 +58,9 @@ namespace our {
 						// Define the vertex array that will be used for drawing vertices and bind it
 						glGenVertexArrays(1, &VAO);
 						glBindVertexArray(VAO);
+
+						// Rebind the vertex buffer
+						glBindBuffer(GL_ARRAY_BUFFER, VBO);
 						// ============================================================================
 
 						// ============================================================================
@@ -70,13 +81,11 @@ namespace our {
 						glVertexAttribPointer(ATTRIB_LOC_NORMAL, 3, GL_FLOAT, false, sizeof(Vertex), (void*)offsetof(Vertex, normal));
 						// ============================================================================
 
-						// ============================================================================
-						// Elements Buffer
-						// ============================================================================
-						glGenBuffers(1, &EBO);
+						// Rebind the element buffer
 						glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-						glBufferData(GL_ELEMENT_ARRAY_BUFFER, elementCount*sizeof(unsigned int), &elements[0], GL_STATIC_DRAW);
-						// ============================================================================
+
+						// Unbind the vertex array
+						glBindVertexArray(0);
         }
 
         // this function should render the mesh
