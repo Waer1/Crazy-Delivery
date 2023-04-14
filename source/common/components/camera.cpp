@@ -52,13 +52,12 @@ namespace our {
         // For the perspective camera, you can use glm::perspective
         // It takes fovY, aspect ratio, near and far
 
-        float aspectRatio = (viewportSize.x*1.0)/viewportSize.y;
+        float aspectRatio = float(viewportSize.x) / viewportSize.y;
 
         if( cameraType == CameraType::ORTHOGRAPHIC )
             return glm::ortho(-orthoHeight*aspectRatio/2 , orthoHeight*aspectRatio/2, -orthoHeight/2, orthoHeight/2);
         else
             return glm::perspective(fovY, aspectRatio, near, far);
-
     }
 
 }
