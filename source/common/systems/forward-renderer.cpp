@@ -23,7 +23,15 @@ namespace our {
             // Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth funtion should we pick?
             // We will draw the sphere from the inside, so what options should we pick for the face culling.
             PipelineState skyPipelineState{};
-            
+            skyPipelineState.depthTesting.enabled = true;
+            // GL_LEQUAL is the best since most cloud are drawn behind the scence
+            skyPipelineState.depthTesting.function = GL_LEQUAL;
+
+            skyPipelineState.faceCulling.enabled=true;
+            skyPipelineState.faceCulling.culledFace = GL_FRONT;
+            // Front is CCW as I remember from the slides
+            skyPipelineState.faceCulling.frontFace = GL_CCW;
+
             // Load the sky texture (note that we don't need mipmaps since we want to avoid any unnecessary blurring while rendering the sky)
             std::string skyTextureFile = config.value<std::string>("sky", "");
             Texture2D* skyTexture = texture_utils::loadImage(skyTextureFile, false);
@@ -135,10 +143,22 @@ namespace our {
 
         //TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         // HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
-        glm::vec3 cameraForward = glm::vec3(0.0, 0.0, -1.0f);
+
+        glm::mat4 M = camera->getOwner()->getLocalToWorldMatrix();
+//        glm::vec3 cameraPos    = glm::vec3(M * glm::vec4(0, 0, 0, 1 ));
+        glm::vec4 forward = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);  // The camera's forward direction in its local space
+        glm::vec4 worldForward = camera->getViewMatrix() * forward;  // The camera's forward direction in world space
+        glm::vec3 cameraForward = glm::normalize(glm::vec3(worldForward));  // Normalize the vector to get the direction
+
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand& first, const RenderCommand& second){
             //TODO: (Req 9) Finish this function
-            // HINT: the following return should return true "first" should be drawn before "second". 
+            // HINT: the following return should return true "first" should be drawn before "second".
+//            double firstDistance  =  glm::abs(glm::dot(first.center-cameraPos,cameraForward));
+//            double secondDistance =  glm::abs(glm::dot(second.center-cameraPos,cameraForward));
+//            if(firstDistance>secondDistance)
+//                return true;
+
+            return false;
             return false;
         });
 
