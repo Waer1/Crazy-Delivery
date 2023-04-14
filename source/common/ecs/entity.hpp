@@ -36,7 +36,7 @@ namespace our {
             //TODO: (Req 8) Create an component of type T, set its "owner" to be this entity, then push it into the component's list
             // Don't forget to return a pointer to the new component
             T * newComponent = new T();
-            newComponent->setOwner(this);
+            newComponent->owner = this;
             components.push_back(newComponent);
             return newComponent;
         }
