@@ -42,7 +42,6 @@ namespace our {
         // For example, if faceCulling.enabled is true, you should call glEnable(GL_CULL_FACE), otherwise, you should call glDisable(GL_CULL_FACE)
         void setup() const {
             //TODO: (Req 4) Write this function
-
 						// Check if face culling is enabled then set the culling face and front face
 						if (faceCulling.enabled) {
 								glEnable(GL_CULL_FACE);
