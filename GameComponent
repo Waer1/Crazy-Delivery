@@ -1,0 +1,52 @@
+component: 
+  - lighting
+  - movment
+  - target
+  - building
+  - obstacles
+  - battery
+  - road
+  - timer & direction & speed
+  - 
+  - 
+
+
+systems:
+  - car movment
+  - Game logic
+  - crashing 
+  - 
+  - 
+
+
+
+suggestions:
+  - diffrent levels indicate diffrent number of obstacles and start and end point
+  - diffrent levels have multiple delivers and destination
+  - views && look behind
+  - minimap
+  - 
+
+
+steps: 
+  - map 
+  - keyboard 
+  - car movment logic 
+  - obstacles & building 
+  - crashing system 
+  - Game logic ( time - win - lose - direction )
+  - menu system
+  - 
+  - 
+
+tasks division: 
+  - render map & obstacles(movment) & building & target : waer - beshoy
+  - car movments & keyboard : فسا الكلاب - nu3
+  - movement of the car on the map & direction : 
+  - crashing system : 
+  - Game logic ( time - win - lose( time, battery ) ) : 
+  - menu system : 
+  - 
+ 
+ 
+ 

@@ -40,7 +40,7 @@ namespace our {
         glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
         glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
         glm::vec3 up = M * glm::vec4(0, 1, 0, 1);
-        // Creating the view matrix with the pre computed vectors
+        // Creating the view matrix with the precomputed vectors
         return glm::lookAt(eye, center, up);
     }
 
