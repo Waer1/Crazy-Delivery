@@ -22,6 +22,11 @@ namespace our {
             //TODO: (Req 10) Pick the correct pipeline state to draw the sky
             // Hints: the sky will be draw after the opaque objects so we would need depth testing but which depth function should we pick?
             // We will draw the sphere from the inside, so what options should we pick for the face culling.
+            /*
+                firstly we need to define a pipeline just to set if we need faceCulling, depthTesting or Blending
+                -> we need to enable depth testing, and set the function to GL_LEQUAL as the clouds are drawn behind the scenes
+                -> we need to enable faceCulling, and to select the front face to be removed
+            */
             PipelineState skyPipelineState{};
             skyPipelineState.depthTesting.enabled = true;
             skyPipelineState.depthTesting.function = GL_LEQUAL;
@@ -62,10 +67,14 @@ namespace our {
             //TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             // Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
             // The depth format can be (Depth component with 24 bits).
-            // As we send a window size then we get the maximum coordinate of them tp generate number of needed levels
+            // As we send a window size then we get the maximum coordinate of them tp generate number of needed levels, if the case was color
             colorTarget=texture_utils::empty(GL_RGBA8,windowSize);
             depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize);
-            // NEEDED
+            /* 
+            Attaching the frame buffer with the color and depth
+            Just like to specify to the frame buffer which texture to be drawn
+            We choose GL_COLOR_ATTACHEMENT0 as we will draw on a single texture, as there are other options to draw on different textures
+            */
             glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
             glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,depthTarget->getOpenGLName(),0);
             
@@ -202,7 +211,9 @@ namespace our {
             skyMaterial->setup();
             
             //TODO: (Req 10) Get the camera position
+            //Getting the Model Matrix to transform from local coordinates to world coordinates
             glm::mat4 M = camera->getOwner()->getLocalToWorldMatrix();
+            //Getting Camera position by selecting the last column of the Model matrix
             glm::vec3 cameraPosition = M * glm::vec4(0, 0, 0, 1);
 
             //TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
@@ -218,6 +229,8 @@ namespace our {
                 0.0f, 0.0f, 1.0f, 1.0f
             );
             //TODO: (Req 10) set the "transform" uniform
+            //We need to get the view Matrix and Projection Matrix
+            //then following TRS sequence of matrices then we will get the transformation matrix, which we will multiply it then with alwaysbehindTransform matrix
             glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
             glm::mat4 transformationMatrix = alwaysBehindTransform * VP * modelMatrix;
             skyMaterial->shader->set("transform", transformationMatrix);
@@ -238,8 +251,11 @@ namespace our {
             //TODO: (Req 11) Return to the default framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
             //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+            //Binding Vertex Array
             glBindVertexArray(postProcessVertexArray);
+            //Now we are ready for postProcess then we need to setup
             postprocessMaterial->setup();
+            //Drawing the new triangles after postProcessing of the image
             glDrawArrays(GL_TRIANGLES,0,3);
         }
     }
