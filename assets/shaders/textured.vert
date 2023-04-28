@@ -13,6 +13,8 @@ uniform mat4 transform;
 
 void main(){
     //TODO: (Req 7) Change the next line to apply the transformation matrix
+		
+		// Apply the transformation matrix by multiplying it with the position vector
     gl_Position = transform * vec4(position, 1.0);
     vs_out.color = color;
     vs_out.tex_coord = tex_coord;
