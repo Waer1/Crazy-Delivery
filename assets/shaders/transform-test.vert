@@ -19,7 +19,6 @@ void main(){
     // Multiply the transform matrix with the position converted to vec4 & set the result
     // as the new position in gl_Position which is defined globally
     gl_Position = transform * vec4(position, 1.0);
-		
     // No need to change any of the following lines
     vs_out.position = position;
     vs_out.color = color;
