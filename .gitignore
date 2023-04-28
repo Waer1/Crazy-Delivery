@@ -36,6 +36,8 @@ build
 imgui.ini
 
 .vscode
+.idea
+cmake-build-debug
 
 screenshots
 *.png
