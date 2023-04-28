@@ -8,7 +8,14 @@
 our::Texture2D* our::texture_utils::empty(GLenum format, glm::ivec2 size){
     our::Texture2D* texture = new our::Texture2D();
     //TODO: (Req 11) Finish this function to create an empty texture with the given size and format
-
+    //Default value for Depth, then checking if the sent format is for Depth or color
+    int numOfLevels=1;
+    if(format != GL_DEPTH_COMPONENT24){
+      //Then it's not depth, we are sending a color, so we need to change number of needed levels
+        numOfLevels=(int)glm::floor(glm::log2((float)glm::max(size.x,size.y)))+1;
+    }
+    texture->bind();
+    glTexStorage2D(GL_TEXTURE_2D,numOfLevels,format,size.x,size.y);
     return texture;
 }
 
@@ -26,6 +33,7 @@ our::Texture2D* our::texture_utils::loadImage(const std::string& filename, bool 
     //- 3: RGB
     //- 4: RGB and Alpha (RGBA)
     //Note: channels (the 4th argument) always returns the original number of channels in the file
+    // pixels that constructs the texture we want to draw, also this will be sent to the GPU memory
     unsigned char* pixels = stbi_load(filename.c_str(), &size.x, &size.y, &channels, 4);
     if(pixels == nullptr){
         std::cerr << "Failed to load image: " << filename << std::endl;
@@ -36,7 +44,7 @@ our::Texture2D* our::texture_utils::loadImage(const std::string& filename, bool 
     //Bind the texture such that we upload the image data to its storage
 		texture->bind();
     //TODO: (Req 5) Finish this function to fill the texture with the data found in "pixels"
-
+    //used to make a 2d matrix in the GPU memory to draw the given pixels
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
 
 		// Check if we need to generate mipmaps for this texture

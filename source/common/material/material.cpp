@@ -24,7 +24,7 @@ namespace our {
     }
 
     // This function should call the setup of its parent and
-    // set the "tint" uniform to the value in the member variable tint
+    // set the "tint" uniform to the value in the member variable tint 
     void TintedMaterial::setup() const {
         //TODO: (Req 7) Write this function
         Material::setup();

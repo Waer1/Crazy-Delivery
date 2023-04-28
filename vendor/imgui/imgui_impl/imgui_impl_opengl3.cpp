@@ -247,6 +247,7 @@ static void ImGui_ImplOpenGL3_SetupRenderState(ImDrawData* draw_data, int fb_wid
 
     // Setup viewport, orthographic projection matrix
     // Our visible imgui space lies from draw_data->DisplayPos (top left) to draw_data->DisplayPos+data_data->DisplaySize (bottom right). DisplayPos is (0,0) for single viewport apps.
+    // view port has a relation with the drawn coordinates of a mesh only not clear color for example
     glViewport(0, 0, (GLsizei)fb_width, (GLsizei)fb_height);
     float L = draw_data->DisplayPos.x;
     float R = draw_data->DisplayPos.x + draw_data->DisplaySize.x;
@@ -368,6 +369,8 @@ void    ImGui_ImplOpenGL3_RenderDrawData(ImDrawData* draw_data)
                 if (clip_rect.x < fb_width && clip_rect.y < fb_height && clip_rect.z >= 0.0f && clip_rect.w >= 0.0f)
                 {
                     // Apply scissor/clipping rectangle
+                    // As scissor has override anything, nothing can tell it don't
+                    // chooses which pixels to be changed
                     glScissor((int)clip_rect.x, (int)(fb_height - clip_rect.w), (int)(clip_rect.z - clip_rect.x), (int)(clip_rect.w - clip_rect.y));
 
                     // Bind texture, Draw

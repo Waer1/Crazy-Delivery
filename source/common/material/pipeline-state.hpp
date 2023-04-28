@@ -43,9 +43,16 @@ namespace our {
         void setup() const {
             //TODO: (Req 4) Write this function
 						// Check if face culling is enabled then set the culling face and front face
+                        // we know the culling face and front face as we send to it if it's a CCW or CW
+                        // Counter clockwise-> Front Face
+                        // Clockwise-> Back Face
+                        // if we rotated the object 180 degree then the faces will be changed
 						if (faceCulling.enabled) {
+                                //firstly we need to enable GL_CULL_FACE
 								glEnable(GL_CULL_FACE);
+                                //which faces we will remove
 								glCullFace(faceCulling.culledFace);
+                                //direction of the front face that won't be removed
 								glFrontFace(faceCulling.frontFace);
 						} // else disable face culling
 						else {
@@ -55,7 +62,9 @@ namespace our {
 						// Check if depth testing is enabled then set the depth function
 						// and specify the color and depth mask
 						if (depthTesting.enabled) {
+                                //firstly we need to enable GL_DEPTH_TEST
 								glEnable(GL_DEPTH_TEST);
+                                //which method should we choose to make the depth testing
 								glDepthFunc(depthTesting.function);
 
 								glColorMask(colorMask.r, colorMask.g, colorMask.b, colorMask.a);
@@ -68,6 +77,7 @@ namespace our {
 						// Check if blending is enabled then set the blending equation, source factor and destination factor
 						// and specify the constant color
 						if (blending.enabled) {
+                                //firstly we need to enable GL_BLEND
 								glEnable(GL_BLEND);
 								glBlendEquation(blending.equation);
 								glBlendFunc(blending.sourceFactor, blending.destinationFactor);

@@ -17,7 +17,7 @@ namespace our {
     class CameraComponent : public Component {
     public:
         CameraType cameraType; // The type of the camera
-        float near, far; // The distance from the camera center to the near and far plane
+        float near, far; // The distance from the camera center to the near and far planes
         float fovY; // The field of view angle of the camera if it is a perspective camera
         float orthoHeight; // The orthographic height of the camera if it is an orthographic camera
 
@@ -27,7 +27,7 @@ namespace our {
         // Reads camera parameters from the given json object
         void deserialize(const nlohmann::json& data) override;
 
-        // Creates and returns the camera view matrix
+        // Creates and returns the camera view matrix to transform to camera space ( making coordinates relative to the camera)
         glm::mat4 getViewMatrix() const;
         
         // Creates and returns the camera projection matrix

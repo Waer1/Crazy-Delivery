@@ -36,7 +36,7 @@ namespace our {
         }
 
         // This function sets a sampler paramter where the value is of type "GLint"
-        // This can be used to set the filtering and wrapping parameters
+        // This can be used to set the filtering and wrapping parameters 
         void set(GLenum parameter, GLint value) const {
             //TODO: (Req 6) Complete this function
 						glSamplerParameteri(name, parameter, value);

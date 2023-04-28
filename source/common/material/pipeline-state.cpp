@@ -5,7 +5,7 @@ namespace our {
 
     // Given a json object, this function deserializes a PipelineState structure
     void PipelineState::deserialize(const nlohmann::json& data){
-        // If the given json data does not represent a json object, return
+        // If the given json data does not represent a json object, return 
         if(!data.is_object()) return;
         
         // If data contain a key "faceCulling" whose value is an object, read its content into the faceCulling struct

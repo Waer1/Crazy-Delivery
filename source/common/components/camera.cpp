@@ -19,9 +19,11 @@ namespace our {
         orthoHeight = data.value("orthoHeight", 1.0f);
     }
 
-    // Creates and returns the camera view matrix
+    // Creates and returns the camera view matrix just to make everything relative to the camera
+    // As the view matrix only does translation and rotation ( there is no scaling as the camera doesn't need to scale something is has the same dimensions of the original object in the world space)
     glm::mat4 CameraComponent::getViewMatrix() const {
         auto owner = getOwner();
+        //Getting model matrix
         auto M = owner->getLocalToWorldMatrix();
         //TODO: (Req 8) Complete this function
         //HINT:
@@ -37,13 +39,14 @@ namespace our {
         // then you can use glm::lookAt
         glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
         glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
-        glm::vec3 up = M * glm::vec4(0, 1, 0, 0);
-
+        glm::vec3 up = M * glm::vec4(0, 1, 0, 1);
+        // Creating the view matrix with the pre computed vectors
         return glm::lookAt(eye, center, up);
     }
 
     // Creates and returns the camera projection matrix
     // "viewportSize" is used to compute the aspect ratio
+    // As aspect ratio defines the difference between width and height as a ratio
     glm::mat4 CameraComponent::getProjectionMatrix(glm::ivec2 viewportSize) const {
         //TODO: (Req 8) Wrtie this function
         // NOTE: The function glm::ortho can be used to create the orthographic projection matrix
@@ -51,7 +54,10 @@ namespace our {
         // Left and Right are the same but after being multiplied by the aspect ratio
         // For the perspective camera, you can use glm::perspective
         // It takes fovY, aspect ratio, near and far
-
+        // fov -> vertical field of view angle, something like zooming in and zooming out
+        // as the camera doesn't change its position but the angle of view is increased or decreased like the difference between different creatures in seeing objects
+        // Calculating aspect ratio as it's required for ortho and perspective projection types which is width/height
+        // camera can't see anything nearer than (near) and farther than (far)
         float aspectRatio = float(viewportSize.x) / viewportSize.y;
 
         if( cameraType == CameraType::ORTHOGRAPHIC )
