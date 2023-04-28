@@ -11,7 +11,7 @@ namespace our {
         // The OpenGL object name of this sampler 
         GLuint name;
     public:
-        // This constructor creates an OpenGL sampler and saves its object name in the member variable "name" 
+        // This constructor creates an OpenGL sampler and saves its object name in the member variable "name"
         Sampler() {
             //TODO: (Req 6) Complete this function
 						glGenSamplers(1, &name);

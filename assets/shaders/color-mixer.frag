@@ -22,14 +22,16 @@ uniform vec4 blue = vec4(0.0, 0.0, 1.0, 0.0);
 // However, this line is too long to write, so we can simplify it using a dot product
 // (which is defined in the "dot" function).
 
-//TODO: (Req 1) Finish this shader and apply the channel mixing using the "dot" function.
+// TODO: (Req 1) Finish this shader and apply the channel mixing using the "dot" function.
 
 void main() {
-    //Converting fs_in to vec4 to be able to use dot function
-    //MAY BE EDITED as the color here is sent as a float from trangle.vert, for optimization we can convert it to int in the upcoming stages.
+    // Converting fs_in to vec4 to be able to use dot function
+    // MAY BE EDITED as the color here is sent as a float from trangle.vert
+    // For optimization we can convert it to int in the upcoming stages.
     vec4 temp = vec4(fs_in.color.r, fs_in.color.g, fs_in.color.b, 1.0);
 
-    //Dot function between the temp variable that we created from fs_in and the corresponding channel vector
+    // Dot function between the temp variable that we created from fs_in and the corresponding channel vector
+    // Perform the dot product between the converted fs_in and each color vector then assign it to the final fragment color
     frag_color.r = dot(red, temp);
     frag_color.g = dot(green, temp);
     frag_color.b = dot(blue, temp);
