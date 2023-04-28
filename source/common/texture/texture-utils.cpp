@@ -4,6 +4,7 @@
 #include <stb/stb_image.h>
 
 #include <iostream>
+#include <cmath>
 
 our::Texture2D* our::texture_utils::empty(GLenum format, glm::ivec2 size){
     our::Texture2D* texture = new our::Texture2D();
@@ -12,9 +13,11 @@ our::Texture2D* our::texture_utils::empty(GLenum format, glm::ivec2 size){
     int numOfLevels=1;
     if(format != GL_DEPTH_COMPONENT24){
       //Then it's not depth, we are sending a color, so we need to change number of needed levels
-        numOfLevels=(int)glm::floor(glm::log2((float)glm::max(size.x,size.y)))+1;
+        numOfLevels= floor((log2f(std::max(size.x,size.y))))+1;
     }
     texture->bind();
+    // Allocate a space without filling it with any data with the required number of levels
+    // As number of levels is determined with the type of the request if it's for depth or color
     glTexStorage2D(GL_TEXTURE_2D,numOfLevels,format,size.x,size.y);
     return texture;
 }
