@@ -59,8 +59,12 @@ namespace our {
 				shader->set("alphaThreshold", alphaThreshold);
 
 				// Bind the texture and sampler to a texture unit 0 and send the unit number to the uniform variable "tex"
-				texture->bind();
-				sampler->bind(0);
+        if (texture) {
+				  texture->bind();
+        }
+        if (sampler) {
+				  sampler->bind(0);
+        }
 				shader->set("tex", 0);
     }
 

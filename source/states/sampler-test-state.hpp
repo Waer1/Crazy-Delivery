@@ -53,9 +53,13 @@ class SamplerTestState: public our::State {
         shader->use();
         // Here we set the active texture unit to 0 then bind the texture to it
         glActiveTexture(GL_TEXTURE0);
-        texture->bind();
+        if (texture) {
+            texture->bind();
+        }
         // Then we bind the sampler to unit 0
-        sampler->bind(0);
+        if (sampler) {
+            sampler->bind(0);
+        }
         // Then we send 0 (the index of the texture unit we used above) to the "tex" uniform
         shader->set("tex", 0);
         mesh->draw();

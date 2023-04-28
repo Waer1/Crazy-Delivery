@@ -15,7 +15,9 @@ our::Texture2D* our::texture_utils::empty(GLenum format, glm::ivec2 size){
       //Then it's not depth, we are sending a color, so we need to change number of needed levels
         numOfLevels= floor((log2f(std::max(size.x,size.y))))+1;
     }
-    texture->bind();
+    if (texture) {
+      texture->bind();
+    }
     // Allocate a space without filling it with any data with the required number of levels
     // As number of levels is determined with the type of the request if it's for depth or color
     glTexStorage2D(GL_TEXTURE_2D,numOfLevels,format,size.x,size.y);
@@ -45,7 +47,9 @@ our::Texture2D* our::texture_utils::loadImage(const std::string& filename, bool 
     // Create a texture
     our::Texture2D* texture = new our::Texture2D();
     //Bind the texture such that we upload the image data to its storage
-		texture->bind();
+    if (texture) {
+		  texture->bind();
+    }
     //TODO: (Req 5) Finish this function to fill the texture with the data found in "pixels"
     //used to make a 2d matrix in the GPU memory to draw the given pixels
 		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size.x, size.y, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);

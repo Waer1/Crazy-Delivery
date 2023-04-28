@@ -45,7 +45,9 @@ class TextureTestState: public our::State {
         shader->use();
         // Here we set the active texture unit to 0 then bind the texture to it
         glActiveTexture(GL_TEXTURE0);
-        texture->bind();
+        if (texture) {
+            texture->bind();
+        }
         // Then we send 0 (the index of the texture unit we used above) to the "tex" uniform
         shader->set("tex", 0);
         mesh->draw();
