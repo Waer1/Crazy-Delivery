@@ -55,7 +55,9 @@ namespace our {
         // Then we check if there is a postprocessing shader in the configuration
         if(config.contains("postprocess")){
             //TODO: (Req 11) Create a framebuffer
+            // Generating FrameBuffer
             glGenFramebuffers(1,&postprocessFrameBuffer);
+            // Binding the postprocessFrameBuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);
             //TODO: (Req 11) Create a color and a depth texture and attach them to the framebuffer
             // Hints: The color format can be (Red, Green, Blue and Alpha components with 8 bits for each channel).
@@ -63,7 +65,7 @@ namespace our {
             // As we send a window size then we get the maximum coordinate of them tp generate number of needed levels
             colorTarget=texture_utils::empty(GL_RGBA8,windowSize);
             depthTarget=texture_utils::empty(GL_DEPTH_COMPONENT24,windowSize);
-
+            // NEEDED
             glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_COLOR_ATTACHMENT0,GL_TEXTURE_2D,colorTarget->getOpenGLName(),0);
             glFramebufferTexture2D(GL_DRAW_FRAMEBUFFER,GL_DEPTH_ATTACHMENT,GL_TEXTURE_2D,depthTarget->getOpenGLName(),0);
             
