@@ -36,12 +36,20 @@ namespace our {
             // Bind the VAO
             glBindVertexArray(VAO);
 
-            // Bind the VBO and copy the vertex data to it
+            // Bind the VBO
             glBindBuffer(GL_ARRAY_BUFFER, VBO);
+
+            // Copy the vertex data to the VBO by using glBufferData & passing the array buffer, vertices size
+            // by multiplying the size of each Vertex with their count, then pass the data itself & finally set
+            // the usage hint to GL_STATIC_DRAW
             glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(Vertex), vertices.data(), GL_STATIC_DRAW);
 
-            // Bind the EBO and copy the element data to it
+            // Bind the EBO
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+            // Copy the elements data to the EBO and pass the same parameters as done with vertices
+            // except the Element array buffer as the first argument & that each element in the elements
+            // data is of type unsigned int
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
 
 						// ============================================================================
