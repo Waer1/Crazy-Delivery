@@ -180,7 +180,7 @@ namespace our {
         // If there is a postprocess material, bind the framebuffer
         if(postprocessMaterial){
             //TODO: (Req 11) bind the framebuffer
-            glBindFramebuffer(GL_FRAMEBUFFER, postprocessFrameBuffer);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
         }
 
         //TODO: (Req 9) Clear the color and depth buffers
@@ -234,10 +234,10 @@ namespace our {
         // If there is a postprocess material, apply postprocessing
         if(postprocessMaterial){
             //TODO: (Req 11) Return to the default framebuffer
-            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,postprocessFrameBuffer);
+            glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
             //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
-            postprocessMaterial->setup();
             glBindVertexArray(postProcessVertexArray);
+            postprocessMaterial->setup();
             glDrawArrays(GL_TRIANGLES,0,3);
         }
     }
