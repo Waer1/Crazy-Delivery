@@ -25,6 +25,7 @@ namespace our {
         auto owner = getOwner();
         //Getting model matrix
         auto M = owner->getLocalToWorldMatrix();
+
         //TODO: (Req 8) Complete this function
         //HINT:
         // In the camera space:
@@ -37,10 +38,14 @@ namespace our {
         // - the center position which is the point (0,0,-1) but after being transformed by M
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
+
+				// Transforming the vectors from the camera space to the world space
         glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
         glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
         glm::vec3 up = M * glm::vec4(0, 1, 0, 1);
         // Creating the view matrix with the precomputed vectors
+
+        // Creating the view matrix with the pre computed vectors
         return glm::lookAt(eye, center, up);
     }
 
@@ -58,9 +63,12 @@ namespace our {
         // as the camera doesn't change its position but the angle of view is increased or decreased like the difference between different creatures in seeing objects
         // Calculating aspect ratio as it's required for ortho and perspective projection types which is width/height
         // camera can't see anything nearer than (near) and farther than (far)
+
+				// Calculate the aspect ratio
         float aspectRatio = float(viewportSize.x) / viewportSize.y;
 
-        if( cameraType == CameraType::ORTHOGRAPHIC )
+				// Return the projection matrix based on the camera type
+        if(cameraType == CameraType::ORTHOGRAPHIC)
             return glm::ortho(-orthoHeight*aspectRatio/2 , orthoHeight*aspectRatio/2, -orthoHeight/2, orthoHeight/2);
         else
             return glm::perspective(fovY, aspectRatio, near, far);

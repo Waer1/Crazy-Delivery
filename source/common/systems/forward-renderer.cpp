@@ -157,80 +157,107 @@ namespace our {
         // If there is no camera, we return (we cannot render without a camera)
         if(camera == nullptr) return;
 
-        //TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
+        // TODO: (Req 9) Modify the following line such that "cameraForward" contains a vector pointing the camera forward direction
         // HINT: See how you wrote the CameraComponent::getViewMatrix, it should help you solve this one
 
-        glm::vec4 forward = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);  // The camera's forward direction in its local space
-        glm::vec4 cameraForward = camera->getViewMatrix() * forward;  // The camera's forward direction in world space
+        // This is the camera's forward direction in its local space & as we know, the camera points at the negative z.
+        glm::vec4 forward = glm::vec4(0.0f, 0.0f, -1.0f, 0.0f);
 
+        // Transform the camera forward position to the world space from the local space using the view matrix
+        glm::vec4 cameraForward = camera->getViewMatrix() * forward;
+
+        // Sort the transparent commands with the custom comparable function as explained below
         std::sort(transparentCommands.begin(), transparentCommands.end(), [cameraForward](const RenderCommand& first, const RenderCommand& second){
-            //TODO: (Req 9) Finish this function
+            // TODO: (Req 9) Finish this function
             // HINT: the following return should return true "first" should be drawn before "second".
+
+            // Get the "first" distance by applying dot product between the center of the "first" after
+            // converting it to a 4D vector and after trasforming it to the world space, with the camera forward position
             double firstDistance = glm::dot(first.localToWorld * glm::vec4(first.center, 1), cameraForward);
+            // Do the same for the "second" distance
             double secondDistance =  glm::dot(second.localToWorld * glm::vec4(second.center, 1), cameraForward);
 
+            // If the "first" distance is greater than the "second" distance, return true, otherwise return false
             if(firstDistance > secondDistance)
                return true;
             return false;
         });
 
-        //TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
+        // TODO: (Req 9) Get the camera ViewProjection matrix and store it in VP
+        // Multiply the camera projection matrix after passing the window size with the view matrix 
         glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
         
-        //TODO: (Req 9) Set the OpenGL viewport using viewportStart and viewportSize
+        // TODO: (Req 9) Set the OpenGL viewport using viewportStart and viewportSize
+        // Use the OpenGL glViewport & pass 0,0 as out starting x & y then extract the total length of x & y from
+        // the window size
         glViewport(0, 0, windowSize.x, windowSize.y);
 
-        //TODO: (Req 9) Set the clear color to black and the clear depth to 1
+        // TODO: (Req 9) Set the clear color to black and the clear depth to 1
         glClearColor(0.0, 0.0, 0.0, 1.0);
         glClearDepth(1.0);
 
-        //TODO: (Req 9) Set the color mask to true and the depth mask to true (to ensure the glClear will affect the framebuffer)
+        // TODO: (Req 9) Set the color mask to true and the depth mask to true (to ensure the glClear will affect the framebuffer)
         glColorMask(true, true, true, true);
         glDepthMask(true);
 
         // If there is a postprocess material, bind the framebuffer
         if(postprocessMaterial){
-            //TODO: (Req 11) bind the framebuffer
+            // TODO: (Req 11) bind the framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
         }
 
-        //TODO: (Req 9) Clear the color and depth buffers
+        // TODO: (Req 9) Clear the color and depth buffers
+        // Use glClear to clear both bits
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        //TODO: (Req 9) Draw all the opaque commands
+        // TODO: (Req 9) Draw all the opaque commands
         // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
+        // Loop over all opaque commands & apply the following steps
         for (auto opaqueCommand : opaqueCommands) {
+            // Setup the material of each opaque command
             opaqueCommand.material->setup();
+            // Set the "transform" uniform as the VP matrix we obtained above & transform it to world space
             opaqueCommand.material->shader->set("transform", VP * opaqueCommand.localToWorld);
+            // Draw Mesh
             opaqueCommand.mesh->draw();
         }
         
         // If there is a sky material, draw the sky
         if(this->skyMaterial){
-            //TODO: (Req 10) setup the sky material
+            // TODO: (Req 10) setup the sky material
             skyMaterial->setup();
             
-            //TODO: (Req 10) Get the camera position
-            //Getting the Model Matrix to transform from local coordinates to world coordinates
+            // TODO: (Req 10) Get the camera position
+            // Getting the Model Matrix to transform from local coordinates to world coordinates
             glm::mat4 M = camera->getOwner()->getLocalToWorldMatrix();
-            //Getting Camera position by selecting the last column of the Model matrix
+            // Getting Camera position by selecting the last column of the Model matrix
             glm::vec3 cameraPosition = M * glm::vec4(0, 0, 0, 1);
 
-            //TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
+            // TODO: (Req 10) Create a model matrix for the sky such that it always follows the camera (sky sphere center = camera position)
+            // We need to translate the sky sphere center to the camera position
+            // Set the sky sphere center as a 4x4 matrix of ones
             glm::mat4 skySphereCenter = glm::mat4(1.0f);
+            // Translate this center to the camera position such that it equals it & store
+            // the resulting transformed matrix in modelMatrix
             glm::mat4 modelMatrix = glm::translate(skySphereCenter, cameraPosition);
 
-            //TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
+            // TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             // We can acheive this by multiplying by an extra matrix after the projection but what values should we put in it?
+            // For the sky to be drawn behind, we need to modify the z-index. How?
+            // Simply set the z coordinate of the transformation matrix to zeros in order to eliminate the z-coordinate. This will
+            // ensure that the sky is the very first thing drawn behind
+            // and set the w coordinate to 1 to keep the w-coordinate
             glm::mat4 alwaysBehindTransform = glm::mat4(
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 0.0f, 1.0f, 1.0f
             );
-            //TODO: (Req 10) set the "transform" uniform
-            //We need to get the view Matrix and Projection Matrix
-            //then following TRS sequence of matrices then we will get the transformation matrix, which we will multiply it then with alwaysbehindTransform matrix
+            // TODO: (Req 10) set the "transform" uniform
+            // We need to get the view Matrix and Projection Matrix
+            // Following TRS sequence of matrices, we will get the VP matrix as we did before from the projection and view matrices
+            // and multiply it by the model matrix to get the transformation matrix
+            // Finally we set it to the "transform" uniform variable in the shader
             glm::mat4 VP = camera->getProjectionMatrix(windowSize) * camera->getViewMatrix();
             glm::mat4 transformationMatrix = alwaysBehindTransform * VP * modelMatrix;
             skyMaterial->shader->set("transform", transformationMatrix);
@@ -238,26 +265,34 @@ namespace our {
             //TODO: (Req 10) draw the sky sphere
             skySphere->draw();
         }
-        //TODO: (Req 9) Draw all the transparent commands
+
+        // TODO: (Req 9) Draw all the transparent commands
         // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
+        // Loop over all transparent commands
         for (auto transparentCommand : transparentCommands) {
+            // Call the setup function in the material of each transparent command
             transparentCommand.material->setup();
+            // Set the "transform" uniform from the shader as the VP matrix in the world space
             transparentCommand.material->shader->set("transform", VP * transparentCommand.localToWorld);
+            // Draw Mesh
             transparentCommand.mesh->draw();
         }
 
         // If there is a postprocess material, apply postprocessing
         if(postprocessMaterial){
-            //TODO: (Req 11) Return to the default framebuffer
+            // TODO: (Req 11) Return to the default framebuffer
+            // Bind Frame buffer as default (0) using glBindFramebuffer openGL function
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-            //TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
-            //Binding Vertex Array
+            // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+            // Bind the Vertex Array
             glBindVertexArray(postProcessVertexArray);
-            //Now we are ready for postProcess then we need to setup
+            // Setup the post process material
             postprocessMaterial->setup();
-            //Drawing the new triangles after postProcessing of the image
-            glDrawArrays(GL_TRIANGLES,0,3);
+            // Drawing the new triangles after postProcessing of the image
+            // By setting the mode as GL_TRIANGLES
+            // The first argument to 0 since we want to start from the beginning
+            // The count is set to 3
+            glDrawArrays(GL_TRIANGLES, 0, 3);
         }
     }
-
 }

@@ -35,8 +35,12 @@ namespace our {
             static_assert(std::is_base_of<Component, T>::value, "T must inherit from Component");
             //TODO: (Req 8) Create an component of type T, set its "owner" to be this entity, then push it into the component's list
             // Don't forget to return a pointer to the new component
+
+						// Create the component object and set it's owner to the current entity
             T * newComponent = new T();
             newComponent->owner = this;
+
+						// Add the component to the components list then return it
             components.push_back(newComponent);
             return newComponent;
         }
@@ -47,7 +51,10 @@ namespace our {
         T* getComponent(){
             //TODO: (Req 8) Go through the components list and find the first component that can be dynamically cast to "T*".
             // Return the component you found, or return null of nothing was found.
-            for(auto it = components.begin(); it != components.end(); it++){
+
+						// Loop through the components list
+            for(auto it = components.begin(); it != components.end(); it++) {
+								// Search for the first component that can be dynamically cast to T* and return it
                 if(dynamic_cast<T*>(*it) != nullptr)
                     return dynamic_cast<T*>(*it);
             }
@@ -70,7 +77,10 @@ namespace our {
         void deleteComponent(){
             //TODO: (Req 8) Go through the components list and find the first component that can be dynamically cast to "T*".
             // If found, delete the found component and remove it from the components list
-            for(auto it = components.begin(); it != components.end(); it++){
+
+						// Loop through the components list
+            for(auto it = components.begin(); it != components.end(); it++) {
+								// Find the first component that can be dynamically cast to T* then remove it from the list and delete it
                 if(dynamic_cast<T*>(*it) != nullptr){
                     components.erase(it);
                     delete *it;
@@ -93,7 +103,10 @@ namespace our {
         void deleteComponent(T const* component){
             //TODO: (Req 8) Go through the components list and find the given component "component".
             // If found, delete the found component and remove it from the components list
-            for(auto it = components.begin(); it != components.end(); it++){
+
+						// Loop through the components list
+            for(auto it = components.begin(); it != components.end(); it++) {
+								// Search for the given component then remove it from the list and delete it
                 if(*it == component){
                     components.erase(it);
                     delete *it;

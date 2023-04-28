@@ -13,12 +13,21 @@ namespace our {
     glm::mat4 Entity::getLocalToWorldMatrix() const {
         //TODO: (Req 8) Write this function
 
+				// Create a temporary entity pointer to the current entity's parent
         Entity* temp  = parent;
+
+				// Create a tranformation matrix for the localToWorld
         glm::mat4 localToWorld = localTransform.toMat4();
+
+				// Keep going up to all the parents until we reach the root
         while(temp) {
+						// Update the localToWorld matrix by multiplying it with the parent's localTransform matrix 
             localToWorld  = temp->localTransform.toMat4() * localToWorld;
+
+						// Move the pointer up to the parent of the entity
             temp = temp->parent;
         }
+				
         return localToWorld;
     }
 
