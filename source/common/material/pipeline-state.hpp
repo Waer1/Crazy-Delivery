@@ -47,6 +47,8 @@ namespace our {
                         // Counter clockwise-> Front Face
                         // Clockwise-> Back Face
                         // if we rotated the object 180 degree then the faces will be changed
+
+                        // if we want to remove the front face then we will remove the back face
 						if (faceCulling.enabled) {
                                 //firstly we need to enable GL_CULL_FACE
 								glEnable(GL_CULL_FACE);
@@ -66,8 +68,9 @@ namespace our {
 								glEnable(GL_DEPTH_TEST);
                                 //which method should we choose to make the depth testing
 								glDepthFunc(depthTesting.function);
-
+                                // which color and depth mask we will use
 								glColorMask(colorMask.r, colorMask.g, colorMask.b, colorMask.a);
+                                // which color and depth mask
 								glDepthMask(depthMask);
 						} // else disable depth testing
 						else {
