@@ -53,8 +53,16 @@ namespace our {
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, elements.size() * sizeof(unsigned int), elements.data(), GL_STATIC_DRAW);
 
 						// ============================================================================
-            // Set the attribute pointers for the vertex data
+            // ===============Set the Attribute Pointers for the vertex data===============
+
 						// Position
+            // Using the glVertexAttribPointer
+            // Set the first argument which is the index as the position location
+            // Set the size of each entry where the position size is 3
+            // Set the type of each entry in the array as GL_FLOAT
+            // False for the normalized boolean (Not needed)
+            // Bit size of the Vertex is set in the 5th argument
+            // Finally, start from the position offset in the Vertex
             glVertexAttribPointer(ATTRIB_LOC_POSITION, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, position));
             glEnableVertexAttribArray(ATTRIB_LOC_POSITION);
 
@@ -76,20 +84,25 @@ namespace our {
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
-            // Store the number of elements
+            // Store the number of elements in elementCount
             elementCount = elements.size();
         }
 
-        // this function should render the mesh
+        // This function should render the mesh
         void draw() 
         {
-            // Bind the VAO and draw the elements
+            // Bind the VAO
             glBindVertexArray(VAO);
+
+            // Draw the elements by specifying that we want to draw triangles and give
+            // the number of elements. Then, the type is unsigned int & the final argument as 0 for indices
             glDrawElements(GL_TRIANGLES, elementCount, GL_UNSIGNED_INT, 0);
+
+            // Unbind the VAO
             glBindVertexArray(0);
         }
 
-        // this function should delete the vertex & element buffers and the vertex array object
+        // This function should delete the vertex & element buffers and the vertex array object
         ~Mesh(){
             //TODO: (Req 2) Write this function
 						
@@ -101,6 +114,7 @@ namespace our {
 						glDeleteVertexArrays(1, &VAO);
         }
 
+        // Delete the Mesh copy constructor & assignment operator
         Mesh(Mesh const &) = delete;
         Mesh &operator=(Mesh const &) = delete;
     };
