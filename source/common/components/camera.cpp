@@ -19,6 +19,7 @@ namespace our {
         orthoHeight = data.value("orthoHeight", 1.0f);
     }
 
+    // The resulting matrix transforms objects from the world space to the camera space.
     // Creates and returns the camera view matrix just to make everything relative to the camera
     // As the view matrix only does translation and rotation ( there is no scaling as the camera doesn't need to scale something is has the same dimensions of the original object in the world space)
     glm::mat4 CameraComponent::getViewMatrix() const {
@@ -39,16 +40,17 @@ namespace our {
         // - the up direction which is the vector (0,1,0) but after being transformed by M
         // then you can use glm::lookAt
 
-				// Transforming the vectors from the camera space to the world space
+		// Transforming the vectors from the camera space to the world space
         glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
         glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
-        glm::vec3 up = M * glm::vec4(0, 1, 0, 1);
-        // Creating the view matrix with the precomputed vectors
+        glm::vec3 up = M * glm::vec4(0, 1, 0, 0);
+        // TODO: change to 0 because TA comment and because it's Vector
 
-        // Creating the view matrix with the pre computed vectors
+        // Creating the view matrix with the precomputed vectors
         return glm::lookAt(eye, center, up);
     }
 
+    // projection matrix that is required for rendering the camera view onto a 2D screen
     // Creates and returns the camera projection matrix
     // "viewportSize" is used to compute the aspect ratio
     // As aspect ratio defines the difference between width and height as a ratio
@@ -64,10 +66,10 @@ namespace our {
         // Calculating aspect ratio as it's required for ortho and perspective projection types which is width/height
         // camera can't see anything nearer than (near) and farther than (far)
 
-				// Calculate the aspect ratio
+		// Calculate the aspect ratio
         float aspectRatio = float(viewportSize.x) / viewportSize.y;
 
-				// Return the projection matrix based on the camera type
+        // Return the projection matrix based on the camera type
         if(cameraType == CameraType::ORTHOGRAPHIC)
             return glm::ortho(-orthoHeight*aspectRatio/2 , orthoHeight*aspectRatio/2, -orthoHeight/2, orthoHeight/2);
         else
