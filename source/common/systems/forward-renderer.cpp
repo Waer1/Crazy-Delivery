@@ -244,9 +244,11 @@ namespace our {
             // TODO: (Req 10) We want the sky to be drawn behind everything (in NDC space, z=1)
             // We can acheive this by multiplying by an extra matrix after the projection but what values should we put in it?
             // For the sky to be drawn behind, we need to modify the z-index. How?
-            // Simply set the z coordinate of the transformation matrix to zeros in order to eliminate the z-coordinate. This will
-            // ensure that the sky is the very first thing drawn behind
-            // and set the w coordinate to 1 to keep the w-coordinate
+            // Simply the 3rd column of our generated alwaysBehindTransform matrix will set the z-coordinate as w. 
+            // Then after normalization, when the values of the matrix are divided by w, we will obtain the z which was
+            // previously set to w as 1. Our goal is achieved.
+            // This will ensure that the sky is the very first thing drawn behind
+            // and set the 4th column to 0,0,0,1 to keep the w-coordinate unchanged
             glm::mat4 alwaysBehindTransform = glm::mat4(
                 1.0f, 0.0f, 0.0f, 0.0f,
                 0.0f, 1.0f, 0.0f, 0.0f,

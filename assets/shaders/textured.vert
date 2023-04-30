@@ -16,6 +16,7 @@ void main(){
 		
 		// Apply the transformation matrix by multiplying it with the position vector
     gl_Position = transform * vec4(position, 1.0);
+    //Then we will set the color and tex_coord 
     vs_out.color = color;
     vs_out.tex_coord = tex_coord;
 }
