@@ -44,7 +44,6 @@ namespace our {
         glm::vec3 eye = M * glm::vec4(0, 0, 0, 1);
         glm::vec3 center = M * glm::vec4(0, 0, -1, 1);
         glm::vec3 up = M * glm::vec4(0, 1, 0, 0);
-        // TODO: change to 0 because TA comment and because it's Vector
 
         // Creating the view matrix with the precomputed vectors
         return glm::lookAt(eye, center, up);
