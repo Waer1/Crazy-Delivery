@@ -5,6 +5,7 @@
 #include "mesh-renderer.hpp"
 #include "free-camera-controller.hpp"
 #include "movement.hpp"
+#include "light.hpp"
 
 namespace our {
 
@@ -22,9 +23,11 @@ namespace our {
             component = entity->addComponent<FreeCameraControllerComponent>();
         } else if (type == MovementComponent::getID()) {
             component = entity->addComponent<MovementComponent>();
-        } else if( type == MeshRendererComponent::getID() ){
+        } else if(type == MeshRendererComponent::getID()){
             component = entity->addComponent<MeshRendererComponent>();
-        }
+        } else if (type == LightComponent::getID()) {
+						component = entity->addComponent<LightComponent>();
+				}
         //serialization -> taking our world with its entities to a file
         //deserialization-> opening a JSON file and filling our entities and their components
         //JSON file has the entities and the components attached to each of them
