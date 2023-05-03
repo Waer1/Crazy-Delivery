@@ -38,7 +38,7 @@
         "fence": "assets/textures/fence.jpg",
         "battery": "assets/textures/battery.jpg",
         "arrow": "assets/textures/arrow.jpg",
-        "car": "assets/textures/Car.jpg"
+        "car": "assets/textures/black.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
