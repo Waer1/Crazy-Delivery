@@ -54,7 +54,7 @@ namespace our {
 
 						// Loop through the components list
             for(auto it = components.begin(); it != components.end(); it++) {
-								// Search for the first component that can be dynamically cast to T* and return it
+                // Search for the first component that can be dynamically cast to T* and return it
                 if(dynamic_cast<T*>(*it) != nullptr)
                     return dynamic_cast<T*>(*it);
             }
