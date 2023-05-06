@@ -420,6 +420,12 @@
                     "type": "Mesh Renderer",
                     "mesh": "arrow",
                     "material": "arrow"
+                  },
+                  {
+                      "type": "Movement",
+                      "linearVelocity": [0, 2, 0],
+                      "angularVelocity": [0, 50, 0],
+                      "movementRangeY": [5, 10]
                   }
                 ]
               }
@@ -516,13 +522,19 @@
                 "name": "battery",
                 "position": [0, 1.6, 0.5],
                 "rotation": [0, 0, 0],
-                "scale": [0.5, 0.4, 0.5],
+                "scale": [0.5, 0.8, 0.5],
                 "components": [
                   {
                     "type": "Mesh Renderer",
                     "mesh": "battery",
                     "material": "battery"
-                  }
+                  },
+                   {
+                       "type": "Movement",
+                       "linearVelocity": [0, 2, 0],
+                       "angularVelocity": [0, 50, 0],
+                       "movementRangeY": [1.5, 6]
+                   }
                 ]
               }
             ]
@@ -532,14 +544,20 @@
           // Battery
           {
             "name": "battery",
-            "position": [0, 1.6, 0.5],
+            "position": [0, 3, 0.5],
             "rotation": [0, 0, 0],
-            "scale": [0.5, 0.4, 0.5],
+            "scale": [0.5, 0.8, 0.5],
             "components": [
               {
                 "type": "Mesh Renderer",
                 "mesh": "battery",
                 "material": "battery"
+              },
+              {
+                  "type": "Movement",
+                  "linearVelocity": [0, 2, 0],
+                  "angularVelocity": [0, 50, 0],
+                  "movementRangeY": [1.5, 6]
               }
             ]
           },

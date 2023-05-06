@@ -14,6 +14,9 @@ namespace our {
     public:
         glm::vec3 linearVelocity = {0, 0, 0}; // Each frame, the entity should move as follows: position += linearVelocity * deltaTime 
         glm::vec3 angularVelocity = {0, 0, 0}; // Each frame, the entity should rotate as follows: rotation += angularVelocity * deltaTime
+        // movement.x = lower , movement.y = upper
+        glm::vec2 movementRangeX = {0, 0} , movementRangeY = {0, 0} , movementRangeZ = {0, 0};
+        glm::vec3 direction = {1, 1, 1};
 
         // The ID of this component type is "Movement"
         static std::string getID() { return "Movement"; }

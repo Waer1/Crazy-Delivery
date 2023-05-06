@@ -8,5 +8,9 @@ namespace our {
         if(!data.is_object()) return;
         linearVelocity = data.value("linearVelocity", linearVelocity);
         angularVelocity = glm::radians(data.value("angularVelocity", angularVelocity));
+        movementRangeX = data.value("movementRangeX", movementRangeX);
+        movementRangeY = data.value("movementRangeY", movementRangeY);
+        movementRangeZ = data.value("movementRangeZ", movementRangeZ);
+
     }
 }

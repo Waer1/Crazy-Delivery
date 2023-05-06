@@ -17,18 +17,41 @@ namespace our
     // For more information, see "common/components/movement.hpp"
     class MovementSystem {
 
-        int sign = 1;
-        void obstacleMovement(Entity* obstacle, float deltaTime) {
-            MovementComponent* movement = obstacle->getComponent<MovementComponent>();
+        void rangeMovement(Entity* entity, float deltaTime) {
+
+            MovementComponent* movement = entity->getComponent<MovementComponent>();
             // Change the position and rotation based on the linear & angular velocity and delta time.
-            obstacle->localTransform.position += sign * deltaTime * movement->linearVelocity;
-            if(abs(obstacle->localTransform.position.x) >= 19){
-                obstacle->localTransform.rotation.y = -obstacle->localTransform.rotation.y;
-                obstacle->localTransform.position.z += sign * 2;
-                sign = -sign;
+            entity->localTransform.position += movement->direction * deltaTime * movement->linearVelocity;
+            entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+
+            if((movement->movementRangeX.y + movement->movementRangeX.x) != 0 &&
+            (entity->localTransform.position.x >= movement->movementRangeX.y || entity->localTransform.position.x < movement->movementRangeX.x) ){
+                movement->direction.x = -movement->direction.x;
             }
 
-            //            obstacle->localTransform.rotation += deltaTime * movement->angularVelocity;
+            if((movement->movementRangeY.y + movement->movementRangeY.x) != 0 &&
+               (entity->localTransform.position.y >= movement->movementRangeY.y || entity->localTransform.position.y < movement->movementRangeY.x) ){
+                movement->direction.y = -movement->direction.y;
+            }
+
+            if((movement->movementRangeZ.y + movement->movementRangeZ.x) != 0 &&
+               (entity->localTransform.position.z >= movement->movementRangeZ.y || entity->localTransform.position.z < movement->movementRangeZ.x) ){
+                movement->direction.z = -movement->direction.z;
+            }
+        }
+
+        void obstacleMovement(Entity* obstacle, float deltaTime) {
+
+            MovementComponent* movement = obstacle->getComponent<MovementComponent>();
+            // Change the position and rotation based on the linear & angular velocity and delta time.
+            obstacle->localTransform.position += movement->direction * deltaTime * movement->linearVelocity;
+            if(abs(obstacle->localTransform.position.x) >= 19){
+                // change the direction of movement of the obstacle(monkey face)
+                obstacle->localTransform.rotation.y = -obstacle->localTransform.rotation.y;
+                // swap the side road
+                obstacle->localTransform.position.z += movement->direction.z * 2;
+                movement->direction = -movement->direction;
+            }
         }
 
     public:
@@ -40,6 +63,8 @@ namespace our
 
                 if(entity->name == "obstacles") {
                     obstacleMovement(entity, deltaTime);
+                } else if(entity->name == "battery" || entity->name == "arrow") {
+                    rangeMovement(entity, deltaTime);
                 }
 
             }
