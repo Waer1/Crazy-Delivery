@@ -19,12 +19,13 @@ namespace our
         void rangeMovement(Entity* entity, float deltaTime) {
 
             MovementComponent* movement = entity->getComponent<MovementComponent>();
+
             // Change the position and rotation based on the linear & angular velocity and delta time.
             entity->localTransform.position += movement->direction * deltaTime * movement->linearVelocity;
             entity->localTransform.rotation += deltaTime * movement->angularVelocity;
 
             if((movement->movementRangeX.y + movement->movementRangeX.x) != 0 &&
-            (entity->localTransform.position.x >= movement->movementRangeX.y || entity->localTransform.position.x < movement->movementRangeX.x) ){
+            	 (entity->localTransform.position.x >= movement->movementRangeX.y || entity->localTransform.position.x < movement->movementRangeX.x) ){
                 movement->direction.x = -movement->direction.x;
             }
 
@@ -42,13 +43,15 @@ namespace our
         void obstacleMovement(Entity* obstacle, float deltaTime) {
 
             MovementComponent* movement = obstacle->getComponent<MovementComponent>();
+
             // Change the position and rotation based on the linear & angular velocity and delta time.
             obstacle->localTransform.position += movement->direction * deltaTime * movement->linearVelocity;
-            if(abs(obstacle->localTransform.position.x) >= 19){
+
+            if(abs(obstacle->localTransform.position.x) >= 60){
                 // change the direction of movement of the obstacle(monkey face)
                 obstacle->localTransform.rotation.y = -obstacle->localTransform.rotation.y;
                 // swap the side road
-                obstacle->localTransform.position.z += movement->direction.z * 2;
+                obstacle->localTransform.position.z += movement->direction.z * 5;
                 movement->direction = -movement->direction;
             }
         }
