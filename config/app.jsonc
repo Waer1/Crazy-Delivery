@@ -229,6 +229,7 @@
         ],
         "children": [
           {
+            "name": "car",
             "position": [0, -1, -1.5],
             "rotation": [0, 0, 0],
             "scale": [1.1, 1.2, 1.0],
@@ -425,7 +426,7 @@
                       "type": "Movement",
                       "linearVelocity": [0, 2, 0],
                       "angularVelocity": [0, 50, 0],
-                      "movementRangeY": [5, 10]
+                      "movementRangeY": [3, 10]
                   }
                 ]
               }

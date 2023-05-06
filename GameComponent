@@ -36,11 +36,10 @@ steps:
   - crashing system 
   - Game logic ( time - win - lose - direction )
   - menu system
-  - 
-  - 
+  -
 
 tasks division: 
-  - render map & obstacles(movment) & building & target : waer - beshoy (Done)
+  - render map & obstacles(movement) & building & target : waer - beshoy (Done)
   - car movements & keyboard : hamdy - nu3
   - movement of the car on the map & direction : 
   - crashing system : 
