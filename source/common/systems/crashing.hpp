@@ -15,17 +15,17 @@ namespace our
         float distance(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
         }
-
+		float minDis = 10000;  //REMOVE
     public:
 
-        void update(World* world) {
+				void update(World* world) {
             // For each entity in the world
             Entity *car;
             for(auto entity : world->getEntities()){
-                    if(entity->name == "car"){
-                        car = entity;
-                        break;
-                    }
+								if(entity->name == "car"){
+										car = entity;
+										break;
+								}
             }
 
             for(auto entity : world->getEntities()) {
@@ -34,24 +34,24 @@ namespace our
                 }
 
 
-                if(distance( car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position ,1)  ,
-                             entity->getLocalToWorldMatrix() * glm::vec4(entity->localTransform.position,1 )) < 10){
-
-                    if(entity->name == "battery") {
-                        printf("battery\n");
-                    } else if(entity->name == "obstacles") {
-                        printf("obstacles\n");
-                    } else if(entity->name == "fence"){
-//                        printf("fence\n");
-                    } else if(entity->name == "arrow"){
-                        printf("arrow\n");
-                    }
-
-                }
-
+								//TODO: function to get the distance between the car and the obstacle without taking the 
+								// scale in consideration
+								float dis = distance(car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1),
+																		entity->getLocalToWorldMatrix() * glm::vec4(entity->localTransform.position, 1));
+								if(entity->name == "battery") {
+										// printf("battery\n"); // 5
+								} else if(entity->name == "obstacles") {
+										// printf("obstacles\n"); // 12
+								} else if(entity->name == "fence"){
+                    // printf("fence\n");
+								} else if(entity->name == "arrow"){
+										// printf("arrow\n");
+										// if (dis < minDis) {
+										// 		minDis = dis;
+										// }
+										// printf("distance: %f\n", minDis);
+								}
             }
-
-
         }
     };
 
