@@ -559,7 +559,7 @@
 							"type": "Movement",
 							"linearVelocity": [0, 2, 0],
 							"angularVelocity": [0, 50, 0],
-							"movementRangeY": [3, 10]
+							"movementRangeY": [3, 8]
 					}
 				]
 			},

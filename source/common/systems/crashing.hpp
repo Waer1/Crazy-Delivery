@@ -13,50 +13,62 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any obstacle.
     class CrashingSystem {
 				// Save the car entity
-				Entity *car;
+        Entity *car;
 
         float distance(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
         }
 
-				bool crashEvent(Entity *car, Entity *object, float threshold) {
-						// Get the car position
-						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
+        bool crashEvent(Entity *car, Entity *object, float threshold) {
+                // Get the car position
+                glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
 
-						// Get the distance between the car and the object
-						float dis = distance(carPosition, glm::vec4(object->localTransform.position, 1));
+                // Get the distance between the car and the object
+                float dis = distance(carPosition, glm::vec4(object->localTransform.position, 1));
 
-						return dis < threshold;
-				}
+                return dis < threshold;
+        }
+
+        bool arrowCrashEvent(Entity *car, Entity *object, float threshold) {
+            // Get the car position
+            glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
+            glm::vec4 objectPosition = car->getLocalToWorldMatrix() * glm::vec4(object->localTransform.position, 1);
+
+
+            // Get the distance between the car and the object
+            float dis = sqrt(pow(carPosition.x - objectPosition.x, 2) + pow(carPosition.z - objectPosition.z, 2) );
+
+            return dis < threshold;
+        }
 				
     public:
 
-				void getCar(World* world) {
+        void getCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
-								if(entity->name == "car"){
-										car = entity;
-										break;
-								}
+                if(entity->name == "car"){
+                        car = entity;
+                        break;
+                }
             }
-				}
+        }
 
-				void update(World* world) {
-						// For each entity in the world
+        void update(World* world) {
+            // For each entity in the world
             for(auto entity : world->getEntities()) {
                 if(entity->name == "car"){
                     continue;
                 }
 
-								if(entity->name == "battery" && crashEvent(car, entity, 3)) {
-										printf("battery\n");
-								} else if(entity->name == "obstacles" && crashEvent(car, entity, 5)) {
-										printf("obstacles\n");
-								} else if(entity->name == "fence"){
+                if(entity->name == "battery" && crashEvent(car, entity, 3)) {
+                        printf("battery\n");
+                } else if(entity->name == "obstacles" && crashEvent(car, entity, 5)) {
+                        printf("obstacles\n");
+                } else if(entity->name == "fence"){
                     // printf("fence\n");
-								} else if(entity->name == "arrow" && crashEvent(car, entity, 10)){
-										printf("arrow\n");
-								}
+                } else if(entity->name == "arrow" && crashEvent(car, entity, 6)){
+                        printf("arrow %f %f \n" , car->localTransform.position , entity->localTransform.position );
+                }
             }
         }
     };
