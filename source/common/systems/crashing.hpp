@@ -32,11 +32,11 @@ namespace our
         bool arrowCrashEvent(Entity *car, Entity *object, float threshold) {
             // Get the car position
             glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
-            glm::vec4 objectPosition = car->getLocalToWorldMatrix() * glm::vec4(object->localTransform.position, 1);
-
+            glm::vec4 objectPosition = glm::vec4(object->localTransform.position, 1);
 
             // Get the distance between the car and the object
             float dis = sqrt(pow(carPosition.x - objectPosition.x, 2) + pow(carPosition.z - objectPosition.z, 2) );
+
 
             return dis < threshold;
         }
@@ -82,8 +82,8 @@ namespace our
                     printf("fence-v\n");
                 } else if(entity->name == "fence-h" && fenceCrashEvent(car, entity, 0, 1)){
                     printf("fence-h\n");
-                } else if(entity->name == "arrow" && crashEvent(car, entity, 6)){
-										printf("arrow\n");
+                } else if(entity->name == "arrow" && arrowCrashEvent(car, entity, 3)){
+                        printf("arrow\n");
                 }
             }
         }
