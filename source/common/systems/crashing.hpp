@@ -15,18 +15,22 @@ namespace our
 				// Save the car entity
         Entity *car;
 
-        float distance(glm::vec4 a, glm::vec4 b){
+        float distanceXYZ(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
         }
 
+        float distanceXZ(glm::vec4 a, glm::vec4 b){
+            return sqrt(pow(a.x - b.x, 2) + pow(a.z - b.z, 2));
+        }
+				
         bool crashEvent(Entity *car, Entity *object, float threshold) {
-                // Get the car position
-                glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
+						// Get the car position
+						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
 
-                // Get the distance between the car and the object
-                float dis = distance(carPosition, glm::vec4(object->localTransform.position, 1));
+						// Get the distance between the car and the object
+						float dis = distanceXYZ(carPosition, glm::vec4(object->localTransform.position, 1));
 
-                return dis < threshold;
+						return dis < threshold;
         }
 
         bool arrowCrashEvent(Entity *car, Entity *object, float threshold) {
@@ -35,25 +39,19 @@ namespace our
             glm::vec4 objectPosition = glm::vec4(object->localTransform.position, 1);
 
             // Get the distance between the car and the object
-            float dis = sqrt(pow(carPosition.x - objectPosition.x, 2) + pow(carPosition.z - objectPosition.z, 2) );
-
+            float dis = distanceXZ(carPosition, objectPosition);
 
             return dis < threshold;
         }
 				
-				bool fenceCrashEvent(Entity *car, Entity *object, bool type, float threshold) {
+				bool fenceCrashEvent(Entity *car, Entity *object, float threshold) {
 						// Get the car position
 						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
 						glm::vec4 objectPosition = object->getLocalToWorldMatrix() * glm::vec4(object->localTransform.position, 1);
 
-						float dis = 0;
-						if (type) { // 1 => Vertical
-            		dis = abs(carPosition.x - objectPosition.x);
-            		return dis < threshold && abs(carPosition.z - objectPosition.z) < 14;
-						} else {    // 0 => Horizontal
-            		dis = abs(carPosition.z - objectPosition.z);
-            		return dis < threshold && abs(carPosition.x - objectPosition.x) < 48;
-						}
+						float dis = distanceXZ(carPosition, objectPosition);
+
+						return dis < threshold;
 				}
     public:
 
@@ -78,12 +76,10 @@ namespace our
 										printf("battery\n");
                 } else if(entity->name == "obstacles" && crashEvent(car, entity, 5)) {
 										printf("obstacles\n");
-                } else if(entity->name == "fence-v" && fenceCrashEvent(car, entity, 1, 1)){
-                    printf("fence-v\n");
-                } else if(entity->name == "fence-h" && fenceCrashEvent(car, entity, 0, 1)){
-                    printf("fence-h\n");
+                } else if(entity->name == "fence" && fenceCrashEvent(car, entity, 0.7)){
+                    printf("fence\n");
                 } else if(entity->name == "arrow" && arrowCrashEvent(car, entity, 3)){
-                        printf("arrow\n");
+										printf("arrow\n");
                 }
             }
         }

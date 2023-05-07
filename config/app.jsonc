@@ -245,7 +245,7 @@
       },
       // Begin Central Road
       {
-        "name": "road",
+        "name": "central-road",
         "position": [0, 0, 0],
         "rotation": [0, 0, 0],
         "scale": [3, 1, 3],
@@ -257,34 +257,6 @@
           }
         ],
         "children": [
-					// First fence
-          {
-            "name": "fence-h",
-            "position": [0.6, 0, -2.5],
-            "rotation": [-90, 0, 0],
-            "scale": [0.163, 0.03, 0.03],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "fence",
-                "material": "fence"
-              }
-            ]
-          },
-					// Second fence
-          {
-            "name": "fence-h",
-            "position": [0.6, 0, 1.6],
-            "rotation": [-90, 0, 0],
-            "scale": [0.163, 0.03, 0.03],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "fence",
-                "material": "fence"
-              }
-            ]
-          },
           //Grass
           {
             "position": [0, 1, 0],
@@ -310,48 +282,6 @@
                 "mesh": "road",
                 "material": "road"
               }
-            ],
-            "children": [
-              // Long fence
-              {
-                "name": "fence-v",
-                "position": [1, 0, -2.5],
-                "rotation": [-90, 0, 0],
-                "scale": [0.17, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              {
-                "name": "fence-v",
-                "position": [8, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.05, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              {
-                "name": "fence-v",
-                "position": [-6, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.045, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              }
             ]
           },
           // End First Cross Road
@@ -366,48 +296,6 @@
                 "type": "Mesh Renderer",
                 "mesh": "road",
                 "material": "road"
-              }
-            ],
-            "children": [
-              // Long fence
-              {
-                "name": "fence-v",
-                "position": [1, 0, -2.5],
-                "rotation": [-90, 0, 0],
-                "scale": [0.17, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              {
-                "name": "fence-v",
-                "position": [8, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.05, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              {
-                "name": "fence-v",
-                "position": [-6, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.05, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
               }
             ]
           },
@@ -424,35 +312,6 @@
                 "mesh": "road",
                 "material": "road"
               }
-            ],
-            "children": [
-              {
-                "name": "fence-h",
-                "position": [1, 0, -2.5],
-                "rotation": [-90, 0, 0],
-                "scale": [0.165, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              // Long fence
-              {
-                "name": "fence-h",
-                "position": [1, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.2, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              }
             ]
           },
           // End First Side Road
@@ -467,35 +326,6 @@
                 "type": "Mesh Renderer",
                 "mesh": "road",
                 "material": "road"
-              }
-            ],
-            "children": [
-              {
-                "name": "fence-h",
-                "position": [1, 0, -2.5],
-                "rotation": [-90, 0, 0],
-                "scale": [0.165, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
-              },
-              // Long fence
-              {
-                "name": "fence-h",
-                "position": [1, 0, 1.6],
-                "rotation": [-90, 0, 0],
-                "scale": [0.2, 0.03, 0.03],
-                "components": [
-                  {
-                    "type": "Mesh Renderer",
-                    "mesh": "fence",
-                    "material": "fence"
-                  }
-                ]
               }
             ]
           }
@@ -564,7 +394,7 @@
 				]
 			},
 			// Obstacles
-			{	
+			{
 				"name": "obstacles", // 1.25 => -3.75 (+-5)
 				"position": [0, 3.5, -3.75],
 				"rotation": [0, 90, 0],
