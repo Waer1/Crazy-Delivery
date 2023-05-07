@@ -259,7 +259,7 @@
         "children": [
 					// First fence
           {
-            "name": "fence",
+            "name": "fence-h",
             "position": [0.6, 0, -2.5],
             "rotation": [-90, 0, 0],
             "scale": [0.163, 0.03, 0.03],
@@ -273,7 +273,7 @@
           },
 					// Second fence
           {
-            "name": "fence",
+            "name": "fence-h",
             "position": [0.6, 0, 1.6],
             "rotation": [-90, 0, 0],
             "scale": [0.163, 0.03, 0.03],
@@ -314,7 +314,7 @@
             "children": [
               // Long fence
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [1, 0, -2.5],
                 "rotation": [-90, 0, 0],
                 "scale": [0.17, 0.03, 0.03],
@@ -327,7 +327,7 @@
                 ]
               },
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [8, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.05, 0.03, 0.03],
@@ -340,7 +340,7 @@
                 ]
               },
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [-6, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.045, 0.03, 0.03],
@@ -371,7 +371,7 @@
             "children": [
               // Long fence
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [1, 0, -2.5],
                 "rotation": [-90, 0, 0],
                 "scale": [0.17, 0.03, 0.03],
@@ -384,7 +384,7 @@
                 ]
               },
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [8, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.05, 0.03, 0.03],
@@ -397,7 +397,7 @@
                 ]
               },
               {
-                "name": "fence",
+                "name": "fence-v",
                 "position": [-6, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.05, 0.03, 0.03],
@@ -427,7 +427,7 @@
             ],
             "children": [
               {
-                "name": "fence",
+                "name": "fence-h",
                 "position": [1, 0, -2.5],
                 "rotation": [-90, 0, 0],
                 "scale": [0.165, 0.03, 0.03],
@@ -439,9 +439,9 @@
                   }
                 ]
               },
-              // Large fence
+              // Long fence
               {
-                "name": "fence",
+                "name": "fence-h",
                 "position": [1, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.2, 0.03, 0.03],
@@ -471,7 +471,7 @@
             ],
             "children": [
               {
-                "name": "fence",
+                "name": "fence-h",
                 "position": [1, 0, -2.5],
                 "rotation": [-90, 0, 0],
                 "scale": [0.165, 0.03, 0.03],
@@ -483,9 +483,9 @@
                   }
                 ]
               },
-              // Large fence
+              // Long fence
               {
-                "name": "fence",
+                "name": "fence-h",
                 "position": [1, 0, 1.6],
                 "rotation": [-90, 0, 0],
                 "scale": [0.2, 0.03, 0.03],
@@ -564,7 +564,7 @@
 				]
 			},
 			// Obstacles
-			{
+			{	
 				"name": "obstacles", // 1.25 => -3.75 (+-5)
 				"position": [0, 3.5, -3.75],
 				"rotation": [0, 90, 0],

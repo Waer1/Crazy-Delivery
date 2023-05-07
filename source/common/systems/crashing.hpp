@@ -41,6 +41,20 @@ namespace our
             return dis < threshold;
         }
 				
+				bool fenceCrashEvent(Entity *car, Entity *object, bool type, float threshold) {
+						// Get the car position
+						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
+						glm::vec4 objectPosition = object->getLocalToWorldMatrix() * glm::vec4(object->localTransform.position, 1);
+
+						float dis = 0;
+						if (type) { // 1 => Vertical
+            		dis = abs(carPosition.x - objectPosition.x);
+            		return dis < threshold && abs(carPosition.z - objectPosition.z) < 14;
+						} else {    // 0 => Horizontal
+            		dis = abs(carPosition.z - objectPosition.z);
+            		return dis < threshold && abs(carPosition.x - objectPosition.x) < 48;
+						}
+				}
     public:
 
         void getCar(World* world) {
@@ -61,13 +75,15 @@ namespace our
                 }
 
                 if(entity->name == "battery" && crashEvent(car, entity, 3)) {
-                        printf("battery\n");
+										printf("battery\n");
                 } else if(entity->name == "obstacles" && crashEvent(car, entity, 5)) {
-                        printf("obstacles\n");
-                } else if(entity->name == "fence"){
-                    // printf("fence\n");
+										printf("obstacles\n");
+                } else if(entity->name == "fence-v" && fenceCrashEvent(car, entity, 1, 1)){
+                    printf("fence-v\n");
+                } else if(entity->name == "fence-h" && fenceCrashEvent(car, entity, 0, 1)){
+                    printf("fence-h\n");
                 } else if(entity->name == "arrow" && crashEvent(car, entity, 6)){
-                        printf("arrow %f %f \n" , car->localTransform.position , entity->localTransform.position );
+										printf("arrow\n");
                 }
             }
         }
