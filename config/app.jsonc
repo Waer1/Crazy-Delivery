@@ -272,7 +272,7 @@
           },
           // Begin First Cross Road
           {
-            "name": "road",
+            "name": "road-left",
             "position": [-16.5, 0, 0],
             "rotation": [0, 90, 0],
             "scale": [1, 1, 1],
@@ -287,7 +287,7 @@
           // End First Cross Road
           // Begin Second Cross Road
           {
-            "name": "road",
+            "name": "road-right",
             "position": [18.3, 0, -2],
             "rotation": [0, -90, 0],
             "scale": [1, 1, 1],
@@ -302,7 +302,7 @@
           // End Second Cross Road
           // Begin First Side Road
           {
-            "name": "road",
+            "name": "road-down",
             "position": [0, 0, 13.3],
             "rotation": [0, 0, 0],
             "scale": [1, 1, 1],
@@ -317,7 +317,7 @@
           // End First Side Road
           // Begin Second Side Road
           {
-            "name": "road",
+            "name": "road-up",
             "position": [1.87, 0, -15.5],
             "rotation": [0, 180, 0],
             "scale": [1, 1, 1],
