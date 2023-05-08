@@ -56,12 +56,10 @@ namespace our
             // We get a reference to the entity's position and rotation
             glm::vec3& position = entity->localTransform.position;
             glm::vec3& rotation = entity->localTransform.rotation;
-
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
             if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
                 glm::vec2 delta = app->getMouse().getMouseDelta();
-                rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch
                 rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
             }
 
@@ -87,18 +85,17 @@ namespace our
             glm::vec3 current_sensitivity = controller->positionSensitivity;
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if(app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT)) current_sensitivity *= controller->speedupFactor;
-            std::cout<<"velocity is "<< controller->positionSensitivity.z<<std::endl;
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
             if(app->getKeyboard().isPressed(GLFW_KEY_W)) 
             {
                 position += front * (deltaTime * current_sensitivity.z);
-                if(controller->positionSensitivity.z <= 30){
+                if(controller->positionSensitivity.z <= 20){
                     controller->positionSensitivity.z+=0.1;
                 }
             }else{
                 if(controller->positionSensitivity.z >=2 ){
-                     controller->positionSensitivity.z-=0.05;
+                     controller->positionSensitivity.z-=0.1;
                 }
             }
             
@@ -110,6 +107,9 @@ namespace our
                     current_sensitivity=controller->positionSensitivity;
                 }
                 position -= front * (deltaTime * current_sensitivity.z);
+                if(controller->positionSensitivity.z <= 10){
+                    controller->positionSensitivity.z+=0.1;
+                }
             }
             // Q & E moves the player up and down
             if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);

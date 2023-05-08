@@ -218,6 +218,7 @@
     "world": [
       //Camera
       {
+        "name":"camera",
         "position": [-52, 2, 43],
         "components": [
           {
