@@ -5,7 +5,7 @@
 #include "../components/free-camera-controller.hpp"
 
 #include "../application.hpp"
-
+#include <iostream>
 #include <glm/glm.hpp>
 #include <glm/gtc/constants.hpp>
 #include <glm/trigonometric.hpp>
@@ -87,16 +87,36 @@ namespace our
             glm::vec3 current_sensitivity = controller->positionSensitivity;
             // If the LEFT SHIFT key is pressed, we multiply the position sensitivity by the speed up factor
             if(app->getKeyboard().isPressed(GLFW_KEY_LEFT_SHIFT)) current_sensitivity *= controller->speedupFactor;
-
+            std::cout<<"velocity is "<< controller->positionSensitivity.z<<std::endl;
             // We change the camera position based on the keys WASD/QE
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) position += front * (deltaTime * current_sensitivity.z);
-            if(app->getKeyboard().isPressed(GLFW_KEY_S)) position -= front * (deltaTime * current_sensitivity.z);
+            if(app->getKeyboard().isPressed(GLFW_KEY_W)) 
+            {
+                position += front * (deltaTime * current_sensitivity.z);
+                if(controller->positionSensitivity.z <= 30){
+                    controller->positionSensitivity.z+=0.1;
+                }
+            }else{
+                if(controller->positionSensitivity.z >=2 ){
+                     controller->positionSensitivity.z-=0.05;
+                }
+            }
+            
+            
+            if(app->getKeyboard().isPressed(GLFW_KEY_S))
+            {
+                if(current_sensitivity.z > 10){
+                    controller->positionSensitivity.z=10;
+                    current_sensitivity=controller->positionSensitivity;
+                }
+                position -= front * (deltaTime * current_sensitivity.z);
+            }
             // Q & E moves the player up and down
             if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
             if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
             // A & D moves the player left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
+    
             if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
         }
 
