@@ -38,7 +38,7 @@
         "fence": "assets/textures/fence.jpg",
         "battery": "assets/textures/battery.jpg",
         "arrow": "assets/textures/arrow.jpg",
-        "car": "assets/textures/black.jpg"
+        "car": "assets/textures/car.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -58,6 +58,21 @@
         }
       },
       "materials": {
+        "car": {
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          "texture": "car",
+          "sampler": "default"
+        },
         "metal": {
           "type": "tinted",
           "shader": "tinted",
@@ -92,21 +107,6 @@
           "tint": [1, 1, 1, 1],
           "texture": "glass",
           "sampler": "pixelated"
-        },
-        "car": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "car",
-          "sampler": "default"
         },
         "grass": {
           "type": "textured",
@@ -230,9 +230,9 @@
         "children": [
           {
             "name": "car",
-            "position": [0, -1, -1.5],
-            "rotation": [0, 0, 0],
-            "scale": [1.1, 1.2, 1.0],
+            "position": [0, -1, -5],
+            "rotation": [0, 180, 0],
+            "scale": [1.0, 1.0, 1.2],
             "components": [
               {
                 "type": "Mesh Renderer",
