@@ -6,7 +6,7 @@ layout(location = 2) in vec2 tex_coord;      // Texture coordinates attribute
 layout(location = 3) in vec3 normal;         // Vertex normal attribute
 
 uniform mat4 VP;                            // View-projection matrix
-uniform vec3 camera_position;               // Position of the camera (eye)
+uniform vec3 eye;               						// Position of the camera (eye)
 uniform mat4 M;                             // Model matrix
 uniform mat4 M_IT;                          // Inverse-transpose of the model matrix
 
@@ -33,7 +33,7 @@ void main() {
     vs_out.normal = normalize((M_IT * vec4(normal, 0.0)).xyz);
 
     // Calculate the vector from the vertex to the camera position
-    vs_out.view = camera_position - world;
+    vs_out.view = eye - world;
 
     // Pass the world position of the vertex
     vs_out.world = world;
