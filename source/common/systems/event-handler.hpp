@@ -2,14 +2,11 @@
 
 #include "application.hpp"
 
-
-
 namespace our
 {
 
     // The crashing system is responsible for checking if the car has crashed with any obstacle.
     class EventHandlerSystem {
-        // Save the car entity
         Application * app;
 
     public:
@@ -24,7 +21,6 @@ namespace our
         void winGame(){
             app->changeState("win");
         }
-
     };
 
 }

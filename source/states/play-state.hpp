@@ -37,6 +37,9 @@ class Playstate: public our::State {
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
 
+				// Target number of deliveries that a player can make
+				int numOfDeliveries = 5;
+
         // initialize the event handler system
         eventHandlerSystem.startHandler(getApp());
 
@@ -57,6 +60,7 @@ class Playstate: public our::State {
         cameraController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
         energySystem.update();
+
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

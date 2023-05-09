@@ -49,23 +49,21 @@ namespace our
             return dis < threshold;
         }
 
-    public:
-
-
-        void initializeCrashingSystem(World* world,EventHandlerSystem * events, EnergySystem * energy) {
-            getCar(world);
-            this->events = events;
-            this->energy = energy;
-        }
-
         void getCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
                 if(entity->name == "car"){
-                        car = entity;
-                        break;
+											car = entity;
+											break;
                 }
             }
+        }
+
+    public:
+        void initializeCrashingSystem(World* world,EventHandlerSystem * events, EnergySystem * energy) {
+            this->events = events;
+            this->energy = energy;
+            getCar(world);
         }
 
         void update(World* world) {
@@ -86,8 +84,10 @@ namespace our
                     energy->buildingCrash();
                 } else if(entity->name == "arrow" && areaCrashEvent(car, entity, 3)){
                     printf("arrow\n");
-                    events->winGame();
-                }
+                    // events->winGame();
+                } else if(entity->name == "delivery") {
+										printf("delivery\n");
+								}
             }
         }
     };
