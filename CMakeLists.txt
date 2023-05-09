@@ -88,6 +88,7 @@ set(COMMON_SOURCES
 				source/common/systems/crashing.hpp
 				source/common/systems/energy.hpp
 				source/common/systems/event-handler.hpp
+				source/common/systems/delivery.hpp
 )
 
 # Define the directories in which to search for the included headers
