@@ -1,10 +1,10 @@
 {
-  "start-scene": "play",
+  "start-scene": "win",
   "window": {
     "title": "Default Game Window",
     "size": {
       "width": 1280,
-      "height": 720
+      "height": 900
     },
     "fullscreen": false
   },

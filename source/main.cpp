@@ -6,6 +6,9 @@
 #include <application.hpp>
 
 #include "states/menu-state.hpp"
+#include "states/win-state.hpp"
+#include "states/lose-state.hpp"
+
 #include "states/play-state.hpp"
 #include "states/shader-test-state.hpp"
 #include "states/mesh-test-state.hpp"
@@ -43,6 +46,10 @@ int main(int argc, char** argv) {
     
     // Register all the states of the project in the application
     app.registerState<Menustate>("menu");
+
+    app.registerState<Winstate>("win");
+    app.registerState<Losestate>("lose");
+
     app.registerState<Playstate>("play");
     app.registerState<ShaderTestState>("shader-test");
     app.registerState<MeshTestState>("mesh-test");
