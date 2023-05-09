@@ -132,6 +132,8 @@ namespace our {
             sampler->bind(4);
             shader->set("material.ambient_occlusion", 4);
 				}
+
+				glActiveTexture(GL_TEXTURE0);
     }
 
     // This function read the material data from a json object

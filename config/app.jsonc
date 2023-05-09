@@ -38,7 +38,11 @@
         "fence": "assets/textures/fence.jpg",
         "battery": "assets/textures/battery.jpg",
         "arrow": "assets/textures/arrow.jpg",
-        "car": "assets/textures/car.jpg"
+        "car": "assets/textures/car.jpg",
+				"building1": "assets/textures/building1.jpg",
+				"building2": "assets/textures/building2.jpg",
+				"black": "assets/textures/black.jpg",
+				"white": "assets/textures/white.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -212,7 +216,25 @@
           "tint": [1, 1, 1, 1],
           "texture": "arrow",
           "sampler": "default"
-        }
+        },
+				"building1": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "sampler": "default",
+					"albedo": "building1",
+					"specular": "white",
+					"emissive": "black",
+					"roughness": "black",
+					"ambient_occlusion": "building1"
+				}
       }
     },
     "world": [
@@ -244,6 +266,21 @@
           }
         ]
       },
+			// ------------- Buildings ------------------
+			// {
+			// 	"name": "building",
+			// 	"position": [0, 5, 0],
+			// 	"rotation": [0, 0, 0],
+			// 	"scale": [5, 10, 5],
+			// 	"components": [
+			// 		{
+			// 			"type": "Mesh Renderer",
+			// 			"mesh": "cube",
+			// 			"material": "building1"
+			// 		}
+			// 	]
+			// },
+			// ------------- Buildings ------------------
       // Begin Central Road
       {
         "name": "central-road",

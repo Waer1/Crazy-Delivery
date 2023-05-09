@@ -228,7 +228,7 @@ namespace our {
 
 						if (auto lightMaterial = dynamic_cast<LightMaterial*>(opaqueCommand.material); lightMaterial) {
 								opaqueCommand.material->shader->set("VP", VP);
-								opaqueCommand.material->shader->set("eye", cameraForward);
+								opaqueCommand.material->shader->set("eye", glm::vec3(cameraForward.x, cameraForward.y, cameraForward.z));
 								opaqueCommand.material->shader->set("light_count", numLights);
 								opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
 								opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
