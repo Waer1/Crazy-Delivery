@@ -1,6 +1,7 @@
 #pragma once
 
 #include <glm/glm.hpp>
+#include <ecs/world.hpp>
 #include <systems/event-handler.hpp>
 #include <chrono>
 
