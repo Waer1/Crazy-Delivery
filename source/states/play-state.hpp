@@ -47,7 +47,7 @@ class Playstate: public our::State {
         crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem);
 
         // start the timer for energy system
-        energySystem.startTimer(&eventHandlerSystem);
+        energySystem.initialize(&world, &eventHandlerSystem);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
