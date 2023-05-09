@@ -7,6 +7,8 @@
 #include <systems/free-camera-controller.hpp>
 #include <systems/movement.hpp>
 #include <systems/crashing.hpp>
+#include <systems/energy.hpp>
+#include <systems/event-handler.hpp>
 #include <asset-loader.hpp>
 
 
@@ -18,6 +20,8 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::MovementSystem movementSystem;
     our::CrashingSystem crashingSystem;
+    our::EnergySystem energySystem;
+    our::EventHandlerSystem eventHandlerSystem;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -32,9 +36,15 @@ class Playstate: public our::State {
         }
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
-				
-				// Get the car entity
-				crashingSystem.getCar(&world);
+
+        // initialize the event handler system
+        eventHandlerSystem.startHandler(getApp());
+
+        // Get the car entity
+        crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem);
+
+        // start the timer for energy system
+        energySystem.startTimer(&eventHandlerSystem);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
@@ -46,6 +56,7 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         cameraController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
+        energySystem.update();
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
 

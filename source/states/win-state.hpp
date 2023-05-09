@@ -10,9 +10,6 @@
 #include <functional>
 #include <array>
 
-
-#include <iostream>
-
 // This state shows how to use some of the abstractions we created to make a menu.
 class Winstate: public our::State {
 
@@ -58,17 +55,16 @@ class Winstate: public our::State {
         // Note that the texture coordinates at the origin is (0.0, 1.0) since we will use the
         // projection matrix to make the origin at the the top-left corner of the screen.
         rectangle = new our::Mesh({
-                                          {{0.0f, 0.0f, 0.0f}, {255, 255, 255, 255}, {0.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
-                                          {{1.0f, 0.0f, 0.0f}, {255, 255, 255, 255}, {1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
-                                          {{1.0f, 1.0f, 0.0f}, {255, 255, 255, 255}, {1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
-                                          {{0.0f, 1.0f, 0.0f}, {255, 255, 255, 255}, {0.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
-                                  },{
-                                          0, 1, 2, 2, 3, 0,
-                                  });
+								{{0.0f, 0.0f, 0.0f}, {255, 255, 255, 255}, {0.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
+								{{1.0f, 0.0f, 0.0f}, {255, 255, 255, 255}, {1.0f, 1.0f}, {0.0f, 0.0f, 1.0f}},
+								{{1.0f, 1.0f, 0.0f}, {255, 255, 255, 255}, {1.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
+								{{0.0f, 1.0f, 0.0f}, {255, 255, 255, 255}, {0.0f, 0.0f}, {0.0f, 0.0f, 1.0f}},
+				},{
+								0, 1, 2, 2, 3, 0,
+				});
 
         // Reset the time elapsed since the state is entered.
         time = 0;
-
     }
 
     void onDraw(double deltaTime) override {
@@ -104,7 +100,6 @@ class Winstate: public our::State {
         menuMaterial->setup();
         menuMaterial->shader->set("transform", VP*M);
         rectangle->draw();
-
     }
 
     void onDestroy() override {

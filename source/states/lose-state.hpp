@@ -11,8 +11,6 @@
 #include <array>
 
 
-#include <iostream>
-
 // This state shows how to use some of the abstractions we created to make a menu.
 class Losestate: public our::State {
 

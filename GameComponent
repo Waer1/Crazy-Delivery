@@ -46,3 +46,24 @@ tasks division:
   - crashing system : (Done)
   - Game logic ( time - win - lose( time, battery ) ) : 
   - menu system : (Done)
+
+
+
+
+
+
+
+battery:
+- battery is 100% at the start
+- energy component
+- draw the battery itself in the map
+- define the energy system
+- combine between crashing system with energy system
+
+
+
+
+
+
+
+
