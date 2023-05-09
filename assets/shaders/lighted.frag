@@ -8,7 +8,8 @@ struct Light {
     int type;               // Type of light (0: directional, 1: point, 2: spot)
     vec3 position;          // Position of the light
     vec3 direction;         // Direction of the light
-    vec3 color;             // Color of the light
+    vec3 diffuse;           // Diffuse color of the light
+    vec3 specular;          // Specular color of the light
     vec3 attenuation;       // Attenuation factors (constant, linear, quadratic)
     vec2 cone_angles;       // Cone angles (inner, outer) for spot lights
 };
