@@ -48,9 +48,9 @@ class Playstate: public our::State {
         eventHandlerSystem.startHandler(getApp(), numOfDeliveries);
 
         // Get the car entity
-        crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem);
-        energySystem.initialize(&world, &eventHandlerSystem);
         deliverySystem.initialize(&world, numOfDeliveries);
+        crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
+        energySystem.initialize(&world, &eventHandlerSystem);
         bigObstaclesSystem.initialize(&world, numberofBigObstacles);
 
         // Then we initialize the renderer

@@ -26,8 +26,8 @@ namespace our
         }
 
         void deliverDelivery(){
-            if(haveDeliver){
-                haveDeliver=0;
+            if (haveDeliver) {
+                haveDeliver = 0;
                 targetDelivers--;
                 printf("%d" ,targetDelivers);
 
