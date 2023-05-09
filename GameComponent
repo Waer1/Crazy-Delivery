@@ -41,7 +41,8 @@ steps:
 tasks division: 
   - render map & obstacles(movement) & building & target : waer - beshoy (Done)
   - car movements & keyboard : hamdy - nu3
-  - movement of the car on the map & direction : 
-  - crashing system : 
+  - movement of the car on the map (restrict the movement, can't go into the buildings and obsticales) & direction arrow :
+  - change the camera with the car when it moves right and left: 
+  - crashing system : (Done)
   - Game logic ( time - win - lose( time, battery ) ) : 
-  - menu system : 
+  - menu system : (Done)
