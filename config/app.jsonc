@@ -422,6 +422,25 @@
               }
 						]
           },
+					// ------------- Delivery -----------------
+					{
+						"name": "delivery-on-car",
+						"position": [0, 0.7, -4],
+						"rotation": [0, 0, 0],
+						"scale": [0.5, 0.5, 0.5],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "monkey",
+								"material": "monkey"
+							},
+							{
+								"type": "Movement",
+								"angularVelocity": [0, 30, 0]
+							}
+						]
+					},
+					// ------------- Delivery -----------------
 					// ------------- Battry bar ------------------
 					{
 						"name": "battry-border",

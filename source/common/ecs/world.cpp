@@ -37,46 +37,6 @@ namespace our {
                     }
     }
 
-    nlohmann::json generateBigObstacle(glm::vec3 startingPosition, glm::vec3 startingAngularVelocity) {
-        return {
-                {"name", "obstacles"},
-                {"position", {startingPosition.x, startingPosition.y, startingPosition.z}},
-                {"rotation", {0, 90, 0}},
-                {"scale", {2, 2, 2}},
-                {"components", nlohmann::json::array({
-                     {
-                             {"type", "Mesh Renderer"},
-                             {"mesh", "monkey"},
-                             {"material", "monkey"}
-                     },
-                     {
-                             {"type", "Movement"},
-                             {"linearVelocity", {0, 0, 0}},
-                             {"angularVelocity", {0, 0, 0}}
-                     }
-                 })}
-        };
-    }
-
-    glm::vec3 generateRandomVec3(int from, int to){
-        srand(static_cast<unsigned int>(time(nullptr)));
-        // Generate random x, y, and z values between x and y
-        float randomX = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
-        float randomZ = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
-
-        // Construct a glm::vec3 with the random values
-        glm::vec3 vec(randomX, 0, randomZ);
-        return vec;
-    }
-
-    void generateBigobstacles(Entity* parent){
-        for(auto randomPosition : randomPositions){
-            Entity* bigObstacle = parent->getWorld()->add();
-            bigObstacle->parent = parent;
-            bigObstacle->deserialize(generateBigObstacle(randomPosition, generateRandomVec3(0,60)));
-        }
-    }
-
     // This will deserialize a json array of entities and add the new entities to the current world
     // If parent pointer is not null, the new entities will be have their parent set to that given pointer
     // If any of the entities has children, this function will be called recursively for these children

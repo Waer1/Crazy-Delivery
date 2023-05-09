@@ -63,16 +63,21 @@ namespace our
             // For each entity in the world
             for(auto entity : world->getEntities()){
 
-                if(entity->name == "obstacles") {
+                if (entity->name == "obstacles") {
                     obstacleMovement(entity, deltaTime);
                 } else if(entity->name == "battery" || entity->name == "arrow") {
                     rangeMovement(entity, deltaTime);
-                }
-
+                } else {
+										// Get the movement component if it exists
+										MovementComponent* movement = entity->getComponent<MovementComponent>();
+										// If the movement component exists
+										if(movement){
+												// Change the position and rotation based on the linear & angular velocity and delta time.
+												entity->localTransform.position += deltaTime * movement->linearVelocity;
+												entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+										}
+								}
             }
-
         }
-
     };
-
 }

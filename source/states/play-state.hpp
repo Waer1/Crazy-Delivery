@@ -9,6 +9,8 @@
 #include <systems/crashing.hpp>
 #include <systems/energy.hpp>
 #include <systems/event-handler.hpp>
+#include <systems/delivery.hpp>
+#include <systems/bigObstacles.hpp>
 #include <asset-loader.hpp>
 
 
@@ -22,6 +24,8 @@ class Playstate: public our::State {
     our::CrashingSystem crashingSystem;
     our::EnergySystem energySystem;
     our::EventHandlerSystem eventHandlerSystem;
+    our::DeliverySystem deliverySystem;
+    our::BigObstaclesSystem bigObstaclesSystem;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -38,16 +42,16 @@ class Playstate: public our::State {
         cameraController.enter(getApp());
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 5;
+        int numOfDeliveries = 5, numberofBigObstacles = 3;
 
         // initialize the event handler system
         eventHandlerSystem.startHandler(getApp(), numOfDeliveries);
 
         // Get the car entity
         crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem);
-
-        // start the timer for energy system
-        energySystem.startTimer(&eventHandlerSystem);
+        energySystem.initialize(&world, &eventHandlerSystem);
+        deliverySystem.initialize(&world, numOfDeliveries);
+        bigObstaclesSystem.initialize(&world, numberofBigObstacles);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
