@@ -958,7 +958,7 @@
 							"type": "Movement",
 							"linearVelocity": [0, 2, 0],
 							"angularVelocity": [0, 50, 0],
-							"movementRangeY": [1.5, 6]
+							"movementRangeY": [1.5, 4]
 					}
 				]
 			},
@@ -977,7 +977,7 @@
 						"type": "Movement",
 						"linearVelocity": [0, 2, 0],
 						"angularVelocity": [0, 50, 0],
-						"movementRangeY": [1.5, 6]
+						"movementRangeY": [1.5, 4]
 					}
 				]
 			},
