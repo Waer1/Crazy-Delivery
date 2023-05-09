@@ -19,7 +19,7 @@ namespace our
         int energy = 1000;
         std::chrono::high_resolution_clock::time_point lastTime;
         our::EventHandlerSystem * eventHandler;
-
+				vector<Entity*> energyBars;
 
         void increaseEnergy(int amount){
             energy = max(amount + amount , 100);
@@ -50,6 +50,7 @@ namespace our
 						int barIndex = 1;
 						for (float x = start; x <= end; x += step) {
 								Entity* bar = parent->getWorld()->add();
+								energyBars.push_back(bar);
 								bar->parent = parent;
 								bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
 								printf("bar: %s\n", bar->name.c_str());
