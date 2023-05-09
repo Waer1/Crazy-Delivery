@@ -35,12 +35,15 @@
         "glass": "assets/textures/glass-panels.png",
         "monkey": "assets/textures/monkey.png",
         "road": "assets/textures/road.jpg",
-        "fence": "assets/textures/fence.jpg",
         "battery": "assets/textures/battery.jpg",
         "arrow": "assets/textures/arrow.jpg",
         "car": "assets/textures/car.jpg",
 				"building1": "assets/textures/building1.jpg",
 				"building2": "assets/textures/building2.jpg",
+				"building3": "assets/textures/building3.jpg",
+				"building4": "assets/textures/building4.jpg",
+				"building5": "assets/textures/building5.jpg",
+				"ground": "assets/textures/ground.jpg",
 				"black": "assets/textures/black.jpg",
 				"white": "assets/textures/white.jpg"
       },
@@ -50,7 +53,6 @@
         "plane": "assets/models/plane.obj",
         "sphere": "assets/models/sphere.obj",
         "road": "assets/models/road.obj",
-        "fence": "assets/models/fence.obj",
         "battery": "assets/models/battery.obj",
         "arrow": "assets/models/arrow.obj",
         "car": "assets/models/Car.obj"
@@ -234,6 +236,93 @@
 					"emissive": "black",
 					"roughness": "black",
 					"ambient_occlusion": "building1"
+				},
+				"building2": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "sampler": "default",
+					"albedo": "building2",
+					"specular": "white",
+					"emissive": "black",
+					"roughness": "black",
+					"ambient_occlusion": "building2"
+				},
+				"building3": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "sampler": "default",
+					"albedo": "building3",
+					"specular": "white",
+					"emissive": "black",
+					"roughness": "black",
+					"ambient_occlusion": "building3"
+				},
+				"building4": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "sampler": "default",
+					"albedo": "building4",
+					"specular": "white",
+					"emissive": "black",
+					"roughness": "black",
+					"ambient_occlusion": "building4"
+				},
+				"building5": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "sampler": "default",
+					"albedo": "building5",
+					"specular": "white",
+					"emissive": "black",
+					"roughness": "black",
+					"ambient_occlusion": "building5"
+				},
+				"ground": {
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [0.7, 0.7, 0.7, 1],
+          "texture": "ground",
+          "sampler": "default"
 				}
       }
     },
@@ -267,19 +356,381 @@
         ]
       },
 			// ------------- Buildings ------------------
-			// {
-			// 	"name": "building",
-			// 	"position": [0, 5, 0],
-			// 	"rotation": [0, 0, 0],
-			// 	"scale": [5, 10, 5],
-			// 	"components": [
-			// 		{
-			// 			"type": "Mesh Renderer",
-			// 			"mesh": "cube",
-			// 			"material": "building1"
-			// 		}
-			// 	]
-			// },
+			// First batch
+			{
+				"name": "building",
+				"position": [35, 10, 18],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [13, 10, 18],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-8, 10, 18],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-30, 10, 18],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
+
+			// Second batch
+			{
+				"name": "building",
+				"position": [57, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [35, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [13, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-8, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-30, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-52, 10, 57],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+
+			// Third batch
+			{
+				"name": "building",
+				"position": [35, 10, -23],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [13, 10, -23],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-8, 10, -23],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-30, 10, -23],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+
+			// Forth batch
+			{
+				"name": "building",
+				"position": [57, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [35, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [13, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-8, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building5"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-30, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-52, 10, -63],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+
+			// Fifth batch
+			{
+				"name": "building",
+				"position": [77, 10, 35],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building5"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [77, 10, 10],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [77, 10, -15],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [77, 10, -40],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+			
+			// Sixth batch
+			{
+				"name": "building",
+				"position": [-70, 10, 35],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building1"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-70, 10, 10],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building2"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-70, 10, -15],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building3"
+					}
+				]
+			},
+			{
+				"name": "building",
+				"position": [-70, 10, -40],
+				"rotation": [0, 0, 0],
+				"scale": [9, 10, 9],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "cube",
+						"material": "building4"
+					}
+				]
+			},
 			// ------------- Buildings ------------------
       // Begin Central Road
       {
@@ -295,7 +746,7 @@
           }
         ],
         "children": [
-          //Grass
+          // Ground
           {
             "position": [0, 1, 0],
             "rotation": [-90, 0, 0],
@@ -304,7 +755,7 @@
               {
                 "type": "Mesh Renderer",
                 "mesh": "plane",
-                "material": "grass"
+                "material": "ground"
               }
             ]
           },
