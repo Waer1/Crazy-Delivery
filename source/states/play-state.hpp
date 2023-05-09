@@ -37,11 +37,11 @@ class Playstate: public our::State {
         // We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
 
-				// Target number of deliveries that a player can make
-				int numOfDeliveries = 5;
+        // Target number of deliveries that a player can make
+        int numOfDeliveries = 5;
 
         // initialize the event handler system
-        eventHandlerSystem.startHandler(getApp());
+        eventHandlerSystem.startHandler(getApp(), numOfDeliveries);
 
         // Get the car entity
         crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem);

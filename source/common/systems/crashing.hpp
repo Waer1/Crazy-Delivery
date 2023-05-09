@@ -84,10 +84,12 @@ namespace our
                     energy->buildingCrash();
                 } else if(entity->name == "arrow" && areaCrashEvent(car, entity, 3)){
                     printf("arrow\n");
-                    // events->winGame();
-                } else if(entity->name == "delivery") {
-										printf("delivery\n");
-								}
+                    events->deliverDelivery();
+                } else if(entity->name == "delivery" && areaCrashEvent(car, entity, 4)
+                && !events->isCarryDeliver()) {
+                    printf("delivery\n");
+                    events->collectDeliver();
+                }
             }
         }
     };

@@ -7,7 +7,7 @@ using namespace std;
 
 #include <chrono>
 
-#define decreasedTime 250
+#define decreasedTime 5000
 #define decreasedEnergy 1
 
 namespace our
@@ -22,11 +22,11 @@ namespace our
 
 
         void increaseEnergy(int amount){
-            energy = max(amount + amount , 100);
+            energy = max(energy + amount , 100);
         }
 
         void decreaseEnergy(int amount){
-            energy = max(energy - amount, 0);
+            energy -= amount;
             if (energy <= 0) eventHandler->loseGame();
         }
 
@@ -46,11 +46,11 @@ namespace our
         }
 
         void obstacleCrash(){
-            decreaseEnergy(20);
+            decreaseEnergy(0);
         }
 
         void buildingCrash(){
-            decreaseEnergy(5);
+            decreaseEnergy(0);
         }
 
 
@@ -61,7 +61,7 @@ namespace our
             printf("energy: %d\n", energy);
             if (elapsedTime >= decreasedTime) {
                 lastTime = currentTime;
-                energy -= decreasedEnergy; // Decrease energy every 50ms
+//                energy -= decreasedEnergy; // Decrease energy every 50ms
                 if (energy <= 0) eventHandler->loseGame();
             }
         }
