@@ -56,7 +56,7 @@ namespace our {
 		// Light material will inherit from the  material and define all texture types for the light material.
     class LightMaterial : public Material {
     public:
-        Texture2D  *albedo, *specular, *emissive, *roughness, *ambient_occlusion;
+        Texture2D *albedo, *specular, *emissive, *roughness, *ambient_occlusion;
         Sampler* sampler;
 
         void setup() const override;

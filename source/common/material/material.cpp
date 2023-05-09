@@ -83,6 +83,16 @@ namespace our {
 				// Setup the material
         Material::setup();
 
+        if (albedo != nullptr) {
+            // select an active texture unit -> 0
+            glActiveTexture(GL_TEXTURE0);
+            // bind the texture to unit 0
+            albedo->bind();
+            // bind the sampler to unit 0
+            sampler->bind(0);
+            shader->set("material.albedo", 0);
+        }
+
         if (specular != nullptr) {
             // Select an active texture unit -> 1
             glActiveTexture(GL_TEXTURE1);
@@ -121,17 +131,7 @@ namespace our {
             // Bind the sampler to unit 4
             sampler->bind(4);
             shader->set("material.ambient_occlusion", 4);
-        }
-
-        if (albedo != nullptr) {
-            // select an active texture unit -> 5
-            glActiveTexture(GL_TEXTURE0);
-            // bind the texture to unit 5
-            albedo->bind();
-            // bind the sampler to unit 5
-            sampler->bind(0);
-            shader->set("material.albedo", 0);
-        }
+				}
     }
 
     // This function read the material data from a json object
