@@ -23,7 +23,7 @@ namespace our
             return sqrt(pow(a.x - b.x, 2) + pow(a.z - b.z, 2));
         }
 				
-        bool crashEvent(Entity *car, Entity *object, float threshold) {
+        bool volumeCrashEvent(Entity *car, Entity *object, float threshold) {
 						// Get the car position
 						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
 
@@ -33,7 +33,7 @@ namespace our
 						return dis < threshold;
         }
 
-        bool arrowCrashEvent(Entity *car, Entity *object, float threshold) {
+        bool areaCrashEvent(Entity *car, Entity *object, float threshold) {
             // Get the car position
             glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
             glm::vec4 objectPosition = glm::vec4(object->localTransform.position, 1);
@@ -43,16 +43,7 @@ namespace our
 
             return dis < threshold;
         }
-				
-				bool fenceCrashEvent(Entity *car, Entity *object, float threshold) {
-						// Get the car position
-						glm::vec4 carPosition = car->getLocalToWorldMatrix() * glm::vec4(car->localTransform.position, 1);
-						glm::vec4 objectPosition = object->getLocalToWorldMatrix() * glm::vec4(object->localTransform.position, 1);
 
-						float dis = distanceXZ(carPosition, objectPosition);
-
-						return dis < threshold;
-				}
     public:
 
         void getCar(World* world) {
@@ -72,13 +63,13 @@ namespace our
                     continue;
                 }
 
-                if(entity->name == "battery" && crashEvent(car, entity, 3)) {
+                if(entity->name == "battery" && volumeCrashEvent(car, entity, 3)) {
 										printf("battery\n");
-                } else if(entity->name == "obstacles" && crashEvent(car, entity, 5)) {
+                } else if(entity->name == "obstacles" && volumeCrashEvent(car, entity, 5)) {
 										printf("obstacles\n");
-                } else if(entity->name == "fence" && fenceCrashEvent(car, entity, 0.7)){
-                    printf("fence\n");
-                } else if(entity->name == "arrow" && arrowCrashEvent(car, entity, 3)){
+                } else if(entity->name == "building" && areaCrashEvent(car, entity, 14)){
+                    printf("building\n");
+                } else if(entity->name == "arrow" && areaCrashEvent(car, entity, 3)){
 										printf("arrow\n");
                 }
             }
