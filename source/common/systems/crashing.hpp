@@ -3,6 +3,9 @@
 #include "../ecs/world.hpp"
 
 #include <glm/glm.hpp>
+#include <systems/event-handler.hpp>
+#include <systems/energy.hpp>
+
 
 #include <iostream>
 using namespace std;
@@ -14,6 +17,8 @@ namespace our
     class CrashingSystem {
 				// Save the car entity
         Entity *car;
+        EventHandlerSystem *events;
+        EnergySystem *energy;
 
         float distanceXYZ(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
@@ -46,6 +51,13 @@ namespace our
 
     public:
 
+
+        void initializeCrashingSystem(World* world,EventHandlerSystem * events, EnergySystem * energy) {
+            getCar(world);
+            this->events = events;
+            this->energy = energy;
+        }
+
         void getCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
@@ -64,13 +76,17 @@ namespace our
                 }
 
                 if(entity->name == "battery" && volumeCrashEvent(car, entity, 3)) {
-										printf("battery\n");
+                    printf("battery\n");
+                    energy->batteryCrash();
                 } else if(entity->name == "obstacles" && volumeCrashEvent(car, entity, 5)) {
-										printf("obstacles\n");
+                    printf("obstacles\n");
+                    energy->obstacleCrash();
                 } else if(entity->name == "building" && areaCrashEvent(car, entity, 14)){
                     printf("building\n");
+                    energy->buildingCrash();
                 } else if(entity->name == "arrow" && areaCrashEvent(car, entity, 3)){
-										printf("arrow\n");
+                    printf("arrow\n");
+                    events->winGame();
                 }
             }
         }
