@@ -42,7 +42,7 @@ class Playstate: public our::State {
         cameraController.enter(getApp());
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 5, numberofBigObstacles = 3;
+        int numOfDeliveries = 5, numberofBigObstacles = 1;
 
         // initialize the event handler system
         eventHandlerSystem.startHandler(getApp(), numOfDeliveries);

@@ -22,24 +22,24 @@ namespace our
                         glm::vec2(55, 10)
         }; // points that we will choose randomly from them
 
-        nlohmann::json generateBigObstacle(glm::vec3 startingPosition, glm::vec3 startingAngularVelocity) {
+        nlohmann::json generateBigObstacle(glm::vec3 startingPosition,glm::vec3 startingLinearVelocity , glm::vec3 startingAngularVelocity) {
             return {
                     {"name", "obstacles"},
                     {"position", {startingPosition.x, startingPosition.y, startingPosition.z}},
                     {"rotation", {0, 90, 0}},
                     {"scale", {2, 2, 2}},
                     {"components", nlohmann::json::array({
-                                                                 {
-                                                                         {"type", "Mesh Renderer"},
-                                                                         {"mesh", "monkey"},
-                                                                         {"material", "monkey"}
-                                                                 },
-                                                                 {
-                                                                         {"type", "Movement"},
-                                                                         {"linearVelocity", {0, 0, 0}},
-                                                                         {"angularVelocity", {0, 0, 0}}
-                                                                 }
-                                                         })}
+                         {
+                                 {"type", "Mesh Renderer"},
+                                 {"mesh", "monkey"},
+                                 {"material", "monkey"}
+                         },
+                         {
+                                 {"type", "Movement"},
+                                 {"linearVelocity", {startingLinearVelocity.x, startingLinearVelocity.y, startingLinearVelocity.z}},
+                                 {"angularVelocity", {startingAngularVelocity.x, startingAngularVelocity.y, startingAngularVelocity.z}}
+                        }
+                    })}
             };
         }
 
@@ -54,7 +54,6 @@ namespace our
             return vec;
         }
 
-
     public:
         void initialize(World* world, int numOfBigObstacles) {
 
@@ -64,7 +63,12 @@ namespace our
 								glm::vec2 randomPoint = pickUpPoints[randomIndex];
 								pickUpPoints.erase(pickUpPoints.begin() + randomIndex);
 								Entity* delivery = world->add();
-								delivery->deserialize(generateBigObstacle(glm::vec3(randomPoint.x ,3.5, randomPoint.y), generateRandomVec3(0,60)));
+								delivery->deserialize(
+                                        generateBigObstacle(glm::vec3(randomPoint.x ,3.5, randomPoint.y),
+                                                            generateRandomVec3(0,120) ,
+                                                            generateRandomVec3(0,60)
+                                                            )
+                                                            );
 						}
 				}
 

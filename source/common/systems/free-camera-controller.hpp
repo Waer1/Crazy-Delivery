@@ -61,6 +61,7 @@ namespace our
             if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
                 glm::vec2 delta = app->getMouse().getMouseDelta();
                 rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
+                rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch‏
             }
 
             // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks

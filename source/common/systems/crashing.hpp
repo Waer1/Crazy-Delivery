@@ -19,6 +19,7 @@ namespace our
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
+        vector<Entity*> BigObstacles;
 
         float distanceXYZ(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
@@ -49,6 +50,18 @@ namespace our
             return dis < threshold;
         }
 
+        bool obstacleCrashEvent(Entity *obstacle, Entity *object, float threshold) {
+            // Get the car position
+            glm::vec4 carPosition = glm::vec4(obstacle->localTransform.position, 1);
+            glm::vec4 objectPosition = glm::vec4(object->localTransform.position, 1);
+
+            // Get the distance between the car and the object
+            float dis = distanceXZ(carPosition, objectPosition);
+
+            return dis < threshold;
+        }
+
+
         void getCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
@@ -59,6 +72,29 @@ namespace our
             }
         }
 
+        void getBigObstacles(World* world) {
+            // For each entity in the world
+            for(auto entity : world->getEntities()){
+                if(entity->name == "obstacles"){
+                    BigObstacles.push_back(entity);
+                    break;
+                }
+            }
+        }
+
+        glm::vec3 generateRandomVec3(int from, int to){
+            srand(static_cast<unsigned int>(time(nullptr)));
+            // Generate random x, y, and z values between x and y
+            float randomX = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
+            float randomZ = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
+
+            // Construct a glm::vec3 with the random values
+            glm::vec3 vec(randomX, 0, randomZ);
+            return vec;
+        }
+
+
+
     public:
         void initializeCrashingSystem(World* world,EventHandlerSystem * events, EnergySystem * energy) {
             this->events = events;
@@ -66,7 +102,7 @@ namespace our
             getCar(world);
         }
 
-        void update(World* world) {
+        void update(World* world){
             // For each entity in the world
             for(auto entity : world->getEntities()) {
                 if(entity->name == "car"){
@@ -91,7 +127,20 @@ namespace our
                     events->collectDeliver();
                 }
             }
+
+            for(auto bigObstacle : BigObstacles) {
+                for(auto entity : world->getEntities()) {
+                    if(entity->name == "building" && obstacleCrashEvent(entity, bigObstacle, 10)){
+                        MovementComponent* bm = bigObstacle->getComponent<MovementComponent>();
+                        bm->angularVelocity = generateRandomVec3(-150,150);
+                        bm->linearVelocity = -bm->linearVelocity;
+                    }
+                }
+            }
+
         }
+
+
     };
 
 }
