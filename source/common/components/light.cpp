@@ -15,7 +15,7 @@ namespace our {
 				else 
 						type = LightType::POINT;
 				
-				color = data.value("color", color);
+				direction = data.value("direction", direction);
 				diffuse = data.value("diffuse", diffuse);
 				specular = data.value("specular", specular);
 				attenuation = data.value("attenuation", attenuation);
