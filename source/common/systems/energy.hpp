@@ -9,7 +9,7 @@ using namespace std;
 
 #include <chrono>
 
-#define decreasedTime 5000
+#define decreasedTime 100
 #define decreasedEnergy 1
 
 namespace our
@@ -18,13 +18,26 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any obstacle.
     class EnergySystem {
         // Save the car entity
-        int energy = 1000;
+        int energy = 100;
         std::chrono::high_resolution_clock::time_point lastTime;
         our::EventHandlerSystem * eventHandler;
-				vector<Entity*> energyBars;
+        vector<Entity*> energyBars;
+
+
+        void handleEnergyBars(int energy) {
+            float percentage = ((float)energy / 100) * 100; // calculate the percentage of energy
+            for (int i = 0; i < energyBars.size(); i++) {
+                printf("percentage: %f    %d\n", percentage, i);
+                if (percentage >= i * 100.0 / energyBars.size() ) {
+                    energyBars[i]->localTransform.scale.x = 0.0; // show the energy bar
+                } else {
+                    energyBars[i]->localTransform.scale.x = 0.0; // hide the energy bar
+                }
+            }
+        }
 
         void increaseEnergy(int amount){
-            energy = max(energy + amount , 100);
+            energy = min(energy + amount , 100);
         }
 
         void decreaseEnergy(int amount){
@@ -48,28 +61,28 @@ namespace our
 							};
 				}
 
-				void constructEnergybar(Entity* parent, float start, float end, float step) {
-						int barIndex = 1;
-						for (float x = start; x <= end; x += step) {
-								Entity* bar = parent->getWorld()->add();
-								energyBars.push_back(bar);
-								bar->parent = parent;
-								bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
-								printf("bar: %s\n", bar->name.c_str());
-						}
-				}
+        void constructEnergybar(Entity* parent, float start, float end, float step) {
+                int barIndex = 1;
+                for (float x = start; x <= end; x += step) {
+                        Entity* bar = parent->getWorld()->add();
+                        energyBars.push_back(bar);
+                        bar->parent = parent;
+                        bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
+                        printf("bar: %s\n", bar->name.c_str());
+                }
+        }
     public:
         void initialize(World* world, EventHandlerSystem* eventHandler){
             lastTime = std::chrono::high_resolution_clock::now();
             this->eventHandler = eventHandler;
             energy = 100;
 
-						// Construct the energy bar
-						for (auto entity : world->getEntities()) {
-							if (entity->name == "camera") {
-									constructEnergybar(entity, 1.73, 5.115, 0.1);
-							}
-						}
+            // Construct the energy bar
+            for (auto entity : world->getEntities()) {
+                if (entity->name == "camera") {
+                        constructEnergybar(entity, 1.73, 5.115, 0.1);
+                }
+            }
         }
 
         int getEnergy(){
@@ -91,10 +104,10 @@ namespace our
         void update() {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
-            printf("energy: %d\n", energy);
             if (elapsedTime >= decreasedTime) {
                 lastTime = currentTime;
-//                energy -= decreasedEnergy; // Decrease energy every 50ms
+                energy -= decreasedEnergy; // Decrease energy every 50ms
+                handleEnergyBars(energy);
                 if (energy <= 0) eventHandler->loseGame();
             }
         }

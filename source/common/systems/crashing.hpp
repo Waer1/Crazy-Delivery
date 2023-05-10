@@ -130,9 +130,9 @@ namespace our
 
             for(auto bigObstacle : BigObstacles) {
                 for(auto entity : world->getEntities()) {
-                    if(entity->name == "building" && obstacleCrashEvent(entity, bigObstacle, 10)){
+                    if(entity->name == "building" && areaCrashEvent(bigObstacle, entity, 15)){
                         MovementComponent* bm = bigObstacle->getComponent<MovementComponent>();
-                        bm->angularVelocity = generateRandomVec3(-150,150);
+                        bm->angularVelocity = generateRandomVec3(0,40);
                         bm->linearVelocity = -bm->linearVelocity;
                     }
                 }
