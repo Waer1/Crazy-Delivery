@@ -46,11 +46,9 @@ tasks division:
   - crashing system : (Done)
   - Game logic ( time - win - lose( time, battery ) ) : 
   - menu system : (Done)
-
-
-
-
-
+  - Crashing with building event and crashing with battery event :
+  - Think about how to link the energy with the speed of the car :
+  - Fix the obstacles movement :
 
 
 battery:
@@ -59,11 +57,3 @@ battery:
 - draw the battery itself in the map
 - define the energy system
 - combine between crashing system with energy system
-
-
-
-
-
-
-
-

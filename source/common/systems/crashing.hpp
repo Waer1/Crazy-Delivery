@@ -5,6 +5,7 @@
 #include <glm/glm.hpp>
 #include <systems/event-handler.hpp>
 #include <systems/energy.hpp>
+#include <systems/delivery.hpp>
 
 
 #include <iostream>
@@ -19,6 +20,7 @@ namespace our
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
+				DeliverySystem *delivery;
         vector<Entity*> BigObstacles;
 
         float distanceXYZ(glm::vec4 a, glm::vec4 b){
@@ -96,9 +98,10 @@ namespace our
 
 
     public:
-        void initializeCrashingSystem(World* world,EventHandlerSystem * events, EnergySystem * energy) {
+        void initializeCrashingSystem(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery) {
             this->events = events;
             this->energy = energy;
+						this->delivery = delivery;
             getCar(world);
         }
 
@@ -121,10 +124,13 @@ namespace our
                 } else if(entity->name == "arrow" && areaCrashEvent(car, entity, 3)){
                     printf("arrow\n");
                     events->deliverDelivery();
-                } else if(entity->name == "delivery" && areaCrashEvent(car, entity, 4)
+										delivery->removeDeliveryOnCar();
+                } else if(entity->name == "delivery" && volumeCrashEvent(car, entity, 4)
                 && !events->isCarryDeliver()) {
                     printf("delivery\n");
                     events->collectDeliver();
+										delivery->addDeliveryOnCar();
+										delivery->removeDelivery(entity, world);
                 }
             }
 
@@ -132,7 +138,7 @@ namespace our
                 for(auto entity : world->getEntities()) {
                     if(entity->name == "building" && areaCrashEvent(bigObstacle, entity, 15)){
                         MovementComponent* bm = bigObstacle->getComponent<MovementComponent>();
-                        bm->angularVelocity = generateRandomVec3(0,40);
+                        bm->angularVelocity = generateRandomVec3(0, 80);
                         bm->linearVelocity = -bm->linearVelocity;
                     }
                 }
