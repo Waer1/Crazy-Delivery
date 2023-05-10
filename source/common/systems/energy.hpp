@@ -91,7 +91,7 @@ namespace our
         void update() {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
-            printf("energy: %d\n", energy);
+            //printf("energy: %d\n", energy);
             if (elapsedTime >= decreasedTime) {
                 lastTime = currentTime;
 //                energy -= decreasedEnergy; // Decrease energy every 50ms

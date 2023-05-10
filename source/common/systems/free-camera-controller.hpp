@@ -33,15 +33,26 @@ namespace our
             // As soon as we find one, we break
             CameraComponent* camera = nullptr;
             FreeCameraControllerComponent *controller = nullptr;
+            Entity* car=nullptr;
             for(auto entity : world->getEntities()){
                 camera = entity->getComponent<CameraComponent>();
                 controller = entity->getComponent<FreeCameraControllerComponent>();
-                if(camera && controller) break;
+                if(camera && controller){
+                    break;
+                }
+            }
+
+            for (auto entity : world ->getEntities()){
+                if(entity->name=="car"){
+                    car=entity;
+                    break;
+                }
             }
             // If there is no entity with both a CameraComponent and a FreeCameraControllerComponent, we can do nothing so we return
             if(!(camera && controller)) return;
             // Get the entity that we found via getOwner of camera (we could use controller->getOwner())
             Entity* entity = camera->getOwner();
+            
 
             // If the left mouse button is pressed, we lock and hide the mouse. This common in First Person Games.
             if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1) && !mouse_locked){
@@ -56,12 +67,14 @@ namespace our
             // We get a reference to the entity's position and rotation
             glm::vec3& position = entity->localTransform.position;
             glm::vec3& rotation = entity->localTransform.rotation;
+
+            glm::vec3& carRotation=car->localTransform.rotation; 
             // If the left mouse button is pressed, we get the change in the mouse location
             // and use it to update the camera rotation
             if(app->getMouse().isPressed(GLFW_MOUSE_BUTTON_1)){
                 glm::vec2 delta = app->getMouse().getMouseDelta();
                 rotation.y -= delta.x * controller->rotationSensitivity; // The x-axis controls the yaw
-                rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch‏
+                //rotation.x -= delta.y * controller->rotationSensitivity; // The y-axis controls the pitch‏
             }
 
             // We prevent the pitch from exceeding a certain angle from the XZ plane to prevent gimbal locks
@@ -99,26 +112,58 @@ namespace our
                      controller->positionSensitivity.z-=0.1;
                 }
             }
-            
-            
+            //brake
             if(app->getKeyboard().isPressed(GLFW_KEY_S))
             {
-                if(current_sensitivity.z > 10){
+                if(controller->positionSensitivity.z > 10){
                     controller->positionSensitivity.z=10;
                     current_sensitivity=controller->positionSensitivity;
                 }
-                position -= front * (deltaTime * current_sensitivity.z);
-                if(controller->positionSensitivity.z <= 10){
-                    controller->positionSensitivity.z+=0.1;
+                position += front * (deltaTime * current_sensitivity.z);
+                if(controller->positionSensitivity.z > 0){
+                    controller->positionSensitivity.z-=0.1;
                 }
             }
             // Q & E moves the player up and down
-            if(app->getKeyboard().isPressed(GLFW_KEY_Q)) position += up * (deltaTime * current_sensitivity.y);
-            if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
+            //if(app->getKeyboard().isPressed(GLFW_KEY_Q))
+            //{position += up * (deltaTime * current_sensitivity.y);}
+            //if(app->getKeyboard().isPressed(GLFW_KEY_E)) position -= up * (deltaTime * current_sensitivity.y);
+
+
             // A & D moves the player left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)) position += right * (deltaTime * current_sensitivity.x);
+            if(app->getKeyboard().isPressed(GLFW_KEY_D)){
+                //Moving the position of each entity in the space right
+                position += right * (deltaTime * current_sensitivity.x);
+                //camera should rotate right with the car
+                rotation.y -= 0.05;
+                //rotating the car right
+                if(carRotation.y > 2.5){
+                    carRotation.y -=0.03;
+                }
+            }
+            else{
+                //if the D is not pressed then the car should return back to it's default phase
+                if(carRotation.y<3.14159){
+                    carRotation.y+=0.02;
+                }
+            }
     
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) position -= right * (deltaTime * current_sensitivity.x);
+            if(app->getKeyboard().isPressed(GLFW_KEY_A)) {
+                //Moving the position of each entity in the space left
+                position -= right * (deltaTime * current_sensitivity.x);
+                //camera should rotate left with the car
+                rotation.y += 0.05;
+                //rotating the car left
+                if(carRotation.y<3.6){
+                    carRotation.y +=0.03;
+                }
+            }            
+            else{
+                //if the A is not pressed then the car should return back to it's default phase
+                if(carRotation.y>3.14159){
+                    carRotation.y-=0.02;
+                }
+            }
         }
 
         // When the state exits, it should call this function to ensure the mouse is unlocked
