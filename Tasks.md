@@ -13,3 +13,4 @@ Tasks division:
   - Add new sky (Not Yet)
   - Add a new postprocessing effect (Not Yet)
   - Add the moon with a light inside it (Not Yet)
+  - Add spot lights across the map (Not Yet)
