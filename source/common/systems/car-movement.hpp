@@ -15,7 +15,6 @@ namespace our
     class CarMovementSystem {
         Application* app; // The application in which the state runs
 
-		CameraComponent* camera = nullptr;
 		Entity* car = nullptr;
 
         float carRotationSensitivity = 0.01f;
@@ -33,19 +32,14 @@ namespace our
     public:
         // When a state enters, it should call this function and give it the pointer to the application
         void initialize(Application* app, World* world){
-            std::cout<<"initialized ya bro"<<std::endl;
             this->app = app;
 
             // First of all, we search for an entity containing both a CameraComponent and a CarMovementComponent
             // As soon as we find one, we break
             for(auto entity : world->getEntities()){
-                camera = entity->getComponent<CameraComponent>();
                 // if the entity is car then set the car
 				if(entity->name == "car"){
                     car = entity;
-                }
-                // break when we have the camera and the car
-                if(camera && car){
                     break;
                 }
             }
@@ -53,12 +47,11 @@ namespace our
 
         // This should be called every frame to update all entities containing a CarMovementComponent
         void update(World* world, float deltaTime) {
-            // If there is no entity with both a CameraComponent and CarEntity, we can do nothing so we return
-            if(!(camera && car)){
-                 std::cout<<"etl3 bara mfesh cam"<<std::endl;
+
+            if(!(car)){
+                 std::cout<<"etl3 bara mfesh car"<<std::endl;
                  return;
             }
-            Entity* entity = camera->getOwner();
             // We get a reference to the camera entity's position and rotation and car rotation
             glm::vec3& position = car->localTransform.position;
             glm::vec3& rotation = car->localTransform.rotation; 
