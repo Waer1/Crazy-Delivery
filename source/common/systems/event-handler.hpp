@@ -12,9 +12,9 @@ namespace our
     bool haveDeliver = 0;
 
     public:
-        void startHandler(Application* app, int _targetDelivers){
+        void startHandler(Application* app, int targetDelivers){
             this->app = app;
-            this->targetDelivers = _targetDelivers;
+            this->targetDelivers = targetDelivers;
         }
 
         void collectDeliver(){
@@ -29,13 +29,11 @@ namespace our
             if (haveDeliver) {
                 haveDeliver = 0;
                 targetDelivers--;
-                printf("%d" ,targetDelivers);
 
                 if(targetDelivers == 0){
                     winGame();
                 }
             }
-
         }
 
         void loseGame(){

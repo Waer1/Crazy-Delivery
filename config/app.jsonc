@@ -1,43 +1,43 @@
 {
-  "start-scene": "play",
-  "window": {
-    "title": "Crazy Delivery",
-    "size": {
-      "width": 1280,
-      "height": 900
-    },
-    "fullscreen": false
-  },
-  "scene": {
-    "renderer": {
-      "sky": "assets/textures/sky.jpg",
-      "postprocess": "assets/shaders/postprocess/vignette.frag"
-    },
-    "assets": {
-      "shaders": {
-        "tinted": {
-          "vs": "assets/shaders/tinted.vert",
-          "fs": "assets/shaders/tinted.frag"
-        },
-        "textured": {
-          "vs": "assets/shaders/textured.vert",
-          "fs": "assets/shaders/textured.frag"
-        },
-        "lighted": {
-          "vs": "assets/shaders/lighted.vert",
-          "fs": "assets/shaders/lighted.frag"
-        }
-      },
-      "textures": {
-        "moon": "assets/textures/moon.jpg",
-        "grass": "assets/textures/grass_ground_d.jpg",
-        "wood": "assets/textures/wood.jpg",
-        "glass": "assets/textures/glass-panels.png",
-        "monkey": "assets/textures/monkey.png",
-        "road": "assets/textures/road.jpg",
-        "battery": "assets/textures/battery.jpg",
-        "arrow": "assets/textures/arrow.jpg",
-        "car": "assets/textures/car.jpg",
+	"start-scene": "play",
+	"window": {
+		"title": "Crazy Delivery",
+		"size": {
+			"width": 1280,
+			"height": 900
+		},
+		"fullscreen": false
+	},
+	"scene": {
+		"renderer": {
+			"sky": "assets/textures/sky.jpg",
+			"postprocess": "assets/shaders/postprocess/vignette.frag"
+		},
+		"assets": {
+			"shaders": {
+				"tinted": {
+					"vs": "assets/shaders/tinted.vert",
+					"fs": "assets/shaders/tinted.frag"
+				},
+				"textured": {
+					"vs": "assets/shaders/textured.vert",
+					"fs": "assets/shaders/textured.frag"
+				},
+				"lighted": {
+					"vs": "assets/shaders/lighted.vert",
+					"fs": "assets/shaders/lighted.frag"
+				}
+			},
+			"textures": {
+				"moon": "assets/textures/moon.jpg",
+				"grass": "assets/textures/grass_ground_d.jpg",
+				"wood": "assets/textures/wood.jpg",
+				"glass": "assets/textures/glass-panels.png",
+				"monkey": "assets/textures/monkey.png",
+				"road": "assets/textures/road.jpg",
+				"battery": "assets/textures/battery.jpg",
+				"arrow": "assets/textures/arrow.jpg",
+				"car": "assets/textures/car.jpg",
 				"building1": "assets/textures/building1.jpg",
 				"building2": "assets/textures/building2.jpg",
 				"building3": "assets/textures/building3.jpg",
@@ -49,191 +49,241 @@
 				"red": "assets/textures/red.jpg",
 				"battery_bar": "assets/textures/battery bar.png",
 				"barborder": "assets/textures/barborder.png"
-      },
-      "meshes": {
-        "cube": "assets/models/cube.obj",
-        "monkey": "assets/models/monkey.obj",
-        "plane": "assets/models/plane.obj",
-        "sphere": "assets/models/sphere.obj",
-        "road": "assets/models/road.obj",
-        "battery": "assets/models/battery.obj",
-        "arrow": "assets/models/arrow.obj",
-        "car": "assets/models/Car.obj"
-      },
-      "samplers": {
-        "default": {},
-        "pixelated": {
-          "MAG_FILTER": "GL_NEAREST"
-        }
-      },
-      "materials": {
-        "car": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "car",
-          "sampler": "default"
-        },
-        "metal": {
-          "type": "tinted",
-          "shader": "tinted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [0.45, 0.4, 0.5, 1]
-        },
-        "glass": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            },
-            "blending": {
-              "enabled": true,
-              "sourceFactor": "GL_SRC_ALPHA",
-              "destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-            },
-            "depthMask": false
-          },
-          "transparent": true,
-          "tint": [1, 1, 1, 1],
-          "texture": "glass",
-          "sampler": "pixelated"
-        },
-        "grass": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "grass",
-          "sampler": "default"
-        },
-        "monkey": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "monkey",
-          "sampler": "default"
-        },
-        "moon": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "moon",
-          "sampler": "default"
-        },
-        "road": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "road",
-          "sampler": "default"
-        },
-        "fence": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "wood",
-          "sampler": "default"
-        },
-        "battery": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "battery",
-          "sampler": "default"
-        },
-        "arrow": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "arrow",
-          "sampler": "default"
-        },
+			},
+			"meshes": {
+				"cube": "assets/models/cube.obj",
+				"monkey": "assets/models/monkey.obj",
+				"plane": "assets/models/plane.obj",
+				"sphere": "assets/models/sphere.obj",
+				"road": "assets/models/road.obj",
+				"battery": "assets/models/battery.obj",
+				"arrow": "assets/models/arrow.obj",
+				"car": "assets/models/Car.obj"
+			},
+			"samplers": {
+				"default": {},
+				"pixelated": {
+					"MAG_FILTER": "GL_NEAREST"
+				}
+			},
+			"materials": {
+				"car": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "car",
+					"sampler": "default"
+				},
+				"metal": {
+					"type": "tinted",
+					"shader": "tinted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						0.45,
+						0.4,
+						0.5,
+						1
+					]
+				},
+				"glass": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						},
+						"blending": {
+							"enabled": true,
+							"sourceFactor": "GL_SRC_ALPHA",
+							"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+						},
+						"depthMask": false
+					},
+					"transparent": true,
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "glass",
+					"sampler": "pixelated"
+				},
+				"grass": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "grass",
+					"sampler": "default"
+				},
+				"monkey": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "monkey",
+					"sampler": "default"
+				},
+				"moon": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "moon",
+					"sampler": "default"
+				},
+				"road": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "road",
+					"sampler": "default"
+				},
+				"fence": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "wood",
+					"sampler": "default"
+				},
+				"battery": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "battery",
+					"sampler": "default"
+				},
+				"arrow": {
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
+					"texture": "arrow",
+					"sampler": "default"
+				},
 				"building1": {
-          "type": "lighted",
-          "shader": "lighted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "sampler": "default",
+					"type": "lighted",
+					"shader": "lighted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"sampler": "default",
 					"albedo": "building1",
 					"specular": "white",
 					"emissive": "black",
@@ -241,17 +291,17 @@
 					"ambient_occlusion": "building1"
 				},
 				"building2": {
-          "type": "lighted",
-          "shader": "lighted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "sampler": "default",
+					"type": "lighted",
+					"shader": "lighted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"sampler": "default",
 					"albedo": "building2",
 					"specular": "white",
 					"emissive": "black",
@@ -259,17 +309,17 @@
 					"ambient_occlusion": "building2"
 				},
 				"building3": {
-          "type": "lighted",
-          "shader": "lighted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "sampler": "default",
+					"type": "lighted",
+					"shader": "lighted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"sampler": "default",
 					"albedo": "building3",
 					"specular": "white",
 					"emissive": "black",
@@ -277,17 +327,17 @@
 					"ambient_occlusion": "building3"
 				},
 				"building4": {
-          "type": "lighted",
-          "shader": "lighted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "sampler": "default",
+					"type": "lighted",
+					"shader": "lighted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"sampler": "default",
 					"albedo": "building4",
 					"specular": "white",
 					"emissive": "black",
@@ -295,17 +345,17 @@
 					"ambient_occlusion": "building4"
 				},
 				"building5": {
-          "type": "lighted",
-          "shader": "lighted",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "sampler": "default",
+					"type": "lighted",
+					"shader": "lighted",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"sampler": "default",
 					"albedo": "building5",
 					"specular": "white",
 					"emissive": "black",
@@ -313,39 +363,49 @@
 					"ambient_occlusion": "building5"
 				},
 				"ground": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [0.7, 0.7, 0.7, 1],
-          "texture": "ground",
-          "sampler": "default"
+					"type": "textured",
+					"shader": "textured",
+					"pipelineState": {
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": true
+						}
+					},
+					"tint": [
+						0.7,
+						0.7,
+						0.7,
+						1
+					],
+					"texture": "ground",
+					"sampler": "default"
 				},
 				"battery_bar": {
 					"type": "textured",
 					"shader": "textured",
 					"pipelineState": {
-							"faceCulling": {
-									"enabled": false
-							},
-							"depthTesting": {
-									"enabled": false
-							},
-							"blending": {
-									"enabled": true,
-									"sourceFactor": "GL_SRC_ALPHA",
-									"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-							},
-							"depthMask": false
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": false
+						},
+						"blending": {
+							"enabled": true,
+							"sourceFactor": "GL_SRC_ALPHA",
+							"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+						},
+						"depthMask": false
 					},
 					"transparent": true,
-					"tint": [1, 1, 1, 1],
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
 					"texture": "battery_bar",
 					"sampler": "default"
 				},
@@ -353,21 +413,26 @@
 					"type": "textured",
 					"shader": "textured",
 					"pipelineState": {
-							"faceCulling": {
-									"enabled": false
-							},
-							"depthTesting": {
-									"enabled": false
-							},
-							"blending": {
-									"enabled": true,
-									"sourceFactor": "GL_SRC_ALPHA",
-									"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-							},
-							"depthMask": false
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": false
+						},
+						"blending": {
+							"enabled": true,
+							"sourceFactor": "GL_SRC_ALPHA",
+							"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+						},
+						"depthMask": false
 					},
 					"transparent": true,
-					"tint": [1, 1, 1, 1],
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
 					"texture": "barborder",
 					"sampler": "default"
 				},
@@ -375,57 +440,50 @@
 					"type": "textured",
 					"shader": "textured",
 					"pipelineState": {
-							"faceCulling": {
-									"enabled": false
-							},
-							"depthTesting": {
-									"enabled": false
-							},
-							"blending": {
-									"enabled": true,
-									"sourceFactor": "GL_SRC_ALPHA",
-									"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
-							},
-							"depthMask": false
+						"faceCulling": {
+							"enabled": false
+						},
+						"depthTesting": {
+							"enabled": false
+						},
+						"blending": {
+							"enabled": true,
+							"sourceFactor": "GL_SRC_ALPHA",
+							"destinationFactor": "GL_ONE_MINUS_SRC_ALPHA"
+						},
+						"depthMask": false
 					},
 					"transparent": true,
-					"tint": [1, 1, 1, 1],
+					"tint": [
+						1,
+						1,
+						1,
+						1
+					],
 					"texture": "red",
 					"sampler": "default"
 				}
-      }
-    },
-    "world": [
-      // ------------- Camera and Car ------------------
+			}
+		},
+		"world": [
+			// ------------- Car ------------------
 			{
-        "name":"camera",
-        "position": [-52, 2, 43],
-        "components": [
-          {
-            "type": "Camera"
-          },
-          {
-            "type": "Free Camera Controller"
-          }
-        ],
-        "children": [
-          {
-            "name": "car",
-            "position": [0, -1, -4],
-            "rotation": [0, 180, 0],
-            "scale": [1.0, 1.0, 1.0],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "car",
-                "material": "car"
-              }
-						]
-          },
+				"name": "car",
+				"position":  [-52, 1.12, 43],
+				"rotation": [0, 180, 0],
+				"scale": [1.0, 1.0, 1.0],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "car",
+						"material": "car"
+					}
+				],
+				"children": [
 					// ------------- Delivery -----------------
 					{
 						"name": "delivery-on-car",
-						"position": [0, 0.7, -4],
+						"position": [0, 1.5, 0],
 						"rotation": [0, 0, 0],
 						"scale": [0.5, 0.5, 0.5],
 						"components": [
@@ -441,45 +499,71 @@
 						]
 					},
 					// ------------- Delivery -----------------
-					// ------------- Battry bar ------------------
+					
+					// ------------- Camera -----------------
 					{
-						"name": "battry-border",
-            "position": [3.4, 3.3, -4],
-            "rotation": [0, 0, 0],
-						"scale": [2, 0.6, 1],
+						"name":"camera",
+						"position": [0, 1.5, -2.8],
+						"rotation": [-20, 180, 0],
 						"components": [
 							{
-								"type": "Mesh Renderer",
-								"mesh": "plane",
-								"material": "barborder"
+								"type": "Camera"
 							}
-						]
-					},
-					{
-						"name": "battry-bar",
-            "position": [1.1, 3.3, -4],
-            "rotation": [0, 0, 0],
-						"scale": [0.7, 0.6, 1],
-						"components": [
+						],
+						"children": [
+							// ------------- Battry bar ------------------
 							{
-								"type": "Mesh Renderer",
-								"mesh": "plane",
-								"material": "battery_bar"
+								"name": "battry-border",
+								"position": [3.4, 3.3, -4],
+								"rotation": [0, 0, 0],
+								"scale": [2, 0.6, 1],
+								"components": [
+									{
+										"type": "Mesh Renderer",
+										"mesh": "plane",
+										"material": "barborder"
+									}
+								]
+							},
+							{
+								"name": "battry-bar",
+								"position": [1.1, 3.3, -4],
+								"rotation": [0, 0, 0],
+								"scale": [0.7, 0.6, 1],
+								"components": [
+									{
+										"type": "Mesh Renderer",
+										"mesh": "plane",
+										"material": "battery_bar"
+									}
+								]
 							}
+							// ------------- Battry bar ------------------
 						]
 					}
-					// ------------- Battry bar ------------------
-        ]
-      },
-      // ------------- Camera and Car ------------------
-
+					// ------------- Camera -----------------
+				]
+			},
+			// ------------- Car ------------------
 			// ------------- Buildings ------------------
 			// First batch
 			{
 				"name": "building",
-				"position": [35, 10, 18],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					35,
+					10,
+					18
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -490,9 +574,21 @@
 			},
 			{
 				"name": "building",
-				"position": [13, 10, 18],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					13,
+					10,
+					18
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -503,9 +599,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-8, 10, 18],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-8,
+					10,
+					18
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -516,9 +624,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-30, 10, 18],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-30,
+					10,
+					18
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -531,9 +651,21 @@
 			// Second batch
 			{
 				"name": "building",
-				"position": [57, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					57,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -544,9 +676,21 @@
 			},
 			{
 				"name": "building",
-				"position": [35, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					35,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -557,9 +701,21 @@
 			},
 			{
 				"name": "building",
-				"position": [13, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					13,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -570,9 +726,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-8, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-8,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -583,9 +751,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-30, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-30,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -596,9 +776,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-52, 10, 57],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-52,
+					10,
+					57
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -611,9 +803,21 @@
 			// Third batch
 			{
 				"name": "building",
-				"position": [35, 10, -23],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					35,
+					10,
+					-23
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -624,9 +828,21 @@
 			},
 			{
 				"name": "building",
-				"position": [13, 10, -23],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					13,
+					10,
+					-23
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -637,9 +853,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-8, 10, -23],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-8,
+					10,
+					-23
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -650,9 +878,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-30, 10, -23],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-30,
+					10,
+					-23
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -665,9 +905,21 @@
 			// Forth batch
 			{
 				"name": "building",
-				"position": [57, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					57,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -678,9 +930,21 @@
 			},
 			{
 				"name": "building",
-				"position": [35, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					35,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -691,9 +955,21 @@
 			},
 			{
 				"name": "building",
-				"position": [13, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					13,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -704,9 +980,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-8, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-8,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -717,9 +1005,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-30, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-30,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -730,9 +1030,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-52, 10, -63],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-52,
+					10,
+					-63
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -745,9 +1057,21 @@
 			// Fifth batch
 			{
 				"name": "building",
-				"position": [77, 10, 35],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					77,
+					10,
+					35
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -758,9 +1082,21 @@
 			},
 			{
 				"name": "building",
-				"position": [77, 10, 10],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					77,
+					10,
+					10
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -771,9 +1107,21 @@
 			},
 			{
 				"name": "building",
-				"position": [77, 10, -15],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					77,
+					10,
+					-15
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -784,9 +1132,21 @@
 			},
 			{
 				"name": "building",
-				"position": [77, 10, -40],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					77,
+					10,
+					-40
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -795,13 +1155,25 @@
 					}
 				]
 			},
-			
+
 			// Sixth batch
 			{
 				"name": "building",
-				"position": [-70, 10, 35],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-70,
+					10,
+					35
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -812,9 +1184,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-70, 10, 10],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-70,
+					10,
+					10
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -825,9 +1209,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-70, 10, -15],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-70,
+					10,
+					-15
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -838,9 +1234,21 @@
 			},
 			{
 				"name": "building",
-				"position": [-70, 10, -40],
-				"rotation": [0, 0, 0],
-				"scale": [9, 10, 9],
+				"position": [
+					-70,
+					10,
+					-40
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					9,
+					10,
+					9
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -850,123 +1258,186 @@
 				]
 			},
 			// ------------- Buildings ------------------
-
-      // ------------- Roads ------------------
-      {
-        "name": "central-road",
-        "position": [0, 0, 0],
-        "rotation": [0, 0, 0],
-        "scale": [3, 1, 3],
-        "components": [
-          {
-            "type": "Mesh Renderer",
-            "mesh": "road",
-            "material": "road"
-          }
-        ],
-        "children": [
-          // Ground
-          {
-            "position": [0, 1, 0],
-            "rotation": [-90, 0, 0],
-            "scale": [50, 50, 1],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "plane",
-                "material": "ground"
-              }
-            ]
-          },
-          // Begin First Cross Road
-          {
-            "name": "road-left",
-            "position": [-16.5, 0, 0],
-            "rotation": [0, 90, 0],
-            "scale": [1, 1, 1],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "road",
-                "material": "road"
-              }
-            ]
-          },
-          // End First Cross Road
-          // Begin Second Cross Road
-          {
-            "name": "road-right",
-            "position": [18.3, 0, -2],
-            "rotation": [0, -90, 0],
-            "scale": [1, 1, 1],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "road",
-                "material": "road"
-              }
-            ]
-          },
-          // End Second Cross Road
-          // Begin First Side Road
-          {
-            "name": "road-down",
-            "position": [0, 0, 13.3],
-            "rotation": [0, 0, 0],
-            "scale": [1, 1, 1],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "road",
-                "material": "road"
-              }
-            ]
-          },
-          // End First Side Road
-          // Begin Second Side Road
-          {
-            "name": "road-up",
-            "position": [1.87, 0, -15.5],
-            "rotation": [0, 180, 0],
-            "scale": [1, 1, 1],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "road",
-                "material": "road"
-              }
-            ]
-          }
-          // End Second Side Road
-        ]
-      },
-      // ------------- Roads ------------------
-
-      // ------------- Battries ------------------
+			// ------------- Roads ------------------
 			{
-				"name": "battery",
-				"position": [0, 3, 0.7],
-				"rotation": [0, 0, 0],
-				"scale": [1, 0.7, 1],
+				"name": "central-road",
+				"position": [
+					0,
+					0,
+					0
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					3,
+					1,
+					3
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
-						"mesh": "battery",
-						"material": "battery"
-					},
-					{
-							"type": "Movement",
-							"linearVelocity": [0, 2, 0],
-							"angularVelocity": [0, 50, 0],
-							"movementRangeY": [1.5, 4]
+						"mesh": "road",
+						"material": "road"
 					}
+				],
+				"children": [
+					// Ground
+					{
+						"position": [
+							0,
+							1,
+							0
+						],
+						"rotation": [
+							-90,
+							0,
+							0
+						],
+						"scale": [
+							50,
+							50,
+							1
+						],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "plane",
+								"material": "ground"
+							}
+						]
+					},
+					// Begin First Cross Road
+					{
+						"name": "road-left",
+						"position": [
+							-16.5,
+							0,
+							0
+						],
+						"rotation": [
+							0,
+							90,
+							0
+						],
+						"scale": [
+							1,
+							1,
+							1
+						],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "road",
+								"material": "road"
+							}
+						]
+					},
+					// End First Cross Road
+					// Begin Second Cross Road
+					{
+						"name": "road-right",
+						"position": [
+							18.3,
+							0,
+							-2
+						],
+						"rotation": [
+							0,
+							-90,
+							0
+						],
+						"scale": [
+							1,
+							1,
+							1
+						],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "road",
+								"material": "road"
+							}
+						]
+					},
+					// End Second Cross Road
+					// Begin First Side Road
+					{
+						"name": "road-down",
+						"position": [
+							0,
+							0,
+							13.3
+						],
+						"rotation": [
+							0,
+							0,
+							0
+						],
+						"scale": [
+							1,
+							1,
+							1
+						],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "road",
+								"material": "road"
+							}
+						]
+					},
+					// End First Side Road
+					// Begin Second Side Road
+					{
+						"name": "road-up",
+						"position": [
+							1.87,
+							0,
+							-15.5
+						],
+						"rotation": [
+							0,
+							180,
+							0
+						],
+						"scale": [
+							1,
+							1,
+							1
+						],
+						"components": [
+							{
+								"type": "Mesh Renderer",
+								"mesh": "road",
+								"material": "road"
+							}
+						]
+					}
+					// End Second Side Road
 				]
 			},
+			// ------------- Roads ------------------
+			// ------------- Battries ------------------
 			{
 				"name": "battery",
-				"position": [0, 1.6, -47],
-				"rotation": [0, 0, 0],
-				"scale": [1, 0.7, 1],
+				"position": [
+					0,
+					3,
+					0.7
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					0.7,
+					1
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -975,20 +1446,84 @@
 					},
 					{
 						"type": "Movement",
-						"linearVelocity": [0, 2, 0],
-						"angularVelocity": [0, 50, 0],
-						"movementRangeY": [1.5, 4]
+						"linearVelocity": [
+							0,
+							2,
+							0
+						],
+						"angularVelocity": [
+							0,
+							50,
+							0
+						],
+						"movementRangeY": [
+							1.5,
+							4
+						]
 					}
 				]
 			},
-      // ------------- Battries ------------------
-
+			{
+				"name": "battery",
+				"position": [
+					0,
+					1.6,
+					-47
+				],
+				"rotation": [
+					0,
+					0,
+					0
+				],
+				"scale": [
+					1,
+					0.7,
+					1
+				],
+				"components": [
+					{
+						"type": "Mesh Renderer",
+						"mesh": "battery",
+						"material": "battery"
+					},
+					{
+						"type": "Movement",
+						"linearVelocity": [
+							0,
+							2,
+							0
+						],
+						"angularVelocity": [
+							0,
+							50,
+							0
+						],
+						"movementRangeY": [
+							1.5,
+							4
+						]
+					}
+				]
+			},
+			// ------------- Battries ------------------
 			// ------------- Destination ------------------
 			{
 				"name": "arrow",
-				"position": [56, 5, -45],
-				"rotation": [0, 0, -90],
-				"scale": [10, 15, 10],
+				"position": [
+					56,
+					5,
+					-45
+				],
+				"rotation": [
+					0,
+					0,
+					-90
+				],
+				"scale": [
+					10,
+					15,
+					10
+				],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -996,15 +1531,25 @@
 						"material": "arrow"
 					},
 					{
-							"type": "Movement",
-							"linearVelocity": [0, 2, 0],
-							"angularVelocity": [0, 50, 0],
-							"movementRangeY": [3, 8]
+						"type": "Movement",
+						"linearVelocity": [
+							0,
+							2,
+							0
+						],
+						"angularVelocity": [
+							0,
+							50,
+							0
+						],
+						"movementRangeY": [
+							3,
+							8
+						]
 					}
 				]
 			}
 			// ------------- Destination ------------------
-
 			// ------------- Obstacles ------------------
 			// {
 			// 	"name": "obstacles", // 1.25 => -3.75 (+-5)
@@ -1025,6 +1570,6 @@
 			// 	]
 			// }
 			// ------------- Obstacles ------------------
-    ]
-  }
+		]
+	}
 }

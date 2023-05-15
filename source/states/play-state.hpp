@@ -4,13 +4,13 @@
 
 #include <ecs/world.hpp>
 #include <systems/forward-renderer.hpp>
-#include <systems/free-camera-controller.hpp>
 #include <systems/movement.hpp>
 #include <systems/crashing.hpp>
 #include <systems/energy.hpp>
 #include <systems/event-handler.hpp>
 #include <systems/delivery.hpp>
 #include <systems/bigObstacles.hpp>
+#include <systems/car-movement.hpp>
 #include <asset-loader.hpp>
 
 
@@ -19,7 +19,7 @@ class Playstate: public our::State {
 
     our::World world;
     our::ForwardRenderer renderer;
-    our::FreeCameraControllerSystem cameraController;
+	our::CarMovementSystem carController;
     our::MovementSystem movementSystem;
     our::CrashingSystem crashingSystem;
     our::EnergySystem energySystem;
@@ -38,8 +38,9 @@ class Playstate: public our::State {
         if(config.contains("world")){
             world.deserialize(config["world"]);
         }
-        // We initialize the camera controller system since it needs a pointer to the app
-        cameraController.enter(getApp());
+        
+		// We initialize the car controller system since it needs a pointer to the app
+		carController.initialize(getApp(), &world);
 
         // Target number of deliveries that a player can make
         int numOfDeliveries = 5, numberofBigObstacles = 1;
@@ -49,7 +50,7 @@ class Playstate: public our::State {
 
         // Get the car entity
         deliverySystem.initialize(&world, numOfDeliveries);
-        crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
+        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
         energySystem.initialize(&world, &eventHandlerSystem);
         bigObstaclesSystem.initialize(&world, numberofBigObstacles);
 
@@ -61,7 +62,7 @@ class Playstate: public our::State {
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
-        cameraController.update(&world, (float)deltaTime);
+        carController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
         energySystem.update();
 
@@ -80,8 +81,6 @@ class Playstate: public our::State {
     void onDestroy() override {
         // Don't forget to destroy the renderer
         renderer.destroy();
-        // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
-        cameraController.exit();
         // Clear the world
         world.clear();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM

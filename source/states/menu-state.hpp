@@ -72,7 +72,7 @@ class Menustate: public our::State {
         highlightMaterial->shader->attach("assets/shaders/tinted.frag", GL_FRAGMENT_SHADER);
         highlightMaterial->shader->link();
         // The tint is white since we will subtract the background color from it to create a negative effect.
-        highlightMaterial->tint = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+        highlightMaterial->tint = glm::vec4(0.92f, 1.0f, 0.34f, 1.0f);
         // To create a negative effect, we enable blending, set the equation to be subtract,
         // and set the factors to be one for both the source and the destination. 
         highlightMaterial->pipelineState.blending.enabled = true;
@@ -105,12 +105,12 @@ class Menustate: public our::State {
         // - The body {} which contains the code to be executed.
 
 
-        buttons[0].position = {890.000000, 490.000000};
-        buttons[0].size = {360.0f, 35.0f};
+        buttons[0].position = {890.0, 608.0};
+        buttons[0].size = {370.0f, 55.0f};
         buttons[0].action = [this](){this->getApp()->changeState("play");};
 
-        buttons[1].position = {890.0f, 550.0f};
-        buttons[1].size = {120.0f, 35.0f};
+        buttons[1].position = {890.0f, 677.0f};
+        buttons[1].size = {120.0f, 52.0f};
         buttons[1].action = [this](){this->getApp()->close();};
 
     }

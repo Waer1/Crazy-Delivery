@@ -16,99 +16,116 @@ namespace our
 {
 
     // The crashing system is responsible for checking if the car has crashed with any obstacle.
-    class EnergySystem {
+    class EnergySystem
+    {
         // Save the car entity
         int energy = 100;
         std::chrono::high_resolution_clock::time_point lastTime;
-        our::EventHandlerSystem * eventHandler;
-        vector<Entity*> energyBars;
+        our::EventHandlerSystem *eventHandler;
+        vector<Entity *> energyBars;
 
-
-        void handleEnergyBars(int energy) {
+        void handleEnergyBars(int energy)
+        {
             float percentage = ((float)energy / 100) * 100; // calculate the percentage of energy
-            for (int i = 0; i < energyBars.size(); i++) {
+            for (int i = 0; i < energyBars.size(); i++)
+            {
                 printf("percentage: %f    %d\n", percentage, i);
-                if (percentage >= i * 100.0 / energyBars.size() ) {
+                if (percentage >= i * 100.0 / energyBars.size())
+                {
                     energyBars[i]->localTransform.scale.x = 0.0; // show the energy bar
-                } else {
+                }
+                else
+                {
                     energyBars[i]->localTransform.scale.x = 0.0; // hide the energy bar
                 }
             }
         }
 
-        void increaseEnergy(int amount){
-            energy = min(energy + amount , 100);
+        void increaseEnergy(int amount)
+        {
+            energy = min(energy + amount, 100);
         }
 
-        void decreaseEnergy(int amount){
+        void decreaseEnergy(int amount)
+        {
             energy -= amount;
-            if (energy <= 0) eventHandler->loseGame();
+            if (energy <= 0)
+                eventHandler->loseGame();
         }
 
-				nlohmann::json generateEnergybar(glm::vec3 position, std::string name) {
-				return {
-								{"name", name},
-								{"position", {position.x, position.y, position.z}},
-								{"rotation", {0, 0, 0}},
-								{"scale", {0.05, 0.35, 1}},
-								{"components", nlohmann::json::array({
-									{
-										{"type", "Mesh Renderer"},
-										{"mesh", "plane"},
-										{"material", "energy_level"}
-									}
-								})}
-							};
-				}
-
-        void constructEnergybar(Entity* parent, float start, float end, float step) {
-                int barIndex = 1;
-                for (float x = start; x <= end; x += step) {
-                        Entity* bar = parent->getWorld()->add();
-                        energyBars.push_back(bar);
-                        bar->parent = parent;
-                        bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
-                        printf("bar: %s\n", bar->name.c_str());
-                }
+        nlohmann::json generateEnergybar(glm::vec3 position, std::string name)
+        {
+            return {
+                {"name", name},
+                {"position", {position.x, position.y, position.z}},
+                {"rotation", {0, 0, 0}},
+                {"scale", {0.05, 0.35, 1}},
+                {"components", nlohmann::json::array({{{"type", "Mesh Renderer"},
+                                                       {"mesh", "plane"},
+                                                       {"material", "energy_level"}}})}};
         }
+
+        void constructEnergybar(Entity *parent, float start, float end, float step)
+        {
+            int barIndex = 1;
+            for (float x = start; x <= end; x += step)
+            {
+                Entity *bar = parent->getWorld()->add();
+                energyBars.push_back(bar);
+                bar->parent = parent;
+                bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
+                printf("bar: %s\n", bar->name.c_str());
+            }
+        }
+
     public:
-        void initialize(World* world, EventHandlerSystem* eventHandler){
+        void initialize(World *world, EventHandlerSystem *eventHandler)
+        {
             lastTime = std::chrono::high_resolution_clock::now();
             this->eventHandler = eventHandler;
             energy = 100;
 
             // Construct the energy bar
-            for (auto entity : world->getEntities()) {
-                if (entity->name == "camera") {
-                        constructEnergybar(entity, 1.73, 5.115, 0.1);
+            for (auto entity : world->getEntities())
+            {
+                if (entity->name == "camera")
+                {
+                    constructEnergybar(entity, 1.73, 5.115, 0.1);
                 }
             }
         }
 
-        int getEnergy(){
+        int getEnergy()
+        {
             return energy;
         }
 
-        void batteryCrash(){
+        void batteryCrash()
+        {
             increaseEnergy(10);
         }
 
-        void obstacleCrash(){
+        void obstacleCrash()
+        {
             decreaseEnergy(0);
         }
 
-        void buildingCrash(){
+        void buildingCrash()
+        {
             decreaseEnergy(0);
         }
 
-        void update() {
+        void update()
+        {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
-            if (elapsedTime >= decreasedTime) {
+            if (elapsedTime >= decreasedTime)
+            {
                 lastTime = currentTime;
                 energy -= decreasedEnergy; // Decrease energy every 50ms
                 handleEnergyBars(energy);
-                if (energy <= 0) eventHandler->loseGame();
+                if (energy <= 0)
+                    eventHandler->loseGame();
             }
         }
     };
