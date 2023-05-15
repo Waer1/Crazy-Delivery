@@ -10,3 +10,6 @@ Tasks division:
   - Direction arrow (Not Yet)
   - Link the energy with the speed of the car (Not Yet)
   - Fix the obstacles movement (Not Yet)
+  - Add new sky (Not Yet)
+  - Add a new postprocessing effect (Not Yet)
+  - Add the moon with a light inside it (Not Yet)
