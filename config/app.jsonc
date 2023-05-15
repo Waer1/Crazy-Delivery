@@ -397,18 +397,18 @@
     },
     "world": [
       // ------------- Free movement --------------
-      // {
-      // 	"name":"camera",
-      // 	"position": [0, 10, 0],
-      // 	"components": [
-      // 		{
-      // 			"type": "Camera"
-      // 		},
-      // 		{
-      // 			"type": "Free Camera Controller"
-      // 		}
-      // 	]
-      // },
+    //   {
+    //   	"name":"camera",
+    //   	"position": [0, 10, 0],
+    //   	"components": [
+    //   		{
+    //   			"type": "Camera"
+    //   		},
+    //   		{
+    //   			"type": "Free Camera Controller"
+    //   		}
+    //   	]
+    //   },
       // ------------- Free movement --------------
       // ------------- Car ------------------
       {
@@ -1015,8 +1015,62 @@
             "movementRangeY": [3, 8]
           }
         ]
-      }
+      },
       // ------------- Destination ------------------
+      // ------------- Signs ------------------
+      {
+        "name": "sign",
+        "position": [-51, 5, -52],
+        "rotation": [0, 0, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [65, 5, -2],
+        "rotation": [0, 90, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [65, 5, 38],
+        "rotation": [0, 90, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [-52, 5, 46],
+        "rotation": [0, 0, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      }
+      // ------------- Signs ------------------
       // ------------- Obstacles ------------------
       // {
       // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
