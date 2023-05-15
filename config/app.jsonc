@@ -424,26 +424,6 @@
           }
         ],
         "children": [
-          // ------------- Delivery -----------------
-          {
-            "name": "delivery-on-car",
-            "position": [0, 1.5, 0],
-            "rotation": [0, 0, 0],
-            "scale": [0.5, 0.5, 0.5],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "monkey",
-                "material": "monkey"
-              },
-              {
-                "type": "Movement",
-                "angularVelocity": [0, 30, 0]
-              }
-            ]
-          },
-          // ------------- Delivery -----------------
-
           // ------------- Camera -----------------
           {
             "name": "camera",
@@ -484,8 +464,27 @@
               }
               // ------------- Battry bar ------------------
             ]
-          }
+          },
           // ------------- Camera -----------------
+          // ------------- Delivery -----------------
+          {
+            "name": "delivery-on-car",
+            "position": [0, 1.5, 0],
+            "rotation": [0, 0, 0],
+            "scale": [0.5, 0.5, 0.5],
+            "components": [
+              {
+                "type": "Mesh Renderer",
+                "mesh": "monkey",
+                "material": "monkey"
+              },
+              {
+                "type": "Movement",
+                "angularVelocity": [0, 30, 0]
+              }
+            ]
+          }
+          // ------------- Delivery -----------------
         ]
       },
       // ------------- Car ------------------
@@ -973,7 +972,14 @@
             "linearVelocity": [0, 2, 0],
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
-          }
+          },
+		  {
+			"type": "Light",
+			"lightType": "point",
+			"diffuse": [1.5, 1.5, 1.5],
+			"specular": [1, 1, 1],
+			"attenuation": [0.0095, 0.0095, 0.0095]
+		  }
         ]
       },
       {
@@ -992,7 +998,14 @@
             "linearVelocity": [0, 2, 0],
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
-          }
+          },
+		  {
+			"type": "Light",
+			"lightType": "point",
+			"diffuse": [1.5, 1.5, 1.5],
+			"specular": [1, 1, 1],
+			"attenuation": [0.0095, 0.0095, 0.0095]
+		  }
         ]
       },
       // ------------- Battries ------------------
