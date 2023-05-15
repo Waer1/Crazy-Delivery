@@ -47,16 +47,16 @@ class Playstate: public our::State {
 		carController.initialize(getApp(), &world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 5, numberofBigObstacles = 1;
+        int numOfDeliveries = 5, numberofBigObstacles = 4;
 
         // initialize the event handler system
         eventHandlerSystem.startHandler(getApp(), numOfDeliveries);
 
         // Get the car entity
-        deliverySystem.initialize(&world, numOfDeliveries);
-        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
-        energySystem.initialize(&world, &eventHandlerSystem);
         bigObstaclesSystem.initialize(&world, numberofBigObstacles);
+        deliverySystem.initialize(&world, numOfDeliveries);
+        energySystem.initialize(&world, &eventHandlerSystem);
+        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
