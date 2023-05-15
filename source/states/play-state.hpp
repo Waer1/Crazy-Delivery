@@ -50,7 +50,7 @@ class Playstate: public our::State {
 
         // Get the car entity
         deliverySystem.initialize(&world, numOfDeliveries);
-        crashingSystem.initializeCrashingSystem(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
+        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
         energySystem.initialize(&world, &eventHandlerSystem);
         bigObstaclesSystem.initialize(&world, numberofBigObstacles);
 
