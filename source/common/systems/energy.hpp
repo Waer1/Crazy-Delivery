@@ -9,7 +9,7 @@ using namespace std;
 
 #include <chrono>
 
-#define decreasedTime 100
+#define decreasedTime 400
 #define decreasedEnergy 1
 
 namespace our
@@ -29,7 +29,6 @@ namespace our
             float percentage = ((float)energy / 100) * 100; // calculate the percentage of energy
             for (int i = 0; i < energyBars.size(); i++)
             {
-                printf("percentage: %f    %d\n", percentage, i);
                 if (percentage >= i * 100.0 / energyBars.size())
                 {
                     energyBars[i]->localTransform.scale.x = 0.0; // show the energy bar
