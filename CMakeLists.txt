@@ -90,6 +90,7 @@ set(COMMON_SOURCES
 		source/common/systems/event-handler.hpp
 		source/common/systems/delivery.hpp
 		source/common/systems/bigObstacles.hpp
+		source/common/systems/car-movement.hpp
 )
 
 # Define the directories in which to search for the included headers
