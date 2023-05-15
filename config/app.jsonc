@@ -396,6 +396,20 @@
       }
     },
     "world": [
+      // ------------- Free movement --------------
+      // {
+      // 	"name":"camera",
+      // 	"position": [0, 10, 0],
+      // 	"components": [
+      // 		{
+      // 			"type": "Camera"
+      // 		},
+      // 		{
+      // 			"type": "Free Camera Controller"
+      // 		}
+      // 	]
+      // },
+      // ------------- Free movement --------------
       // ------------- Car ------------------
       {
         "name": "car",
