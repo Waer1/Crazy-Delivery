@@ -65,8 +65,8 @@ namespace our
 								Entity* delivery = world->add();
 								delivery->deserialize(
                                         generateBigObstacle(glm::vec3(randomPoint.x ,3.5, randomPoint.y),
-                                                            generateRandomVec3(0,50) ,
-                                                            generateRandomVec3(0,60)
+                                                            generateRandomVec3(-50,50) ,
+                                                            generateRandomVec3(-30,60)
                                                             )
                                                             );
 						}
