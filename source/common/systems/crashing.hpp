@@ -23,6 +23,7 @@ namespace our
         EnergySystem *energy;
 		DeliverySystem *delivery;
         vector<Entity*> BigObstacles;
+        vector<Entity*> Buildings;
 
         float distanceXYZ(glm::vec4 a, glm::vec4 b){
             return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
@@ -43,23 +44,19 @@ namespace our
             return dis < threshold;
         }
 
-        void getCar(World* world) {
+        void getTargetEntities(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
                 if(entity->name == "car"){
 					car = entity;
-					break;
-                }
-            }
-        }
-
-        void getBigObstacles(World* world) {
-            // For each entity in the world
-            for(auto entity : world->getEntities()){
-                if(entity->name == "obstacles"){
+                }else if(entity->name == "obstacles")
+                {
                     BigObstacles.push_back(entity);
-                    break;
+                } else if(entity->name == "building")
+                {
+                    Buildings.push_back(entity);
                 }
+
             }
         }
 
@@ -100,7 +97,7 @@ namespace our
             this->events = events;
             this->energy = energy;
 			this->delivery = delivery;
-            getCar(world);
+            getTargetEntities(world);
         }
 
         void update(World* world) {
@@ -133,15 +130,18 @@ namespace our
 				}
 			}
 
-            for(auto bigObstacle : BigObstacles) {
-                for(auto entity : world->getEntities()) {
-                    if(entity->name == "building" && areaCrashEvent(bigObstacle, entity, 15)){
-                        MovementComponent* bm = bigObstacle->getComponent<MovementComponent>();
-                        bm->angularVelocity = generateRandomVec3(0, 80);
-                        bm->linearVelocity = -bm->linearVelocity;
+
+            for (auto obstacle : BigObstacles) {
+                for (auto building : Buildings) {
+                    if (obstacleCrashEvent(obstacle, building , 25)) {
+                        MovementComponent* bm = obstacle->getComponent<MovementComponent>();
+                        bm->angularVelocity = generateRandomVec3(-50, 50);
+                        bm->linearVelocity = -generateRandomVec3(-50, 50);
                     }
                 }
             }
+
+
         }
 
     };
