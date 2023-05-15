@@ -466,6 +466,20 @@
 			}
 		},
 		"world": [
+			// ------------- Free movement --------------
+			// {
+			// 	"name":"camera",
+			// 	"position": [0, 10, 0],
+			// 	"components": [
+			// 		{
+			// 			"type": "Camera"
+			// 		},
+			// 		{
+			// 			"type": "Free Camera Controller"
+			// 		}
+			// 	]
+			// },
+			// ------------- Free movement --------------
 			// ------------- Car ------------------
 			{
 				"name": "car",
@@ -1509,21 +1523,9 @@
 			// ------------- Destination ------------------
 			{
 				"name": "arrow",
-				"position": [
-					56,
-					5,
-					-45
-				],
-				"rotation": [
-					0,
-					0,
-					-90
-				],
-				"scale": [
-					10,
-					15,
-					10
-				],
+				"position": [56, 5, -45],
+				"rotation": [0, 0, -90],
+				"scale": [10, 15, 10],
 				"components": [
 					{
 						"type": "Mesh Renderer",
@@ -1532,20 +1534,9 @@
 					},
 					{
 						"type": "Movement",
-						"linearVelocity": [
-							0,
-							2,
-							0
-						],
-						"angularVelocity": [
-							0,
-							50,
-							0
-						],
-						"movementRangeY": [
-							3,
-							8
-						]
+						"linearVelocity": [0, 2, 0],
+						"angularVelocity": [0, 50, 0],
+						"movementRangeY": [3, 8]
 					}
 				]
 			}
