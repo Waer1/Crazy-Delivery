@@ -148,8 +148,8 @@
           "sampler": "default"
         },
         "moon": {
-          "type": "textured",
-          "shader": "textured",
+          "type": "lighted",
+          "shader": "lighted",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -159,8 +159,12 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          "texture": "moon",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo": "moon",
+          "specular": "moon",
+          "emissive": "moon",
+          "ambient_occlusion": "moon",
+          "roughness": "black"
         },
         "road": {
           "type": "textured",
@@ -397,18 +401,18 @@
     },
     "world": [
       // ------------- Free movement --------------
-    //   {
-    //   	"name":"camera",
-    //   	"position": [0, 10, 0],
-    //   	"components": [
-    //   		{
-    //   			"type": "Camera"
-    //   		},
-    //   		{
-    //   			"type": "Free Camera Controller"
-    //   		}
-    //   	]
-    //   },
+      //   {
+      //     "name": "camera",
+      //     "position": [0, 10, 0],
+      //     "components": [
+      //       {
+      //         "type": "Camera"
+      //       },
+      //       {
+      //         "type": "Free Camera Controller"
+      //       }
+      //     ]
+      //   },
       // ------------- Free movement --------------
       // ------------- Car ------------------
       {
@@ -973,13 +977,13 @@
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
           },
-		  {
-			"type": "Light",
-			"lightType": "point",
-			"diffuse": [1.5, 1.5, 1.5],
-			"specular": [1, 1, 1],
-			"attenuation": [0.0095, 0.0095, 0.0095]
-		  }
+          {
+            "type": "Light",
+            "lightType": "point",
+            "diffuse": [1.5, 1.5, 1.5],
+            "specular": [1, 1, 1],
+            "attenuation": [0.0095, 0.0095, 0.0095]
+          }
         ]
       },
       {
@@ -999,13 +1003,13 @@
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
           },
-		  {
-			"type": "Light",
-			"lightType": "point",
-			"diffuse": [1.5, 1.5, 1.5],
-			"specular": [1, 1, 1],
-			"attenuation": [0.0095, 0.0095, 0.0095]
-		  }
+          {
+            "type": "Light",
+            "lightType": "point",
+            "diffuse": [1.5, 1.5, 1.5],
+            "specular": [1, 1, 1],
+            "attenuation": [0.0095, 0.0095, 0.0095]
+          }
         ]
       },
       // ------------- Battries ------------------
@@ -1082,8 +1086,35 @@
             "material": "arrow"
           }
         ]
-      }
+      },
       // ------------- Signs ------------------
+      // ------------- Moon ------------------
+      {
+        "position": [-54, 35, -45],
+        "rotation": [45, 45, 0],
+        "scale": [4, 4, 4],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "sphere",
+            "material": "moon"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 30, 0]
+          },
+          {
+            "type": "Light",
+            "lightType": "Directional",
+            "diffuse": [0.53725, 0.811764, 0.94117647],
+            "specular": [0.53725, 0.811764, 0.94117647],
+            "attenuation": [0.00095, 0.00095, 0.000095],
+            "cone_angles.inner": 20,
+            "cone-angles.outer": 50
+          }
+        ]
+      }
+      // ------------- Moon ------------------
       // ------------- Obstacles ------------------
       // {
       // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
