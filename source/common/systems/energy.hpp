@@ -19,7 +19,7 @@ namespace our
     class EnergySystem
     {
         // Save the car entity
-        int energy = 100;
+        int energy = 100, energyBarsSize;
         std::chrono::high_resolution_clock::time_point lastTime;
         our::EventHandlerSystem *eventHandler;
         vector<Entity *> energyBars;
@@ -27,15 +27,15 @@ namespace our
         void handleEnergyBars(int energy)
         {
             float percentage = ((float)energy / 100) * 100; // calculate the percentage of energy
-            for (int i = 0; i < energyBars.size(); i++)
+            for (int i = 0; i < energyBarsSize; i++)
             {
                 if (percentage >= i * 100.0 / energyBars.size())
                 {
-                    energyBars[i]->localTransform.scale.x = 0.0; // show the energy bar
+                    energyBars[energyBarsSize - i-1]->localTransform.scale.x = 0.05; // show the energy bar
                 }
                 else
                 {
-                    energyBars[i]->localTransform.scale.x = 0.0; // hide the energy bar
+                    energyBars[energyBarsSize - i-1]->localTransform.scale.x = 0.0; // hide the energy bar
                 }
             }
         }
@@ -75,6 +75,7 @@ namespace our
                 bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
                 printf("bar: %s\n", bar->name.c_str());
             }
+            energyBarsSize = energyBars.size();
         }
 
     public:
