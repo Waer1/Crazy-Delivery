@@ -131,7 +131,6 @@ namespace our
         void obstacleCrash()
         {
             decreaseEnergy(0);
-            crashed = true;
         }
 
         void buildingCrash()
