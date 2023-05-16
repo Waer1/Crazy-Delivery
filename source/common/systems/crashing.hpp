@@ -153,12 +153,11 @@ namespace our
 
 
             for (auto obstacle : BigObstacles) {
-                for (auto building : Buildings) {
-                    if (obstacleCrashEvent(obstacle, building , 25)) {
-                        MovementComponent* bm = obstacle->getComponent<MovementComponent>();
-                        bm->angularVelocity = generateRandomVec3(-50, 50);
-                        bm->linearVelocity = -generateRandomVec3(-50, 50);
-                    }
+                if (abs(obstacle->localTransform.position.x) > 70 || abs(obstacle->localTransform.position.z) > 50)
+                {
+                    MovementComponent *bm = obstacle->getComponent<MovementComponent>();
+                    bm->angularVelocity = generateRandomVec3(-180, 180);
+                    bm->linearVelocity = -bm->linearVelocity + generateRandomVec3(-20, 20) ;
                 }
             }
 
