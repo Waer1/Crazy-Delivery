@@ -14,6 +14,7 @@ namespace our
     // The car movement system is responsible for moving the car entity.
     class CarMovementSystem {
         Application* app; // The application in which the state runs
+        Keyboard* keyboard;
 
 		CameraComponent* camera = nullptr;
 		Entity* car = nullptr;
@@ -22,6 +23,7 @@ namespace our
         // When a state enters, it should call this function and give it the pointer to the application
         void initialize(Application* app, World* world){
             this->app = app;
+            this->keyboard = &app->getKeyboard();
 
             // First of all, we search for an entity containing both a CameraComponent and a CarMovementComponent
             // As soon as we find one, we break
@@ -59,24 +61,24 @@ namespace our
             float sensitivity = 9.0f;
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) {
+            if(keyboard->isPressed(GLFW_KEY_W)) {
                 position += front * (deltaTime * sensitivity);
 				right.x = abs(right.x);
             }
 
-			if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+			if(keyboard->isPressed(GLFW_KEY_S)) {
 				position -= front * (deltaTime * (sensitivity - 1.0f));
 				right.x = -abs(right.x);
 			}
 
             // A & D moves the car left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)){
+            if(keyboard->isPressed(GLFW_KEY_D)){
                 // Move the position of each entity in the space right
                 position += right * (deltaTime * sensitivity);
 				rotation.y -= 0.03;
             }
     
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) {
+            if(keyboard->isPressed(GLFW_KEY_A)) {
                 // Move the position of each entity in the space left
                 position -= right * (deltaTime * sensitivity);
 				rotation.y += 0.03;
