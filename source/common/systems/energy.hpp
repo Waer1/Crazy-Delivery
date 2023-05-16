@@ -4,10 +4,9 @@
 #include <ecs/world.hpp>
 #include <systems/event-handler.hpp>
 #include <chrono>
+#include <iostream>
 
 using namespace std;
-
-#include <chrono>
 
 #define decreasedTime 400
 #define decreasedEnergy 1
@@ -18,6 +17,31 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any obstacle.
     class EnergySystem
     {
+        bool crashed = false;
+
+        Entity* getCar(World* world) {
+            Entity* car = nullptr;
+            // For each entity in the world
+            for(auto entity : world->getEntities()){
+                if(entity->name == "car"){
+                    car = entity;
+					break;
+                }
+            }
+            return car;
+        }
+
+        Entity* getCamera(World* world) {
+            Entity* camera = nullptr;
+            // For each entity in the world
+            for(auto entity : world->getEntities()){
+                if(entity->name == "camera"){
+                    camera = entity;
+					break;
+                }
+            }
+            return camera;
+        }
         // Save the car entity
         int energy = 100, energyBarsSize;
         std::chrono::high_resolution_clock::time_point lastTime;
@@ -113,9 +137,10 @@ namespace our
         void buildingCrash()
         {
             decreaseEnergy(0);
+            crashed = true;
         }
 
-        void update()
+        void update(World* world)
         {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
@@ -126,6 +151,16 @@ namespace our
                 handleEnergyBars(energy);
                 if (energy <= 0)
                     eventHandler->loseGame();
+                // Check if the car crashed with a building or an obstacle
+                // We'll return it to the starting point if this happened
+                if (crashed) {
+                    Entity* car = getCar(world);
+                    if (car) {
+                        printf("---Crashed---\n");
+                        car->localTransform.position = glm::vec3(-52, 1.12, 43);
+                        crashed = false;
+                    }
+                }
             }
         }
     };

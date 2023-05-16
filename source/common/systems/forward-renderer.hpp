@@ -35,7 +35,7 @@ namespace our
         std::vector<RenderCommand> opaqueCommands;
         std::vector<RenderCommand> transparentCommands;
 
-				std::vector<LightComponent*> lights;
+		std::vector<LightComponent*> lights;
         // Objects used for rendering a skybox
         Mesh* skySphere;
         TexturedMaterial* skyMaterial;

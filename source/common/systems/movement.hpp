@@ -23,19 +23,25 @@ namespace our
             // Change the position and rotation based on the linear & angular velocity and delta time.
             entity->localTransform.position += movement->direction * deltaTime * movement->linearVelocity;
             entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+			
+			if (entity->localTransform.position.y > movement->movementRangeY.y) {
+				entity->localTransform.position.y = movement->movementRangeY.y;
+			} else if (entity->localTransform.position.y < movement->movementRangeY.x) {
+				entity->localTransform.position.y = movement->movementRangeY.x;
+			}
 
             if((movement->movementRangeX.y + movement->movementRangeX.x) != 0 &&
-            	 (entity->localTransform.position.x >= movement->movementRangeX.y || entity->localTransform.position.x < movement->movementRangeX.x) ){
+			    (entity->localTransform.position.x >= movement->movementRangeX.y || entity->localTransform.position.x <= movement->movementRangeX.x) ){
                 movement->direction.x = -movement->direction.x;
             }
 
             if((movement->movementRangeY.y + movement->movementRangeY.x) != 0 &&
-               (entity->localTransform.position.y >= movement->movementRangeY.y || entity->localTransform.position.y < movement->movementRangeY.x) ){
+				(entity->localTransform.position.y >= movement->movementRangeY.y || entity->localTransform.position.y <= movement->movementRangeY.x) ){
                 movement->direction.y = -movement->direction.y;
             }
 
             if((movement->movementRangeZ.y + movement->movementRangeZ.x) != 0 &&
-               (entity->localTransform.position.z >= movement->movementRangeZ.y || entity->localTransform.position.z < movement->movementRangeZ.x) ){
+               	(entity->localTransform.position.z >= movement->movementRangeZ.y || entity->localTransform.position.z <= movement->movementRangeZ.x) ){
                 movement->direction.z = -movement->direction.z;
             }
         }
@@ -62,21 +68,20 @@ namespace our
         void update(World* world, float deltaTime) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
-
                 if (entity->name == "obstacles") {
                     obstacleMovement(entity, deltaTime);
                 } else if(entity->name == "battery" || entity->name == "arrow") {
                     rangeMovement(entity, deltaTime);
                 } else {
-										// Get the movement component if it exists
-										MovementComponent* movement = entity->getComponent<MovementComponent>();
-										// If the movement component exists
-										if(movement){
-												// Change the position and rotation based on the linear & angular velocity and delta time.
-												entity->localTransform.position += deltaTime * movement->linearVelocity;
-												entity->localTransform.rotation += deltaTime * movement->angularVelocity;
-										}
-								}
+					// Get the movement component if it exists
+					MovementComponent* movement = entity->getComponent<MovementComponent>();
+					// If the movement component exists
+					if(movement){
+						// Change the position and rotation based on the linear & angular velocity and delta time.
+						entity->localTransform.position += deltaTime * movement->linearVelocity;
+						entity->localTransform.rotation += deltaTime * movement->angularVelocity;
+					}
+				}
             }
         }
     };

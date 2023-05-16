@@ -69,7 +69,7 @@ class Playstate: public our::State {
         carController.update(&world, (float)deltaTime);
 		cameraController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
-        energySystem.update();
+        energySystem.update(&world);
 
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);

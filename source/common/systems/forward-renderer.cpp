@@ -133,7 +133,7 @@ namespace our {
         CameraComponent* camera = nullptr;
         opaqueCommands.clear();
         transparentCommands.clear();
-				lights.clear();
+		lights.clear();
 
         for(auto entity : world->getEntities()){
             // If we hadn't found a camera yet, we look for a camera in this entity
@@ -153,12 +153,11 @@ namespace our {
                 		// Otherwise, we add it to the opaque command list
                     opaqueCommands.push_back(command);
                 }
-
-								// If the entity has a light component, we add it to the lights list
-								if (auto light = entity->getComponent<LightComponent>(); light) {
-									lights.push_back(light);
-								}
             }
+			// If the entity has a light component, we add it to the lights list
+			if (auto light = entity->getComponent<LightComponent>(); light) {
+				lights.push_back(light);
+			}
         }
 
         // If there is no camera, we return (we cannot render without a camera)
@@ -217,7 +216,7 @@ namespace our {
         // Use glClear to clear both bits
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-				int numLights = lights.size();
+		int numLights = lights.size();
 
         // TODO: (Req 9) Draw all the opaque commands
         // Don't forget to set the "transform" uniform to be equal the model-view-projection matrix for each render command
@@ -226,32 +225,34 @@ namespace our {
             // Setup the material of each opaque command
             opaqueCommand.material->setup();
 
-						if (auto lightMaterial = dynamic_cast<LightMaterial*>(opaqueCommand.material); lightMaterial) {
-								opaqueCommand.material->shader->set("VP", VP);
-								opaqueCommand.material->shader->set("eye", glm::vec3(cameraForward.x, cameraForward.y, cameraForward.z));
-								opaqueCommand.material->shader->set("light_count", numLights);
-								opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
-								opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
+			if (auto lightMaterial = dynamic_cast<LightMaterial*>(opaqueCommand.material); lightMaterial) {
+				opaqueCommand.material->shader->set("VP", VP);
+				opaqueCommand.material->shader->set("eye", glm::vec3(cameraForward.x, cameraForward.y, cameraForward.z));
+				opaqueCommand.material->shader->set("light_count", numLights);
+				opaqueCommand.material->shader->set("M", opaqueCommand.localToWorld);
+				opaqueCommand.material->shader->set("M_IT", glm::transpose(glm::inverse(opaqueCommand.localToWorld)));
 
-								opaqueCommand.material->shader->set("sky.top", glm::vec3(0.0f, 0.1f, 0.5f));
-								opaqueCommand.material->shader->set("sky.horizon", glm::vec3(0.3f, 0.3f, 0.3f));
-								opaqueCommand.material->shader->set("sky.bottom", glm::vec3(0.1f, 0.1f, 0.1f));
+				opaqueCommand.material->shader->set("sky.top", glm::vec3(0.0f, 0.1f, 0.5f));
+				opaqueCommand.material->shader->set("sky.horizon", glm::vec3(0.3f, 0.3f, 0.3f));
+				opaqueCommand.material->shader->set("sky.bottom", glm::vec3(0.1f, 0.1f, 0.1f));
 
-								for (int i = 0; i < numLights; i++) {
-										std::string prefix = "lights[" + std::to_string(i) + "].";
-										opaqueCommand.material->shader->set(prefix + "position", lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-										opaqueCommand.material->shader->set(prefix + "direction", lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->direction, 0.0f));
-										opaqueCommand.material->shader->set(prefix + "type", (int)lights[i]->type);
+				for (int i = 0; i < numLights; i++) {
+					std::string prefix = "lights[" + std::to_string(i) + "].";
+					glm::vec3 position = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+					glm::vec3 direction = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->direction, 0.0f);
+					opaqueCommand.material->shader->set(prefix + "position", glm::vec3(position.x, position.y, position.z));
+					opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(direction.x, direction.y, direction.z));
+					opaqueCommand.material->shader->set(prefix + "type", (int)lights[i]->type);
 
-										opaqueCommand.material->shader->set(prefix + "diffuse", lights[i]->diffuse);
-										opaqueCommand.material->shader->set(prefix + "specular", lights[i]->specular);
-										opaqueCommand.material->shader->set(prefix + "attenuation", lights[i]->attenuation);
-										opaqueCommand.material->shader->set(prefix + "cone_angles", lights[i]->cone_angles);
-								}
-						} else {
-            		// Set the "transform" uniform as the VP matrix we obtained above & transform it to world space
-            		opaqueCommand.material->shader->set("transform", VP * opaqueCommand.localToWorld);
-						}
+					opaqueCommand.material->shader->set(prefix + "diffuse", lights[i]->diffuse);
+					opaqueCommand.material->shader->set(prefix + "specular", lights[i]->specular);
+					opaqueCommand.material->shader->set(prefix + "attenuation", lights[i]->attenuation);
+					opaqueCommand.material->shader->set(prefix + "cone_angles", lights[i]->cone_angles);
+				}
+			} else {
+				// Set the "transform" uniform as the VP matrix we obtained above & transform it to world space
+				opaqueCommand.material->shader->set("transform", VP * opaqueCommand.localToWorld);
+			}
 
             // Draw Mesh
             opaqueCommand.mesh->draw();

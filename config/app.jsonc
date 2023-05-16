@@ -148,8 +148,8 @@
           "sampler": "default"
         },
         "moon": {
-          "type": "textured",
-          "shader": "textured",
+          "type": "lighted",
+          "shader": "lighted",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -159,8 +159,12 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          "texture": "moon",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo": "moon",
+          "specular": "moon",
+          "emissive": "moon",
+          "ambient_occlusion": "moon",
+          "roughness": "black"
         },
         "road": {
           "type": "textured",
@@ -397,18 +401,18 @@
     },
     "world": [
       // ------------- Free movement --------------
-      // {
-      // 	"name":"camera",
-      // 	"position": [0, 10, 0],
-      // 	"components": [
-      // 		{
-      // 			"type": "Camera"
-      // 		},
-      // 		{
-      // 			"type": "Free Camera Controller"
-      // 		}
-      // 	]
-      // },
+      //   {
+      //     "name": "camera",
+      //     "position": [0, 10, 0],
+      //     "components": [
+      //       {
+      //         "type": "Camera"
+      //       },
+      //       {
+      //         "type": "Free Camera Controller"
+      //       }
+      //     ]
+      //   },
       // ------------- Free movement --------------
       // ------------- Car ------------------
       {
@@ -424,26 +428,6 @@
           }
         ],
         "children": [
-          // ------------- Delivery -----------------
-          {
-            "name": "delivery-on-car",
-            "position": [0, 1.5, 0],
-            "rotation": [0, 0, 0],
-            "scale": [0.5, 0.5, 0.5],
-            "components": [
-              {
-                "type": "Mesh Renderer",
-                "mesh": "monkey",
-                "material": "monkey"
-              },
-              {
-                "type": "Movement",
-                "angularVelocity": [0, 30, 0]
-              }
-            ]
-          },
-          // ------------- Delivery -----------------
-
           // ------------- Camera -----------------
           {
             "name": "camera",
@@ -484,8 +468,27 @@
               }
               // ------------- Battry bar ------------------
             ]
-          }
+          },
           // ------------- Camera -----------------
+          // ------------- Delivery -----------------
+          {
+            "name": "delivery-on-car",
+            "position": [0, 1.5, 0],
+            "rotation": [0, 0, 0],
+            "scale": [0.5, 0.5, 0.5],
+            "components": [
+              {
+                "type": "Mesh Renderer",
+                "mesh": "monkey",
+                "material": "monkey"
+              },
+              {
+                "type": "Movement",
+                "angularVelocity": [0, 30, 0]
+              }
+            ]
+          }
+          // ------------- Delivery -----------------
         ]
       },
       // ------------- Car ------------------
@@ -973,6 +976,13 @@
             "linearVelocity": [0, 2, 0],
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
+          },
+          {
+            "type": "Light",
+            "lightType": "point",
+            "diffuse": [1.5, 1.5, 1.5],
+            "specular": [1, 1, 1],
+            "attenuation": [0.0095, 0.0095, 0.0095]
           }
         ]
       },
@@ -992,6 +1002,13 @@
             "linearVelocity": [0, 2, 0],
             "angularVelocity": [0, 50, 0],
             "movementRangeY": [1.5, 4]
+          },
+          {
+            "type": "Light",
+            "lightType": "point",
+            "diffuse": [1.5, 1.5, 1.5],
+            "specular": [1, 1, 1],
+            "attenuation": [0.0095, 0.0095, 0.0095]
           }
         ]
       },
@@ -1015,8 +1032,87 @@
             "movementRangeY": [3, 8]
           }
         ]
-      }
+      },
       // ------------- Destination ------------------
+      // ------------- Signs ------------------
+      {
+        "name": "sign",
+        "position": [-51, 5, -52],
+        "rotation": [0, 0, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [65, 5, -2],
+        "rotation": [0, 90, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [65, 5, 38],
+        "rotation": [0, 90, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      {
+        "name": "sign",
+        "position": [-52, 5, 46],
+        "rotation": [0, 0, 0],
+        "scale": [10, 15, 10],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "arrow",
+            "material": "arrow"
+          }
+        ]
+      },
+      // ------------- Signs ------------------
+      // ------------- Moon ------------------
+      {
+        "position": [-54, 35, -45],
+        "rotation": [45, 45, 0],
+        "scale": [4, 4, 4],
+        "components": [
+          {
+            "type": "Mesh Renderer",
+            "mesh": "sphere",
+            "material": "moon"
+          },
+          {
+            "type": "Movement",
+            "angularVelocity": [0, 30, 0]
+          },
+          {
+            "type": "Light",
+            "lightType": "point",
+            "diffuse": [1.2, 0.85, 1.1],
+            "specular": [0.5, 0.8, 0.9],
+            "attenuation": [0.00095, 0.00095, 0.000095]
+          }
+        ]
+      }
+      // ------------- Moon ------------------
       // ------------- Obstacles ------------------
       // {
       // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
