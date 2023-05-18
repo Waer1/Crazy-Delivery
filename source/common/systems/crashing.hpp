@@ -22,53 +22,14 @@ namespace our
         EventHandlerSystem *events;
         EnergySystem *energy;
 		DeliverySystem *delivery;
-        vector<Entity*> BigObstacles;
-        vector<Entity*> Buildings;
-
-        float distanceXYZ(glm::vec4 a, glm::vec4 b){
-            return sqrt(pow(a.x - b.x, 2) + pow(a.y - b.y, 2) + pow(a.z - b.z, 2));
-        }
-
-        float distanceXZ(glm::vec4 a, glm::vec4 b){
-            return sqrt(pow(a.x - b.x, 2) + pow(a.z - b.z, 2));
-        }
-		
-        bool obstacleCrashEvent(Entity *obstacle, Entity *object, float threshold) {
-            // Get the car position
-            glm::vec4 carPosition = glm::vec4(obstacle->localTransform.position, 1);
-            glm::vec4 objectPosition = glm::vec4(object->localTransform.position, 1);
-
-            // Get the distance between the car and the object
-            float dis = distanceXZ(carPosition, objectPosition);
-
-            return dis < threshold;
-        }
 
         void getTargetEntities(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
                 if(entity->name == "car"){
 					car = entity;
-                }else if(entity->name == "obstacles")
-                {
-                    BigObstacles.push_back(entity);
-                } else if(entity->name == "building")
-                {
-                    Buildings.push_back(entity);
                 }
-
             }
-        }
-
-        glm::vec3 generateRandomVec3(int from, int to){
-            srand(static_cast<unsigned int>(time(nullptr)));
-            // Generate random x, y, and z values between x and y
-            float randomX = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
-            float randomZ = static_cast<float>(rand()) / RAND_MAX * (to - from) + from;
-
-            // Construct a glm::vec3 with the random values
-            glm::vec3 vec(randomX, 0, randomZ);
-            return vec;
         }
 
 		bool crash(Entity *object1, Entity *object2) {
@@ -150,16 +111,6 @@ namespace our
 					}
 				}
 			}
-
-
-            for (auto obstacle : BigObstacles) {
-                if (abs(obstacle->localTransform.position.x) > 70 || abs(obstacle->localTransform.position.z) > 50)
-                {
-                    MovementComponent *bm = obstacle->getComponent<MovementComponent>();
-                    bm->angularVelocity = glm::vec3(0,0,0);
-                    bm->linearVelocity = -bm->linearVelocity;
-                }
-            }
 
 
         }
