@@ -76,15 +76,22 @@ namespace our
                 }
             }
             //Brake
-			if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
-                if(this->carPositionSensitivity.z > 10){
-                    this->carPositionSensitivity.z=10;
+			// if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+            //     if(this->carPositionSensitivity.z > 10){
+            //         this->carPositionSensitivity.z=10;
+            //     }
+            //     position += front * (deltaTime * this->carPositionSensitivity.z);
+            //     if(this->carPositionSensitivity.z > 0){
+            //         this->carPositionSensitivity.z-=this->acceleration;
+            //     }
+			// }
+            // Move Backwards
+            if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+                position -= front * (deltaTime * this->carPositionSensitivity.z);
+                if(this->carPositionSensitivity.z <= this->maxSpeed){
+                    this->carPositionSensitivity.z+=this->acceleration;
                 }
-                position += front * (deltaTime * this->carPositionSensitivity.z);
-                if(this->carPositionSensitivity.z > 0){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
-			}
+            }
 
             // A & D moves the car left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)){
