@@ -9,6 +9,7 @@
 #include <systems/energy.hpp>
 #include <systems/event-handler.hpp>
 #include <systems/delivery.hpp>
+#include <systems/street-lights.hpp>
 #include <systems/bigObstacles.hpp>
 #include <systems/car-movement.hpp>
 #include <systems/free-camera-controller.hpp>
@@ -26,6 +27,7 @@ class Playstate: public our::State {
     our::EnergySystem energySystem;
     our::EventHandlerSystem eventHandlerSystem;
     our::DeliverySystem deliverySystem;
+    our::LightSystem lightSystem;
     our::BigObstaclesSystem bigObstaclesSystem;
 	our::FreeCameraControllerSystem cameraController;
 
@@ -55,6 +57,7 @@ class Playstate: public our::State {
         // Get the car entity
         bigObstaclesSystem.initialize(&world, numberofBigObstacles);
         deliverySystem.initialize(&world, numOfDeliveries);
+        lightSystem.initialize(&world);
         energySystem.initialize(&world, &eventHandlerSystem);
         crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
 
