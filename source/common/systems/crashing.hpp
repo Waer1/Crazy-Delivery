@@ -156,8 +156,8 @@ namespace our
                 if (abs(obstacle->localTransform.position.x) > 70 || abs(obstacle->localTransform.position.z) > 50)
                 {
                     MovementComponent *bm = obstacle->getComponent<MovementComponent>();
-                    bm->angularVelocity = generateRandomVec3(-180, 180);
-                    bm->linearVelocity = -bm->linearVelocity + generateRandomVec3(-20, 20) ;
+                    bm->angularVelocity = glm::vec3(0,0,0);
+                    bm->linearVelocity = -bm->linearVelocity;
                 }
             }
 
