@@ -14,7 +14,7 @@ struct Light {
     vec2 cone_angles;       // Cone angles (inner, outer) for spot lights
 };
 
-#define MAX_LIGHTS 8         // Maximum number of lights
+#define MAX_LIGHTS 30         // Maximum number of lights
 
 uniform Light lights[MAX_LIGHTS];      // Array of lights
 uniform int light_count;               // Number of lights
