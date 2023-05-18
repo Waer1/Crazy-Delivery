@@ -11,6 +11,7 @@
 #include <systems/delivery.hpp>
 #include <systems/bigObstacles.hpp>
 #include <systems/car-movement.hpp>
+#include <systems/free-camera-controller.hpp>
 #include <asset-loader.hpp>
 
 
@@ -26,6 +27,7 @@ class Playstate: public our::State {
     our::EventHandlerSystem eventHandlerSystem;
     our::DeliverySystem deliverySystem;
     our::BigObstaclesSystem bigObstaclesSystem;
+	our::FreeCameraControllerSystem cameraController;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -38,7 +40,9 @@ class Playstate: public our::State {
         if(config.contains("world")){
             world.deserialize(config["world"]);
         }
-        
+		// We initialize the camera controller system since it needs a pointer to the app
+        cameraController.enter(getApp());
+
 		// We initialize the car controller system since it needs a pointer to the app
 		carController.initialize(getApp(), &world);
 
@@ -63,6 +67,7 @@ class Playstate: public our::State {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         carController.update(&world, (float)deltaTime);
+		cameraController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
         energySystem.update();
 
@@ -81,6 +86,8 @@ class Playstate: public our::State {
     void onDestroy() override {
         // Don't forget to destroy the renderer
         renderer.destroy();
+		// On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
+        cameraController.exit();
         // Clear the world
         world.clear();
         // and we delete all the loaded assets to free memory on the RAM and the VRAM
