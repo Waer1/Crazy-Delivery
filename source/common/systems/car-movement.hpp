@@ -15,8 +15,19 @@ namespace our
     class CarMovementSystem {
         Application* app; // The application in which the state runs
 
-		CameraComponent* camera = nullptr;
 		Entity* car = nullptr;
+
+        float carRotationSensitivity = 0.01f;
+        glm::vec3 carPositionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of car movement if WASD is pressed
+        float defaultRotation=3.14159;
+        //float maxRightRotation=1.5;
+        //float maxLeftRotation=4.5;
+        float maxSpeed=20;
+        float minSpeed=2;
+        float acceleration=0.1;
+        float rateOfRotation=0.03;
+        float centeringRate=0.02;
+
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -26,13 +37,9 @@ namespace our
             // First of all, we search for an entity containing both a CameraComponent and a CarMovementComponent
             // As soon as we find one, we break
             for(auto entity : world->getEntities()){
-                camera = entity->getComponent<CameraComponent>();
-
+                // if the entity is car then set the car
 				if(entity->name == "car"){
                     car = entity;
-                }
-
-                if(camera && car){
                     break;
                 }
             }
@@ -40,12 +47,11 @@ namespace our
 
         // This should be called every frame to update all entities containing a CarMovementComponent
         void update(World* world, float deltaTime) {
-            // If there is no entity with both a CameraComponent and CarEntity, we can do nothing so we return
-            if(!(camera && car)) return;
 
-            // Get the entity that we found via getOwner of camera
-            Entity* entity = camera->getOwner();
-
+            if(!(car)){
+                 std::cout<<"etl3 bara mfesh car"<<std::endl;
+                 return;
+            }
             // We get a reference to the camera entity's position and rotation and car rotation
             glm::vec3& position = car->localTransform.position;
             glm::vec3& rotation = car->localTransform.rotation; 
@@ -56,32 +62,45 @@ namespace our
             glm::vec3 front = glm::vec3(matrix * glm::vec4(0, 0, 1, 0)),
                       right = glm::vec3(matrix * glm::vec4(-1, 0, 0, 0));
 
-            float sensitivity = 9.0f;
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
             if(app->getKeyboard().isPressed(GLFW_KEY_W)) {
-                position += front * (deltaTime * sensitivity);
-				right.x = abs(right.x);
+                position += front * (deltaTime * this->carPositionSensitivity.z);
+                if(this->carPositionSensitivity.z <= this->maxSpeed){
+                    this->carPositionSensitivity.z+=this->acceleration;
+                }
             }
-
+            else{
+                if(this->carPositionSensitivity.z>=this->minSpeed){
+                    this->carPositionSensitivity.z-=this->acceleration;
+                }
+            }
+            //Brake
 			if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
-				position -= front * (deltaTime * (sensitivity - 1.0f));
-				right.x = -abs(right.x);
+                if(this->carPositionSensitivity.z > 10){
+                    this->carPositionSensitivity.z=10;
+                }
+                position += front * (deltaTime * this->carPositionSensitivity.z);
+                if(this->carPositionSensitivity.z > 0){
+                    this->carPositionSensitivity.z-=this->acceleration;
+                }
 			}
 
             // A & D moves the car left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)){
-                // Move the position of each entity in the space right
-                position += right * (deltaTime * sensitivity);
-				rotation.y -= 0.03;
+                //Moving the position of each entity in the space right
+                position += right * (deltaTime * this->carPositionSensitivity.x);
+                rotation.y -=this->rateOfRotation;
+
             }
     
             if(app->getKeyboard().isPressed(GLFW_KEY_A)) {
-                // Move the position of each entity in the space left
-                position -= right * (deltaTime * sensitivity);
-				rotation.y += 0.03;
-                
-            }
-        }
-    };
+                //Moving the position of each entity in the space left
+                position -= right * (deltaTime * this->carPositionSensitivity.x);
+                rotation.y +=this->rateOfRotation;
+            }            
+
+    }
+};  
+
 }
