@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define decreasedTime 400
+#define decreasedTime 500
 #define decreasedEnergy 1
 
 namespace our
@@ -126,17 +126,17 @@ namespace our
 
         void batteryCrash()
         {
-            increaseEnergy(10);
+            increaseEnergy(30);
         }
 
         void obstacleCrash()
         {
-            decreaseEnergy(0);
+            decreaseEnergy(20);
         }
 
         void buildingCrash()
         {
-            decreaseEnergy(0);
+            decreaseEnergy(10);
             crashed = true;
         }
 
