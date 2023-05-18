@@ -7,6 +7,7 @@
 #include <systems/energy.hpp>
 #include <systems/delivery.hpp>
 #include <systems/movement.hpp>
+#include <systems/battery-handler.hpp>
 
 
 #include <iostream>
@@ -21,7 +22,8 @@ namespace our
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
-		DeliverySystem *delivery;
+				DeliverySystem *delivery;
+				BatterySystem *batterySystem;
         vector<Entity*> BigObstacles;
         vector<Entity*> Buildings;
 
@@ -114,11 +116,12 @@ namespace our
 		}
 
     public:
-        void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery) {
+        void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery) {
             this->events = events;
             this->energy = energy;
-			this->delivery = delivery;
-            getTargetEntities(world);
+						this->delivery = delivery;
+            this->batterySystem = battery;
+						getTargetEntities(world);
         }
 
         void update(World* world) {
@@ -128,29 +131,27 @@ namespace our
                     continue;
                 }
 
-				if (crash(car, entity)) {
-					if (entity->name == "battery") {
-						printf("battery\n");
-						energy->batteryCrash();
-					} else if (entity->name == "obstacles") {
-						printf("obstacles\n");
-						energy->obstacleCrash();
-					} else if (entity->name == "building") {
-						printf("building\n");
-						energy->buildingCrash();
-					} else if (entity->name == "arrow" && crashDestination(car, entity)) {
-						events->deliverDelivery();
-						delivery->removeDeliveryOnCar();
-					} else if (entity->name == "delivery") {
-						if (!events->isCarryDeliver()) {
-							events->collectDeliver();
-							delivery->addDeliveryOnCar();
-							delivery->removeDelivery(entity, world);
+						if (crash(car, entity)) {
+							if (entity->name == "battery") {
+								energy->batteryCrash();
+								batterySystem->takeBattery(entity);
+							} else if (entity->name == "obstacles") {
+								printf("obstacles\n");
+								energy->obstacleCrash();
+							} else if (entity->name == "building") {
+								energy->buildingCrash();
+							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
+								events->deliverDelivery();
+								delivery->removeDeliveryOnCar();
+							} else if (entity->name == "delivery") {
+								if (!events->isCarryDeliver()) {
+									events->collectDeliver();
+									delivery->addDeliveryOnCar();
+									delivery->removeDelivery(entity, world);
+								}
+							}
 						}
 					}
-				}
-			}
-
 
             for (auto obstacle : BigObstacles) {
                 if (abs(obstacle->localTransform.position.x) > 70 || abs(obstacle->localTransform.position.z) > 50)
@@ -160,10 +161,6 @@ namespace our
                     bm->linearVelocity = -bm->linearVelocity;
                 }
             }
-
-
         }
-
     };
-
 }

@@ -990,6 +990,10 @@
             "mesh": "battery",
             "material": "battery"
           },
+					{
+						"type": "Battery",
+						"isTaken": false
+					},
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],
@@ -1016,6 +1020,10 @@
             "mesh": "battery",
             "material": "battery"
           },
+					{
+						"type": "Battery",
+						"isTaken": false
+					},
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],

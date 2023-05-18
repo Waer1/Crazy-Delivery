@@ -80,17 +80,20 @@ set(COMMON_SOURCES
         source/common/components/component-deserializer.hpp
         source/common/components/light.hpp
 				source/common/components/light.cpp
+				source/common/components/battery.hpp
+				source/common/components/battery.cpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp
         source/common/systems/free-camera-controller.hpp
         source/common/systems/movement.hpp
-		source/common/systems/crashing.hpp
-		source/common/systems/energy.hpp
-		source/common/systems/event-handler.hpp
-		source/common/systems/delivery.hpp
-		source/common/systems/bigObstacles.hpp
-		source/common/systems/car-movement.hpp
+				source/common/systems/crashing.hpp
+				source/common/systems/energy.hpp
+				source/common/systems/event-handler.hpp
+				source/common/systems/delivery.hpp
+				source/common/systems/bigObstacles.hpp
+				source/common/systems/car-movement.hpp
+				source/common/systems/battery-handler.hpp
 )
 
 # Define the directories in which to search for the included headers
@@ -111,8 +114,8 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${PROJECT_SOURCE_DIR}/bin)
 set(STATES_SOURCES
         source/states/play-state.hpp
         source/states/menu-state.hpp
-		source/states/win-state.hpp
-		source/states/lose-state.hpp
+				source/states/win-state.hpp
+				source/states/lose-state.hpp
 
         source/states/shader-test-state.hpp
         source/states/mesh-test-state.hpp
