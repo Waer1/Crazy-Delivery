@@ -344,9 +344,12 @@
               "enabled": true
             }
           },
-          "tint": [0.7, 0.7, 0.7, 1],
+          "sampler": "default",
           "albedo": "ground",
-          "sampler": "default"
+          "specular": "black",
+          "emissive": "black",
+          "roughness": "black",
+          "ambient_occlusion": "black"
         },
         "battery_bar": {
           "type": "textured",
