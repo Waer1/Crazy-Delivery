@@ -184,8 +184,8 @@
           "roughness": "black"
         },
         "road": {
-          "type": "textured",
-          "shader": "textured",
+          "type": "lighted",
+          "shader": "lighted",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -194,9 +194,12 @@
               "enabled": true
             }
           },
-          "tint": [1, 1, 1, 1],
-          "texture": "road",
-          "sampler": "default"
+          "sampler": "default",
+					"albedo": "road",
+					"specular": "white",
+          "roughness": "road",
+					"emissive": "black",
+					"ambient_occlusion": "road"
         },
         "fence": {
           "type": "textured",
@@ -348,8 +351,8 @@
           "albedo": "ground",
           "specular": "black",
           "emissive": "black",
-          "roughness": "black",
-          "ambient_occlusion": "black"
+          "roughness": "ground",
+          "ambient_occlusion": "ground"
         },
         "battery_bar": {
           "type": "textured",
@@ -991,6 +994,10 @@
             "mesh": "battery",
             "material": "battery"
           },
+					{
+						"type": "Battery",
+						"isTaken": false
+					},
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],
@@ -1000,9 +1007,9 @@
           {
             "type": "Light",
             "lightType": "point",
-            "diffuse": [1.5, 1.5, 1.5],
-            "specular": [1, 1, 1],
-            "attenuation": [0.0095, 0.0095, 0.0095]
+            "diffuse": [0.1, 0.1, 0.1],
+            "specular": [0.5, 0.5, 0.5],
+            "attenuation": [0.01, 0.01, 0.01]
           }
         ]
       },
@@ -1017,6 +1024,10 @@
             "mesh": "battery",
             "material": "battery"
           },
+					{
+						"type": "Battery",
+						"isTaken": false
+					},
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],
@@ -1026,9 +1037,9 @@
           {
             "type": "Light",
             "lightType": "point",
-            "diffuse": [1.5, 1.5, 1.5],
-            "specular": [1, 1, 1],
-            "attenuation": [0.0095, 0.0095, 0.0095]
+            "diffuse": [0.1, 0.1, 0.1],
+            "specular": [0.5, 0.5, 0.5],
+            "attenuation": [0.01, 0.01, 0.01]
           }
         ]
       },
