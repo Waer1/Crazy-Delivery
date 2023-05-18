@@ -53,13 +53,13 @@ namespace our
             float percentage = ((float)energy / 100) * 100; // calculate the percentage of energy
             for (int i = 0; i < energyBarsSize; i++)
             {
-                if (percentage >= i * 100.0 / energyBars.size())
+                if (percentage >= i * 100.0 / energyBarsSize)
                 {
-                    energyBars[energyBarsSize - i-1]->localTransform.scale.x = 0.05; // show the energy bar
+                    energyBars[energyBarsSize - i - 1]->localTransform.scale.x = 0.05; // show the energy bar
                 }
                 else
                 {
-                    energyBars[energyBarsSize - i-1]->localTransform.scale.x = 0.0; // hide the energy bar
+                    energyBars[energyBarsSize - i - 1]->localTransform.scale.x = 0.0; // hide the energy bar
                 }
             }
         }
