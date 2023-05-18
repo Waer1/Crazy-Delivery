@@ -14,6 +14,7 @@ namespace our
     // The car movement system is responsible for moving the car entity.
     class CarMovementSystem {
         Application* app; // The application in which the state runs
+        Keyboard* keyboard;
 
 		Entity* car = nullptr;
 
@@ -33,6 +34,7 @@ namespace our
         // When a state enters, it should call this function and give it the pointer to the application
         void initialize(Application* app, World* world){
             this->app = app;
+            this->keyboard = &app->getKeyboard();
 
             // First of all, we search for an entity containing both a CameraComponent and a CarMovementComponent
             // As soon as we find one, we break
@@ -64,43 +66,29 @@ namespace our
 
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) {
-                position += front * (deltaTime * this->carPositionSensitivity.z);
-                if(this->carPositionSensitivity.z <= this->maxSpeed){
-                    this->carPositionSensitivity.z+=this->acceleration;
-                }
+            if(keyboard->isPressed(GLFW_KEY_W)) {
+                position += front * (deltaTime * sensitivity);
+				right.x = abs(right.x);
             }
-            else{
-                if(this->carPositionSensitivity.z>=this->minSpeed){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
-            }
-            //Brake
-			if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
-                if(this->carPositionSensitivity.z > 10){
-                    this->carPositionSensitivity.z=10;
-                }
-                position += front * (deltaTime * this->carPositionSensitivity.z);
-                if(this->carPositionSensitivity.z > 0){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
+
+			if(keyboard->isPressed(GLFW_KEY_S)) {
+				position -= front * (deltaTime * (sensitivity - 1.0f));
+				right.x = -abs(right.x);
 			}
 
             // A & D moves the car left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)){
-                //Moving the position of each entity in the space right
-                position += right * (deltaTime * this->carPositionSensitivity.x);
-                rotation.y -=this->rateOfRotation;
-
+            if(keyboard->isPressed(GLFW_KEY_D)){
+                // Move the position of each entity in the space right
+                position += right * (deltaTime * sensitivity);
+				rotation.y -= 0.03;
             }
     
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) {
-                //Moving the position of each entity in the space left
-                position -= right * (deltaTime * this->carPositionSensitivity.x);
-                rotation.y +=this->rateOfRotation;
-            }            
-
-    }
-};  
-
+            if(keyboard->isPressed(GLFW_KEY_A)) {
+                // Move the position of each entity in the space left
+                position -= right * (deltaTime * sensitivity);
+				rotation.y += 0.03;
+                
+            }
+        }
+    };
 }
