@@ -241,7 +241,7 @@ namespace our {
 					glm::vec3 position = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 					glm::vec3 direction = lights[i]->getOwner()->getLocalToWorldMatrix() * glm::vec4(lights[i]->direction, 0.0f);
 					opaqueCommand.material->shader->set(prefix + "position", glm::vec3(position.x, position.y, position.z));
-					opaqueCommand.material->shader->set(prefix + "direction", glm::vec3(direction.x, direction.y, direction.z));
+					opaqueCommand.material->shader->set(prefix + "direction", glm::normalize(glm::vec3(direction.x, direction.y, direction.z)));
 					opaqueCommand.material->shader->set(prefix + "type", (int)lights[i]->type);
 
 					opaqueCommand.material->shader->set(prefix + "diffuse", lights[i]->diffuse);

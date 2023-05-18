@@ -48,7 +48,8 @@
         "white": "assets/textures/white.jpg",
         "red": "assets/textures/red.jpg",
         "battery_bar": "assets/textures/battery bar.png",
-        "barborder": "assets/textures/barborder.png"
+        "barborder": "assets/textures/barborder.png",
+        "street-light": "assets/textures/street-light.png"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -58,7 +59,8 @@
         "road": "assets/models/road.obj",
         "battery": "assets/models/battery.obj",
         "arrow": "assets/models/arrow.obj",
-        "car": "assets/models/Car.obj"
+        "car": "assets/models/Car.obj",
+        "street-light": "assets/models/street-light.obj"
       },
       "samplers": {
         "default": {},
@@ -80,6 +82,21 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "car",
+          "sampler": "default"
+        },
+        "street-light": {
+          "type": "lighted",
+          "shader": "lighted",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          // "albedo": "street-light",
           "sampler": "default"
         },
         "metal": {
@@ -317,8 +334,8 @@
           "ambient_occlusion": "building5"
         },
         "ground": {
-          "type": "textured",
-          "shader": "textured",
+          "type": "lighted",
+          "shader": "lighted",
           "pipelineState": {
             "faceCulling": {
               "enabled": false
@@ -327,9 +344,12 @@
               "enabled": true
             }
           },
-          "tint": [0.7, 0.7, 0.7, 1],
-          "texture": "ground",
-          "sampler": "default"
+          "sampler": "default",
+          "albedo": "ground",
+          "specular": "black",
+          "emissive": "black",
+          "roughness": "black",
+          "ambient_occlusion": "black"
         },
         "battery_bar": {
           "type": "textured",
@@ -401,18 +421,18 @@
     },
     "world": [
       // ------------- Free movement --------------
-      //   {
-      //     "name": "camera",
-      //     "position": [0, 10, 0],
-      //     "components": [
-      //       {
-      //         "type": "Camera"
-      //       },
-      //       {
-      //         "type": "Free Camera Controller"
-      //       }
-      //     ]
-      //   },
+      // {
+      //   "name": "camera",
+      //   "position": [0, 10, 0],
+      //   "components": [
+      //     {
+      //       "type": "Camera"
+      //     },
+      //     {
+      //       "type": "Free Camera Controller"
+      //     }
+      //   ]
+      // },
       // ------------- Free movement --------------
       // ------------- Car ------------------
       {
