@@ -162,7 +162,6 @@ namespace our
                 if (crashed) {
                     Entity* car = getCar(world);
                     if (car) {
-                        printf("---Crashed---\n");
                         car->localTransform.position = glm::vec3(-52, 1.12, 43);
                         crashed = false;
                     }

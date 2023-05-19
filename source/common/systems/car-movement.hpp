@@ -28,6 +28,8 @@ namespace our
         float rateOfRotation=0.03;
         float centeringRate=0.02;
 
+        bool streetPoleCrash = false;
+
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -48,6 +50,11 @@ namespace our
         void decreaseCarSpeed(){
             carPositionSensitivity.z = 3.0f;
         }
+
+        void poleCrash() {
+            streetPoleCrash = true;
+        }
+
         // This should be called every frame to update all entities containing a CarMovementComponent
         void update(World* world, float deltaTime) {
 
@@ -67,7 +74,7 @@ namespace our
 
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W)) {
+            if(app->getKeyboard().isPressed(GLFW_KEY_W) && !streetPoleCrash) {
                 position += front * (deltaTime * this->carPositionSensitivity.z);
                 if(this->carPositionSensitivity.z <= this->maxSpeed){
                     this->carPositionSensitivity.z+=this->acceleration;
@@ -92,18 +99,19 @@ namespace our
              
             // Move Backwards
             if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+                streetPoleCrash = false;
                 position -= front * (deltaTime * this->carPositionSensitivity.z);
             }
 
             // A & D moves the car left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D)){
+            if(app->getKeyboard().isPressed(GLFW_KEY_D) && !streetPoleCrash){
                 //Moving the position of each entity in the space right
                 position += right * (deltaTime * this->carPositionSensitivity.x);
                 rotation.y -=this->rateOfRotation;
 
             }
     
-            if(app->getKeyboard().isPressed(GLFW_KEY_A)) {
+            if(app->getKeyboard().isPressed(GLFW_KEY_A) && !streetPoleCrash) {
                 //Moving the position of each entity in the space left
                 position -= right * (deltaTime * this->carPositionSensitivity.x);
                 rotation.y +=this->rateOfRotation;
