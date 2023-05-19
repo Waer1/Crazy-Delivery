@@ -9,6 +9,7 @@
 #include <systems/movement.hpp>
 #include <systems/car-movement.hpp>
 #include <systems/battery-handler.hpp>
+#include <systems/sound.hpp>
 
 
 #include <iostream>
@@ -21,7 +22,8 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any other entity.
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
-		// Save the car entity
+				Sound test = Sound("assets/sounds/test.mp3", false);
+				// Save the car entity
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
@@ -79,6 +81,8 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
+				test.play();
+				printf("Sound played\n");
 			}
 
 			bool checkTime() {
