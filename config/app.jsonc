@@ -195,11 +195,11 @@
             }
           },
           "sampler": "default",
-					"albedo": "road",
-					"specular": "white",
+          "albedo": "road",
+          "specular": "white",
           "roughness": "road",
-					"emissive": "black",
-					"ambient_occlusion": "road"
+          "emissive": "black",
+          "ambient_occlusion": "road"
         },
         "fence": {
           "type": "textured",
@@ -994,10 +994,10 @@
             "mesh": "battery",
             "material": "battery"
           },
-					{
-						"type": "Battery",
-						"isTaken": false
-					},
+          {
+            "type": "Battery",
+            "isTaken": false
+          },
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],
@@ -1024,10 +1024,10 @@
             "mesh": "battery",
             "material": "battery"
           },
-					{
-						"type": "Battery",
-						"isTaken": false
-					},
+          {
+            "type": "Battery",
+            "isTaken": false
+          },
           {
             "type": "Movement",
             "linearVelocity": [0, 2, 0],
@@ -1066,15 +1066,16 @@
       },
       {
         "name": "destLight",
-        "position": [56, 10, -45],
+        "position": [56, 5, -45],
         "components": [
           {
             "type": "Light",
-            "lightType": "directional",
-            "direction": [0, 0, -1],
-            "diffuse": [0.5, 0.5, 0.5],
-            "specular": [1, 1, 1],
-            "attenuation": [0.00095, 0.00095, 0.000095]
+            "lightType": "spot",
+            "direction": [0, -1, 0],
+            "diffuse": [0.028, 0.028, 0],
+            "specular": [0.5, 0.5, 0.5],
+            "attenuation": [0.00095, 0.00095, 0.000095],
+            "cone_angles": [1.57, 2]
           }
         ]
       },
