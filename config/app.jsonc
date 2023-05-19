@@ -500,6 +500,21 @@
           // ------------- Delivery -----------------
         ]
       },
+      {
+        "name": "carLight",
+        "position": [-51.2, 5, 42],
+        "components": [
+          {
+            "type": "Light",
+            "lightType": "spot",
+            "direction": [0, -1, 0],
+            "diffuse": [0.025, 0, 0.025],
+            "specular": [1, 1, 1],
+            "attenuation": [0.00095, 0.00095, 0.000095],
+            "cone_angles": [1.57, 2]
+          }
+        ]
+      },
       // ------------- Car ------------------
       // ------------- Buildings ------------------
       // First batch
@@ -1058,7 +1073,7 @@
             "type": "Light",
             "lightType": "spot",
             "direction": [0, -1, 0],
-            "diffuse": [0.028, 0.028, 0],
+            "diffuse": [0.035, 0.035, 0],
             "specular": [0.5, 0.5, 0.5],
             "attenuation": [0.00095, 0.00095, 0.000095],
             "cone_angles": [1.57, 2]
@@ -1144,152 +1159,166 @@
           }
         ]
       },
+      {
+        "name": "moonLight",
+        "position": [-54, 35, -45],
+        "components": [
+          {
+            "type": "Light",
+            "lightType": "directional",
+            "direction": [-1, 1, 1],
+            "diffuse": [0.4, 0.4, 0.4],
+            "specular": [1, 1, 1],
+            "attenuation": [0.1, 0.1, 0.1]
+          }
+        ]
+      },
       // ------------- Moon ------------------
       // ------------- Deliveries ------------------
       {
-				"name": "deliveries",
+        "name": "deliveries",
         "components": [
           {
             "type": "Position Point",
-						"position": [30, 1.8, -3.75]
+            "position": [30, 1.8, -3.75]
           },
           {
             "type": "Position Point",
-						"position": [-30, 1.8, 1]
+            "position": [-30, 1.8, 1]
           },
           {
             "type": "Position Point",
-						"position": [-50, 1.8, -30]
+            "position": [-50, 1.8, -30]
           },
           {
             "type": "Position Point",
-						"position": [-54, 1.8, 25]
+            "position": [-54, 1.8, 25]
           },
           {
             "type": "Position Point",
-						"position": [-20, 1.8, 40]
+            "position": [-20, 1.8, 40]
           },
           {
             "type": "Position Point",
-						"position": [60, 1.8, 37]
+            "position": [60, 1.8, 37]
           },
           {
             "type": "Position Point",
-						"position": [55, 1.8, 10]
+            "position": [55, 1.8, 10]
           }
         ]
       },
       // ------------- Deliveries ------------------
       // ------------- Lights ------------------
-			{
-				"name": "streetLight-position",
-				"components": [
+      {
+        "name": "streetLight-position",
+        "components": [
           {
             "type": "Position Point",
-						"position": [-35, 1.12, -11]
+            "position": [-35, 1.12, -11]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, -11]
+            "position": [0, 1.12, -11]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, -11]
+            "position": [40, 1.12, -11]
           },
           {
             "type": "Position Point",
-						"position": [-40, 1.12, -36]
+            "position": [-40, 1.12, -36]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, -36]
+            "position": [0, 1.12, -36]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, -36]
+            "position": [40, 1.12, -36]
           },
           {
             "type": "Position Point",
-						"position": [-40, 1.12, -52.7]
+            "position": [-40, 1.12, -52.7]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, -52.7]
+            "position": [0, 1.12, -52.7]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, -52.7]
+            "position": [40, 1.12, -52.7]
           },
           {
             "type": "Position Point",
-						"position": [-40, 1.12, 6.4]
+            "position": [-40, 1.12, 6.4]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, 6.4]
+            "position": [0, 1.12, 6.4]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, 6.4]
+            "position": [40, 1.12, 6.4]
           },
           {
             "type": "Position Point",
-						"position": [-40, 1.12, 29.8]
+            "position": [-40, 1.12, 29.8]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, 29.8]
+            "position": [0, 1.12, 29.8]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, 29.8]
+            "position": [40, 1.12, 29.8]
           },
           {
             "type": "Position Point",
-						"position": [-40, 1.12, 46.5]
+            "position": [-40, 1.12, 46.5]
           },
           {
             "type": "Position Point",
-						"position": [0, 1.12, 46.5]
+            "position": [0, 1.12, 46.5]
           },
           {
             "type": "Position Point",
-						"position": [40, 1.12, 46.5]
+            "position": [40, 1.12, 46.5]
           },
           {
             "type": "Position Point",
-						"position": [-59.2, 1.12, 40]
+            "position": [-59.2, 1.12, 40]
           },
           {
             "type": "Position Point",
-						"position": [-59.2, 1.12, 7]
+            "position": [-59.2, 1.12, 7]
           },
           {
             "type": "Position Point",
-						"position": [-59.2, 1.12, -17]
+            "position": [-59.2, 1.12, -17]
           },
           {
             "type": "Position Point",
-						"position": [-59.2, 1.12, -47]
+            "position": [-59.2, 1.12, -47]
           },
           {
             "type": "Position Point",
-						"position": [65.5, 1.12, 40]
+            "position": [65.5, 1.12, 40]
           },
           {
             "type": "Position Point",
-						"position": [65.5, 1.12, 10]
+            "position": [65.5, 1.12, 10]
           },
           {
             "type": "Position Point",
-						"position": [65.5, 1.12, -12]
+            "position": [65.5, 1.12, -12]
           },
           {
             "type": "Position Point",
-						"position": [65.5, 1.12, -34]
+            "position": [65.5, 1.12, -34]
           }
-				]
-			}
+        ]
+      }
       // ------------- Lights ------------------
     ]
   }
