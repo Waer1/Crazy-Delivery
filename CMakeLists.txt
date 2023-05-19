@@ -93,7 +93,7 @@ set(COMMON_SOURCES
 				source/common/systems/energy.hpp
 				source/common/systems/event-handler.hpp
 				source/common/systems/delivery.hpp
-				source/common/systems/bigObstacles.hpp
+				source/common/systems/big-obstacles.hpp
 				source/common/systems/car-movement.hpp
 				source/common/systems/battery-handler.hpp
 )

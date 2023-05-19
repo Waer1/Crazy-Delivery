@@ -10,7 +10,7 @@
 #include <systems/event-handler.hpp>
 #include <systems/delivery.hpp>
 #include <systems/street-lights.hpp>
-#include <systems/bigObstacles.hpp>
+#include <systems/big-obstacles.hpp>
 #include <systems/car-movement.hpp>
 #include <systems/free-camera-controller.hpp>
 #include <systems/battery-handler.hpp>
