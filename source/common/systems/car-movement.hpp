@@ -45,6 +45,9 @@ namespace our
             }
         }
 
+        void decreaseCarSpeed(){
+            carPositionSensitivity.z = 3.0f;
+        }
         // This should be called every frame to update all entities containing a CarMovementComponent
         void update(World* world, float deltaTime) {
 

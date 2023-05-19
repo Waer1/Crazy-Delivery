@@ -22,7 +22,7 @@ class Playstate: public our::State {
 
     our::World world;
     our::ForwardRenderer renderer;
-		our::CarMovementSystem carController;
+    our::CarMovementSystem carController;
     our::MovementSystem movementSystem;
     our::CrashingSystem crashingSystem;
     our::EnergySystem energySystem;
@@ -30,8 +30,8 @@ class Playstate: public our::State {
     our::DeliverySystem deliverySystem;
     our::LightSystem lightSystem;
     our::BigObstaclesSystem bigObstaclesSystem;
-		our::FreeCameraControllerSystem cameraController;
-		our::BatterySystem batteryHandlerSystem;
+    our::FreeCameraControllerSystem cameraController;
+    our::BatterySystem batteryHandlerSystem;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -61,7 +61,7 @@ class Playstate: public our::State {
         deliverySystem.initialize(&world, numOfDeliveries);
         lightSystem.initialize(&world);
         energySystem.initialize(&world, &eventHandlerSystem);
-        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem, &batteryHandlerSystem);
+        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem, &batteryHandlerSystem, &carController);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
