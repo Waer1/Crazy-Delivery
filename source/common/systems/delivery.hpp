@@ -29,7 +29,7 @@ namespace our
 				{"name", name},
 				{"position", {position.x, 1.8, position.y}},
 				{"rotation", {0, 0, 0}},
-				{"scale", {0.5, 0.5, 0.5}},
+				{"scale", {0.3, 0.3, 0.3}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Mesh Renderer"},
@@ -74,7 +74,7 @@ namespace our
 		}
 
 		void addDeliveryOnCar() {
-			deliveryOnCar->localTransform.scale = glm::vec3(0.5, 0.5, 0.5);
+			deliveryOnCar->localTransform.scale = glm::vec3(0.3, 0.3, 0.3);
 		}
 
 		void removeDelivery(Entity* delivery, World* world) {
