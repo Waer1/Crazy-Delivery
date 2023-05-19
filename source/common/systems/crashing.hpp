@@ -32,11 +32,11 @@ namespace our
 
         void setCar(World* world) {
             // For each entity in the world
-			// Check if it's name is "car" and then set the car entity we have
+						// Check if it's name is "car" and then set the car entity we have
             for (auto entity : world->getEntities()){
                 if (entity->name == "car"){
-					car = entity;
-					break;
+										car = entity;
+										break;
                 }
             }
         }
@@ -119,20 +119,19 @@ namespace our
 					else if (entity->name == "StreetPole" && crash(car, entity, false, true)) {
 						printf("Street Pole\n");
 						carMovement->poleCrash();
+					} else if (entity->name == "battery" && crash(car, entity, false, false)) {
+						printf("Battery\n");
+						energy->batteryCrash();
+						batterySystem->takeBattery(entity);
 					}
-					// Crashing with battery/obstacles/buildings
+					// Crashing with obstacles/buildings
 					else if (crash(car, entity, false, false)) {
 						if (!checkTime())
 							continue;
 
 						// Now we made sure that a crash happened and after the specified time
 						// We need to check for the entity type and do something accordingly
-						if (entity->name == "battery") {
-							printf("Battery\n");
-							energy->batteryCrash();
-							batterySystem->takeBattery(entity);
-						} 
-						else if (entity->name == "obstacles") {
+						if (entity->name == "obstacles") {
 							printf("Obstacle\n");
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
