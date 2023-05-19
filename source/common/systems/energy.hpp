@@ -97,7 +97,6 @@ namespace our
                 energyBars.push_back(bar);
                 bar->parent = parent;
                 bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
-                printf("bar: %s\n", bar->name.c_str());
             }
             energyBarsSize = energyBars.size();
         }
