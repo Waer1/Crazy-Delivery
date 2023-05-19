@@ -22,15 +22,15 @@ namespace our
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
-				DeliverySystem *delivery;
-				BatterySystem *batterySystem;
+		DeliverySystem *delivery;
+		BatterySystem *batterySystem;
 
         void getCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
                 if(entity->name == "car"){
-									car = entity;
-									break;
+					car = entity;
+					break;
                 }
             }
         }
@@ -81,9 +81,9 @@ namespace our
         void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery) {
             this->events = events;
             this->energy = energy;
-						this->delivery = delivery;
+			this->delivery = delivery;
             this->batterySystem = battery;
-						getCar(world);
+			getCar(world);
         }
 
         void update(World* world) {
@@ -92,28 +92,27 @@ namespace our
                 if(entity->name == "car"){
                     continue;
                 }
-
-						if (crash(car, entity)) {
-							if (entity->name == "battery") {
-								energy->batteryCrash();
-								batterySystem->takeBattery(entity);
-							} else if (entity->name == "obstacles") {
-								printf("obstacles\n");
-								energy->obstacleCrash();
-							} else if (entity->name == "building") {
-								energy->buildingCrash();
-							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
-								events->deliverDelivery();
-								delivery->removeDeliveryOnCar();
-							} else if (entity->name == "delivery") {
-								if (!events->isCarryDeliver()) {
-									events->collectDeliver();
-									delivery->addDeliveryOnCar();
-									delivery->removeDelivery(entity, world);
-								}
-							}
+				if (crash(car, entity)) {
+					if (entity->name == "battery") {
+						energy->batteryCrash();
+						batterySystem->takeBattery(entity);
+					} else if (entity->name == "obstacles") {
+						printf("obstacles\n");
+						energy->obstacleCrash();
+					} else if (entity->name == "building") {
+						energy->buildingCrash();
+					} else if (entity->name == "arrow" && crashDestination(car, entity)) {
+						events->deliverDelivery();
+						delivery->removeDeliveryOnCar();
+					} else if (entity->name == "delivery") {
+						if (!events->isCarryDeliver()) {
+							events->collectDeliver();
+							delivery->addDeliveryOnCar();
+							delivery->removeDelivery(entity, world);
 						}
 					}
+				}
+			}
         }
     };
 }
