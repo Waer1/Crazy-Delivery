@@ -2,6 +2,8 @@
 #include "../mesh/mesh-utils.hpp"
 #include "../texture/texture-utils.hpp"
 
+#include<iostream>
+
 namespace our {
 
     void ForwardRenderer::initialize(glm::ivec2 windowSize, const nlohmann::json& config){
@@ -205,9 +207,8 @@ namespace our {
         // TODO: (Req 9) Set the color mask to true and the depth mask to true (to ensure the glClear will affect the framebuffer)
         glColorMask(true, true, true, true);
         glDepthMask(true);
-
         // If there is a postprocess material, bind the framebuffer
-        if(postprocessMaterial && this->effect){
+        if(postprocessMaterial && this->crashingEffect){
             // TODO: (Req 11) bind the framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
         }
@@ -317,7 +318,7 @@ namespace our {
         }
 
         // If there is a postprocess material, apply postprocessing
-        if(this->effect && postprocessMaterial){
+        if(this->crashingEffect && postprocessMaterial){
             // TODO: (Req 11) Return to the default framebuffer
             // Bind Frame buffer as default (0) using glBindFramebuffer openGL function
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);

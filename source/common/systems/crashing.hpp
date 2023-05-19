@@ -94,7 +94,9 @@ namespace our
 				return true;
 			}
 
-			bool update(World* world) {
+			bool update(World* world,std::string&postProcessIndicator){
+
+				bool applyPostProcess=false;
 
 				// For each entity in the world
 				for (auto entity : world->getEntities()) {
@@ -123,6 +125,8 @@ namespace our
 					else if (entity->name == "battery" && crash(car, entity, false, false)) {
 						energy->batteryCrash();
 						batterySystem->takeBattery(entity);
+						applyPostProcess=true;
+						postProcessIndicator="battery";
 					}
 					// Crashing with obstacles/buildings
 					else if (crash(car, entity, false, false)) {
@@ -134,12 +138,17 @@ namespace our
 						if (entity->name == "obstacles") {
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
+							applyPostProcess=true;
+							postProcessIndicator="obstacle";
 						} 
 						else if (entity->name == "building") {
 							energy->buildingCrash();
+							applyPostProcess=true;
+							postProcessIndicator="obstacle";
 						}
 					}
 				}
+				return applyPostProcess;
 			}
     };
 }

@@ -7,9 +7,6 @@ in vec2 tex_coord;
 // Color whill be sent from the fragment shader
 out vec4 frag_color;
 
-#define REDSTRENGTH 0.5
-#define GREENSTRENGTH 1.2
-#define BLUESTRENGTH 0.1
 
 void main(){
     

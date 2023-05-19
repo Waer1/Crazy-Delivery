@@ -9,6 +9,8 @@
 #include <glad/gl.h>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include<iostream>
 
 namespace our
 {
@@ -43,7 +45,8 @@ namespace our
         GLuint postprocessFrameBuffer, postProcessVertexArray;
         Texture2D *colorTarget, *depthTarget;
         TexturedMaterial* postprocessMaterial;
-        bool effect=false;
+        bool crashingEffect=false;
+        bool boostingEffect=false;
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
         // windowSize is the width & height of the window (in pixels).
@@ -53,10 +56,33 @@ namespace our
         // This function should be called every frame to draw the given world
         void render(World* world);
 
-        void applyEffect(){this->effect=true;};
-        void ignoreEffect(){this->effect=false;};
+        void applyEffect(std::string type){
+        
+            if(type=="battery"){
+                this->boostingEffect=true;
+            }
+            if(type=="obstacle"){
+                this->crashingEffect=true;
+            }
+        };
 
-        bool getEffect(){return this->effect;};
+        void ignoreEffect(std::string type){
+            if(type=="battery"){
+                this->boostingEffect=false;
+            }
+            if(type=="obstacle"){
+                this->crashingEffect=false;
+            }
+        };
+
+        bool getEffect(std::string type){
+            if(type=="battery"){
+                return  this->boostingEffect;
+            }
+            else{
+                return this->crashingEffect;
+            }
+        };
     };
 
 }

@@ -15,6 +15,7 @@
 #include <systems/free-camera-controller.hpp>
 #include <systems/battery-handler.hpp>
 #include <asset-loader.hpp>
+#include <string>
 
 
 // This state shows how to use the ECS framework and deserialization.
@@ -34,6 +35,7 @@ class Playstate: public our::State {
     our::BatterySystem* batteryHandlerSystem;
 
     int timer=0;
+    std::string lastPostProcessEvent="";
 
     void onInitialize() override {
         world = new our::World;
@@ -85,25 +87,33 @@ class Playstate: public our::State {
 
     void onDraw(double deltaTime) override {
         // Here, we just run a bunch of systems to control the world logic
-        movementSystem.update(&world, (float)deltaTime);
-        carController.update(&world, (float)deltaTime);
-				cameraController.update(&world, (float)deltaTime);
-        bool applyPostprocess =crashingSystem.update(&world);
-        energySystem.update(&world);
-				batteryHandlerSystem.update(&world);
-
-        if(applyPostprocess){
-          renderer.applyEffect();
-          applyPostprocess=false;
-          timer=1;
+        movementSystem->update(world, (float)deltaTime);
+        carController->update(world, (float)deltaTime);
+				cameraController->update(world, (float)deltaTime);
+        std::string postProcessType="";
+        bool applyPostProcess =crashingSystem->update(world,postProcessType);
+        if(postProcessType!=""){
+          lastPostProcessEvent=postProcessType;
         }
+        
+        energySystem->update(world);
+				batteryHandlerSystem->update(world);
 
-        if(renderer.getEffect() && timer==80){
-          renderer.ignoreEffect();
+        if(applyPostProcess){
+          if(lastPostProcessEvent!=""){
+            renderer->applyEffect(lastPostProcessEvent);
+            applyPostProcess=false;
+            timer=1;
+          }
+        }
+        if(renderer->getEffect(lastPostProcessEvent) && timer==80){
+          renderer->ignoreEffect(lastPostProcessEvent);
+          applyPostProcess=false;
           timer=0;
         }else{
           timer++;
         }
+        
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
 
@@ -113,7 +123,7 @@ class Playstate: public our::State {
         }
 
         // And finally we use the renderer system to draw the scene
-        renderer.render(&world);
+        renderer->render(world);
     }
 
     void onDestroy() override {
