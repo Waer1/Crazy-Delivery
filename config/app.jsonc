@@ -11,7 +11,7 @@
   "scene": {
     "renderer": {
       "sky": "assets/textures/night-sky.jpg",
-      "postprocess": "assets/shaders/postprocess/grayscale.frag"
+      "postprocess": "assets/shaders/postprocess/vignette.frag"
     },
     "assets": {
       "shaders": {
@@ -1192,8 +1192,119 @@
 						"position": [55, 1.8, 10]
           }
         ]
-      }
+      },
       // ------------- Deliveries ------------------
+      // ------------- Lights ------------------
+			{
+				"name": "streetLight-position",
+				"components": [
+          {
+            "type": "Position Point",
+						"position": [-35, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, 7]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, -17]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, -47]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, 10]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, -12]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, -34]
+          }
+				]
+			}
+      // ------------- Lights ------------------
     ]
   }
 }
