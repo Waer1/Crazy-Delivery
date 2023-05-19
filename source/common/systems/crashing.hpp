@@ -22,7 +22,7 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any other entity.
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
-				Sound test = Sound("assets/sounds/test.mp3", false);
+				Sound test = Sound("assets/sounds/Car Skidding-SoundBible.com-801319245.mp3", false);
 				// Save the car entity
         Entity *car;
         EventHandlerSystem *events;
