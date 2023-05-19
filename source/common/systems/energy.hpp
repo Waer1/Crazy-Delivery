@@ -128,6 +128,11 @@ namespace our
             increaseEnergy(30);
         }
 
+        void deliverMonkey()
+        {
+            increaseEnergy(15);
+        }
+
         void obstacleCrash()
         {
             decreaseEnergy(20);
@@ -162,6 +167,7 @@ namespace our
                     Entity* car = getCar(world);
                     if (car) {
                         car->localTransform.position = glm::vec3(-52, 1.12, 43);
+												car->localTransform.rotation = glm::vec3(0, -180, 0);
                         crashed = false;
                     }
                 }

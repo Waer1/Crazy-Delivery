@@ -116,6 +116,7 @@ namespace our
 					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
 						events->deliverDelivery();
 						delivery->removeDeliveryOnCar();
+						energy->deliverMonkey();
 					}
 					// Hit a street pole
 					else if (entity->name == "StreetPole" && crash(car, entity, false, true)) {
