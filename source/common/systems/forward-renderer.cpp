@@ -10,6 +10,8 @@ namespace our {
         // First, we store the window size for later use
         this->windowSize = windowSize;
 
+        
+
         // Then we check if there is a sky texture in the configuration
         if(config.contains("sky")){
             // First, we create a sphere which will be used to draw the sky
@@ -61,6 +63,10 @@ namespace our {
 
         // Then we check if there is a postprocessing shader in the configuration
         if(config.contains("postprocess")){
+            if(config.contains("energyPostProcess")){
+                this->boostPath=config.value<std::string>("energyPostProcess", "");
+             }
+            this->crashingPath=config.value<std::string>("postprocess", "");
             //TODO: (Req 11) Create a framebuffer
             // Generating FrameBuffer
             glGenFramebuffers(1,&postprocessFrameBuffer);
@@ -95,7 +101,7 @@ namespace our {
             // Create the post processing shader
             ShaderProgram* postprocessShader = new ShaderProgram();
             postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
-            postprocessShader->attach(config.value<std::string>("postprocess", ""), GL_FRAGMENT_SHADER);
+            postprocessShader->attach(this->crashingPath, GL_FRAGMENT_SHADER);
             postprocessShader->link();
 
             // Create a post processing material
@@ -107,6 +113,7 @@ namespace our {
             // so it is more performant to disable the depth mask
             postprocessMaterial->pipelineState.depthMask = false;
         }
+                // Then we check if there is a postprocessing shader in the configuration
     }
 
     void ForwardRenderer::destroy(){
@@ -333,5 +340,23 @@ namespace our {
             // The count is set to 3
             glDrawArrays(GL_TRIANGLES, 0, 3);
         }
+
+      /*  if(this->boostPath!=""){
+            if(this->boostingEffect && postprocessMaterial){    
+                 // TODO: (Req 11) Return to the default framebuffer
+                // Bind Frame buffer as default (0) using glBindFramebuffer openGL function
+                glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+                // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+                // Bind the Vertex Array
+                glBindVertexArray(postProcessVertexArray);
+                // Setup the post process material
+                postprocessMaterial->setup();
+                // Drawing the new triangles after postProcessing of the image
+                // By setting the mode as GL_TRIANGLES
+                // The first argument to 0 since we want to start from the beginning
+                // The count is set to 3
+                glDrawArrays(GL_TRIANGLES, 0, 3);
+            }
+        }*/
     }
 }
