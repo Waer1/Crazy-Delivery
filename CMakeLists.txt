@@ -82,6 +82,8 @@ set(COMMON_SOURCES
 				source/common/components/light.cpp
 				source/common/components/battery.hpp
 				source/common/components/battery.cpp
+				source/common/components/position-point.hpp
+				source/common/components/position-point.cpp
 
         source/common/systems/forward-renderer.hpp
         source/common/systems/forward-renderer.cpp

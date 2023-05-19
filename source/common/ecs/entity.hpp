@@ -28,6 +28,21 @@ namespace our {
         glm::mat4 getLocalToWorldMatrix() const; // Computes and returns the transformation from the entities local space to the world space
         void deserialize(const nlohmann::json&); // Deserializes the entity data and components from a json object
         
+				// Function to get the list of components
+				template<typename T>
+				std::list<T*> getComponents() const {
+						std::list<T*> list;
+						
+						// Loop through the components list
+            for(auto it = components.begin(); it != components.end(); it++) {
+                // Search for the first component that can be dynamically cast to T* and return it
+                if(dynamic_cast<T*>(*it) != nullptr)
+                    list.push_back(dynamic_cast<T*>(*it));
+            }
+
+						return list;
+				}
+
         // This template method create a component of type T,
         // adds it to the components map and returns a pointer to it 
         template<typename T>

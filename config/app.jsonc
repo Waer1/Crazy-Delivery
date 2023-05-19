@@ -1142,8 +1142,43 @@
             "attenuation": [0.00095, 0.00095, 0.000095]
           }
         ]
-      }
+      },
       // ------------- Moon ------------------
+      // ------------- Deliveries ------------------
+      {
+				"name": "deliveries",
+        "components": [
+          {
+            "type": "Position Point",
+						"position": [30, 1.8, -3.75]
+          },
+          {
+            "type": "Position Point",
+						"position": [-30, 1.8, 1]
+          },
+          {
+            "type": "Position Point",
+						"position": [-50, 1.8, -30]
+          },
+          {
+            "type": "Position Point",
+						"position": [-54, 1.8, 25]
+          },
+          {
+            "type": "Position Point",
+						"position": [-20, 1.8, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [60, 1.8, 37]
+          },
+          {
+            "type": "Position Point",
+						"position": [55, 1.8, 10]
+          }
+        ]
+      }
+      // ------------- Deliveries ------------------
       // ------------- Obstacles ------------------
       // {
       // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
