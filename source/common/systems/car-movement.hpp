@@ -71,9 +71,10 @@ namespace our
                 }
             }
             else{
-                if(this->carPositionSensitivity.z>=this->minSpeed){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
+                // if(this->carPositionSensitivity.z>=this->minSpeed){
+                //     this->carPositionSensitivity.z-=this->acceleration;
+                // }
+                this->carPositionSensitivity.z = 7.5;
             }
             //Brake
 			// if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
@@ -88,9 +89,6 @@ namespace our
             // Move Backwards
             if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
                 position -= front * (deltaTime * this->carPositionSensitivity.z);
-                if(this->carPositionSensitivity.z <= this->maxSpeed){
-                    this->carPositionSensitivity.z+=this->acceleration;
-                }
             }
 
             // A & D moves the car left or right 
