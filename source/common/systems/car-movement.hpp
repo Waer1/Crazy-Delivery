@@ -59,7 +59,6 @@ namespace our
         void update(World* world, float deltaTime) {
 
             if(!(car)){
-                 std::cout<<"etl3 bara mfesh car"<<std::endl;
                  return;
             }
             // We get a reference to the camera entity's position and rotation and car rotation
