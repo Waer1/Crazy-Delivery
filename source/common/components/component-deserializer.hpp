@@ -7,6 +7,7 @@
 #include "movement.hpp"
 #include "light.hpp"
 #include "battery.hpp"
+#include "position-point.hpp"
 
 namespace our {
 
@@ -30,6 +31,8 @@ namespace our {
 						component = entity->addComponent<LightComponent>();
 				} else if (type == BatteryComponent::getID()) {
 						component = entity->addComponent<BatteryComponent>();
+				} else if (type == PositionPointComponent::getID()) {
+						component = entity->addComponent<PositionPointComponent>();
 				}
         //serialization -> taking our world with its entities to a file
         //deserialization-> opening a JSON file and filling our entities and their components

@@ -37,8 +37,8 @@ namespace our
             // For each entity in the world
             for(auto entity : world->getEntities()){
                 if(entity->name == "car"){
-									car = entity;
-									break;
+					car = entity;
+					break;
                 }
             }
         }
@@ -85,7 +85,7 @@ namespace our
 							object1Max.z >= object2Min.z && object1Min.z <= object2Max.z);
 				}
 
-    public:
+     public:
         void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery, CarMovementSystem* carMovement) {
             this->events = events;
             this->energy = energy;
@@ -120,6 +120,8 @@ namespace our
                                 }
 							} else if (entity->name == "building") {
 								energy->buildingCrash();
+							} else if (entity->name == "StreetPole") {
+								energy->streetPoleCrash();
 							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
 								events->deliverDelivery();
 								delivery->removeDeliveryOnCar();
@@ -132,6 +134,6 @@ namespace our
 							}
 						}
 					}
-        }
+		}
     };
 }
