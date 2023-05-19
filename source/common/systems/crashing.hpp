@@ -97,7 +97,8 @@ namespace our
             lastObstacleCrash = std::chrono::high_resolution_clock::now();
         }
 
-        void update(World* world) {
+        bool update(World* world) {
+			bool applyPostprocess=false;
 
             // For each entity in the world
             for(auto entity : world->getEntities()) {
@@ -109,6 +110,7 @@ namespace our
 							if (entity->name == "battery") {
 								energy->batteryCrash();
 								batterySystem->takeBattery(entity);
+								applyPostprocess=true;
 							} else if (entity->name == "obstacles") {
                                 currentTime = std::chrono::high_resolution_clock::now();
                                 auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastObstacleCrash).count();
@@ -132,6 +134,7 @@ namespace our
 							}
 						}
 					}
+			return applyPostprocess;
 		}
     };
 }

@@ -33,6 +33,8 @@ class Playstate: public our::State {
     our::FreeCameraControllerSystem cameraController;
     our::BatterySystem batteryHandlerSystem;
 
+    int timer=0;
+
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -73,13 +75,22 @@ class Playstate: public our::State {
         movementSystem.update(&world, (float)deltaTime);
         carController.update(&world, (float)deltaTime);
 				cameraController.update(&world, (float)deltaTime);
-        crashingSystem.update(&world);
+        bool applyPostprocess =crashingSystem.update(&world);
         energySystem.update(&world);
 				batteryHandlerSystem.update(&world);
 
-        // And finally we use the renderer system to draw the scene
-        renderer.render(&world);
+        if(applyPostprocess){
+          renderer.applyEffect();
+          applyPostprocess=false;
+          timer=1;
+        }
 
+        if(renderer.getEffect() && timer==80){
+          renderer.ignoreEffect();
+          timer=0;
+        }else{
+          timer++;
+        }
         // Get a reference to the keyboard object
         auto& keyboard = getApp()->getKeyboard();
 
@@ -87,6 +98,9 @@ class Playstate: public our::State {
             // If the escape  key is pressed in this frame, go to the play state
             getApp()->changeState("menu");
         }
+
+        // And finally we use the renderer system to draw the scene
+        renderer.render(&world);
     }
 
     void onDestroy() override {

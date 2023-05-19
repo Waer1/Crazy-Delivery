@@ -207,7 +207,7 @@ namespace our {
         glDepthMask(true);
 
         // If there is a postprocess material, bind the framebuffer
-        if(postprocessMaterial){
+        if(postprocessMaterial && this->effect){
             // TODO: (Req 11) bind the framebuffer
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
         }
@@ -317,7 +317,7 @@ namespace our {
         }
 
         // If there is a postprocess material, apply postprocessing
-        if(postprocessMaterial){
+        if(this->effect && postprocessMaterial){
             // TODO: (Req 11) Return to the default framebuffer
             // Bind Frame buffer as default (0) using glBindFramebuffer openGL function
             glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);

@@ -11,7 +11,7 @@
   "scene": {
     "renderer": {
       "sky": "assets/textures/night-sky.jpg",
-      "postprocess": "assets/shaders/postprocess/grayscale.frag"
+      "postprocess": "assets/shaders/postprocess/boosting.frag"
     },
     "assets": {
       "shaders": {
