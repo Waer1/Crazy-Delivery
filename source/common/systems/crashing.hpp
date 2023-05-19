@@ -118,9 +118,12 @@ namespace our
 					}
 					// Arrived at the destination
 					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
+						if (!checkTime())
+							continue;
+						if (events->isCarryDeliver())
+							energy->deliverMonkey();
 						events->deliverDelivery();
 						delivery->removeDeliveryOnCar();
-						energy->deliverMonkey();
 					}
 					// Hit a street pole
 					else if (entity->name == "StreetPole" && crash(car, entity, false, true)) {
@@ -145,7 +148,7 @@ namespace our
 							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;
 							postProcessIndicator="obstacle";
-						} 
+						}
 						else if (entity->name == "building") {
 							energy->buildingCrash();
 							applyPostProcess=true;

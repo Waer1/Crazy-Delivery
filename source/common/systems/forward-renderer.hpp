@@ -44,9 +44,12 @@ namespace our
         // Objects used for Postprocessing
         GLuint postprocessFrameBuffer, postProcessVertexArray;
         Texture2D *colorTarget, *depthTarget;
-        TexturedMaterial* postprocessMaterial;
+        TexturedMaterial* postprocessMaterial,*postprocessMaterial2;
         bool crashingEffect=false;
         bool boostingEffect=false;
+
+        std::string crashingPath;
+        std::string boostPath="";
     public:
         // Initialize the renderer including the sky and the Postprocessing objects.
         // windowSize is the width & height of the window (in pixels).
