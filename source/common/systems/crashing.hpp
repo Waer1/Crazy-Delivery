@@ -12,15 +12,14 @@
 
 
 #include <iostream>
-
 using namespace std;
 
-#define CrashTime 1000
+#define CrashTime 500
 
 namespace our
 {
-
-    // The crashing system is responsible for checking if the car has crashed with any obstacle.
+    // The crashing system is responsible for checking if the car has crashed with any other entity.
+	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
 		// Save the car entity
         Entity *car;
@@ -28,110 +27,122 @@ namespace our
         EnergySystem *energy;
         DeliverySystem *delivery;
         BatterySystem *batterySystem;
-        std::chrono::high_resolution_clock::time_point lastObstacleCrash, currentTime;
+        std::chrono::high_resolution_clock::time_point lastCrashTime, currentTime;
         CarMovementSystem* carMovement;
 
-
-
-        void getCar(World* world) {
+        void setCar(World* world) {
             // For each entity in the world
-            for(auto entity : world->getEntities()){
-                if(entity->name == "car"){
+			// Check if it's name is "car" and then set the car entity we have
+            for (auto entity : world->getEntities()){
+                if (entity->name == "car"){
 					car = entity;
 					break;
                 }
             }
         }
 
-				bool crash(Entity *object1, Entity *object2) {
-					// get the car's max and min position
-					glm::vec3 object1Position = object1->localTransform.position;
-					glm::vec3 object1Size = object1->localTransform.scale;
-					glm::vec3 object1Max = object1Position + object1Size;
-					glm::vec3 object1Min = object1Position - object1Size;
+		bool crash(Entity *object1, Entity *object2, bool destination, bool pole) {
+			// Get the car's max position, min position, current position, and size
+			glm::vec3 object1Position = object1->localTransform.position;
+			glm::vec3 object1Size = object1->localTransform.scale;
+			glm::vec3 object1Max = object1Position + object1Size;
+			glm::vec3 object1Min = object1Position - object1Size;
 
-					// get the collider's position
-					glm::vec3 object2Position = object2->localTransform.position;
-					// get the collider's size
-					glm::vec3 object2Size = object2->localTransform.scale;
-					// get the collider's max and min position
-					glm::vec3 object2Max = object2Position + object2Size;
-					glm::vec3 object2Min = object2Position - object2Size;
+			// Get the collider's position
+			glm::vec3 object2Position = object2->localTransform.position;
 
-					// if the car is in the range of the obstacle, take an action
-					return (object1Max.x >= object2Min.x && object1Min.x <= object2Max.x &&
-							object1Max.y >= object2Min.y && object1Min.y <= object2Max.y &&
-							object1Max.z >= object2Min.z && object1Min.z <= object2Max.z);
-				}
-				
-				bool crashDestination(Entity *object1, Entity *object2) {
-					// get the car's max and min position
-					glm::vec3 object1Position = object1->localTransform.position;
-					glm::vec3 object1Size = object1->localTransform.scale;
-					glm::vec3 object1Max = object1Position + object1Size;
-					glm::vec3 object1Min = object1Position - object1Size;
+			glm::vec3 object2Size = object2->localTransform.scale;
+			// Set the object size
+			if (destination)
+				object2Size = {1.5, 10.0, 1.5};
+			else if (pole)
+				object2Size = {0.2, 0.5, 0.2};
 
-					// get the collider's position
-					glm::vec3 object2Position = object2->localTransform.position;
-					// get the collider's size
-					glm::vec3 object2Size = {1.5, 10.0, 1.5};
-					// get the collider's max and min position
-					glm::vec3 object2Max = object2Position + object2Size;
-					glm::vec3 object2Min = object2Position - object2Size;
+			// Get the collider's max and min positions
+			glm::vec3 object2Max = object2Position + object2Size;
+			glm::vec3 object2Min = object2Position - object2Size;
 
-					// if the car is in the range of the obstacle, take an action
-					return (object1Max.x >= object2Min.x && object1Min.x <= object2Max.x &&
-							object1Max.y >= object2Min.y && object1Min.y <= object2Max.y &&
-							object1Max.z >= object2Min.z && object1Min.z <= object2Max.z);
-				}
+			// If the car is in the range of the obstacle, that's a collision!
+			return (object1Max.x >= object2Min.x && object1Min.x <= object2Max.x &&
+					object1Max.y >= object2Min.y && object1Min.y <= object2Max.y &&
+					object1Max.z >= object2Min.z && object1Min.z <= object2Max.z);
+		}
 
-     public:
-        void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery, CarMovementSystem* carMovement) {
-            this->events = events;
-            this->energy = energy;
-            this->delivery = delivery;
-            this->batterySystem = battery;
-            this->carMovement = carMovement;
-            getCar(world);
-            // prevent crashing when start the game for CrashTime
-            lastObstacleCrash = std::chrono::high_resolution_clock::now();
-        }
+     	public:
+			void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery, CarMovementSystem* carMovement) {
+				this->events = events;
+				this->energy = energy;
+				this->delivery = delivery;
+				this->batterySystem = battery;
+				this->carMovement = carMovement;
+				setCar(world);
 
-        void update(World* world) {
+				// Prevent the car from crashing at the start
+				lastCrashTime = std::chrono::high_resolution_clock::now();
+			}
 
-            // For each entity in the world
-            for(auto entity : world->getEntities()) {
-                if(entity->name == "car"){
-                    continue;
-                }
+			bool checkTime() {
+				// Check for the crashing time threshold
+				auto currentTime = std::chrono::high_resolution_clock::now();
+				auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastCrashTime).count();
+				if (elapsedTime < CrashTime)
+					return false;
 
-						if (crash(car, entity)) {
-							if (entity->name == "battery") {
-								energy->batteryCrash();
-								batterySystem->takeBattery(entity);
-							} else if (entity->name == "obstacles") {
-                                currentTime = std::chrono::high_resolution_clock::now();
-                                auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastObstacleCrash).count();
-                                if(elapsedTime >= CrashTime){
-                                    printf("obstacles\n");
-                                    energy->obstacleCrash();
-                                    lastObstacleCrash = std::chrono::high_resolution_clock::now();
-                                    carMovement->decreaseCarSpeed();
-                                }
-							} else if (entity->name == "building") {
-								energy->buildingCrash();
-							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
-								events->deliverDelivery();
-								delivery->removeDeliveryOnCar();
-							} else if (entity->name == "delivery") {
-								if (!events->isCarryDeliver()) {
-									events->collectDeliver();
-									delivery->addDeliveryOnCar();
-									delivery->removeDelivery(entity, world);
-								}
-							}
+				// Set the last crashing time as the current time
+				lastCrashTime = currentTime;
+
+				return true;
+			}
+
+			void update(World* world) {
+
+				// For each entity in the world
+				for (auto entity : world->getEntities()) {
+
+					if (entity->name == "car")
+						continue;
+
+					// Delivery Pick-up
+					if (entity->name == "delivery" && crash(car, entity, false, false)) {
+						if (!events->isCarryDeliver()) {
+							events->collectDeliver();
+							delivery->addDeliveryOnCar();
+							delivery->removeDelivery(entity, world);
 						}
 					}
-		}
+					// Arrived at the destination
+					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
+						events->deliverDelivery();
+						delivery->removeDeliveryOnCar();
+					}
+					// Hit a street pole
+					else if (entity->name == "StreetPole" && crash(car, entity, false, true)) {
+						printf("Street Pole\n");
+						carMovement->poleCrash();
+					}
+					// Crashing with battery/obstacles/buildings
+					else if (crash(car, entity, false, false)) {
+						if (!checkTime())
+							continue;
+
+						// Now we made sure that a crash happened and after the specified time
+						// We need to check for the entity type and do something accordingly
+						if (entity->name == "battery") {
+							printf("Battery\n");
+							energy->batteryCrash();
+							batterySystem->takeBattery(entity);
+						} 
+						else if (entity->name == "obstacles") {
+							printf("Obstacle\n");
+							energy->obstacleCrash();
+							carMovement->decreaseCarSpeed();
+						} 
+						else if (entity->name == "building") {
+							printf("Building\n");
+							energy->buildingCrash();
+						}
+					}
+				}
+			}
     };
 }
