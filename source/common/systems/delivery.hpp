@@ -46,6 +46,7 @@ namespace our
 				}
 
     public:
+    
         void initialize(World* world, int numOfDeliveries) {
 						// Get the delivery points from the world
 						Entity* deliveryPoints;
@@ -63,15 +64,18 @@ namespace our
 						}
 
             getDeliveryOnCar(world);
-
+            //Then make it with scale 0 just not to be drawn on the screen
             removeDeliveryOnCar();
 
             // Pick a random points from the pickUpPoints
             for (int i = 0; i < numOfDeliveries; i++) {
+                //Selecting a random number from the array that contains all possible points to pickup a delivery
                 int randomIndex = rand() % pickUpPoints.size();
                 glm::vec3 randomPoint = pickUpPoints[randomIndex];
-                pickUpPoints.erase(pickUpPoints.begin() + randomIndex);
 
+								//removing that random point from the array just not to select it again
+                pickUpPoints.erase(pickUpPoints.begin() + randomIndex);
+                //Adding this chosen point to be the point of generation to the delivery
                 Entity* delivery = world->add();
                 delivery->deserialize(generateDelivery(randomPoint, "delivery"));
             }
