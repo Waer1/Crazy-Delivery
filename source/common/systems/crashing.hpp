@@ -85,7 +85,7 @@ namespace our
 							object1Max.z >= object2Min.z && object1Min.z <= object2Max.z);
 				}
 
-    public:
+     public:
         void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery, CarMovementSystem* carMovement) {
             this->events = events;
             this->energy = energy;
@@ -132,8 +132,6 @@ namespace our
 							}
 						}
 					}
-				}
-			}
-        }
+		}
     };
 }
