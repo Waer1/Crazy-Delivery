@@ -46,24 +46,24 @@ namespace our
             return random;
         }
 
-        vector<glm::vec2> horizontalPoints={
-                glm::vec2(generateRandomNumber(-40, 40), -5), // middle
-                glm::vec2(generateRandomNumber(-40, 40), -47), // left
-                glm::vec2(generateRandomNumber(-40, 40), 34), // right
-        }, verticalPoints={
-                glm::vec2(52, generateRandomNumber(-40, 40)), // up
-                glm::vec2(-54, generateRandomNumber(-40, 40)), // down
-        };
-
     public:
         void initialize(World* world) {
             srand(static_cast<unsigned int>(time(nullptr))); // Call srand only once at the beginning
 
+            vector<glm::vec2> horizontalPoints={
+                    glm::vec2(generateRandomNumber(-40, 40), -5), // middle
+                    glm::vec2(generateRandomNumber(-40, 40), -47), // left
+                    glm::vec2(generateRandomNumber(-40, 40), 34), // right
+            }, verticalPoints={
+                    glm::vec2(52, generateRandomNumber(-40, 40)), // up
+                    glm::vec2(-54, generateRandomNumber(-40, 40)), // down
+            };
+
             for(glm::vec2 point : horizontalPoints){
-                Entity* delivery = world->add();
-                delivery->deserialize(
+                Entity* BigObstacle = world->add();
+                BigObstacle->deserialize(
                         generateBigObstacle(glm::vec3(point.x, 3.5, point.y),
-                                            glm::vec3(20, 0, 0),
+                                            glm::vec3(1, 0, 0),
                                             glm::vec3(0, 0, 0),
                                             glm::vec2(-55,60),
                                             glm::vec2(0,0),
@@ -73,10 +73,10 @@ namespace our
             }
 
             for(glm::vec2 point : verticalPoints){
-                Entity* delivery = world->add();
-                delivery->deserialize(
+                Entity* BigObstacle = world->add();
+                BigObstacle->deserialize(
                         generateBigObstacle(glm::vec3(point.x, 3.5, point.y),
-                                            glm::vec3(0, 0, 20),
+                                            glm::vec3(0, 0, 1),
                                             glm::vec3(0, 0, 0),
                                             glm::vec2(0,0),
                                             glm::vec2(0,0),

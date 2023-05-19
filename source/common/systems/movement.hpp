@@ -87,6 +87,8 @@ namespace our
             for(auto entity : world->getEntities()){
                 if (entity->name == "obstacles") {
                     obstacleMovement(entity, deltaTime);
+                    MovementComponent* obstacleMovement = entity->getComponent<MovementComponent>();
+                    obstacleMovement->linearVelocity = min(obstacleMovement->linearVelocity * glm::vec3(1.01,1.01,1.01), glm::vec3(20,20,20));
                 } else if(entity->name == "battery" || entity->name == "arrow") {
                     rangeMovement(entity, deltaTime);
                 } else {
