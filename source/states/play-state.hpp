@@ -13,6 +13,7 @@
 #include <systems/bigObstacles.hpp>
 #include <systems/car-movement.hpp>
 #include <systems/free-camera-controller.hpp>
+#include <systems/battery-handler.hpp>
 #include <asset-loader.hpp>
 
 
@@ -21,7 +22,7 @@ class Playstate: public our::State {
 
     our::World world;
     our::ForwardRenderer renderer;
-	our::CarMovementSystem carController;
+		our::CarMovementSystem carController;
     our::MovementSystem movementSystem;
     our::CrashingSystem crashingSystem;
     our::EnergySystem energySystem;
@@ -29,7 +30,8 @@ class Playstate: public our::State {
     our::DeliverySystem deliverySystem;
     our::LightSystem lightSystem;
     our::BigObstaclesSystem bigObstaclesSystem;
-	our::FreeCameraControllerSystem cameraController;
+		our::FreeCameraControllerSystem cameraController;
+		our::BatterySystem batteryHandlerSystem;
 
     void onInitialize() override {
         // First of all, we get the scene configuration from the app config
@@ -42,11 +44,11 @@ class Playstate: public our::State {
         if(config.contains("world")){
             world.deserialize(config["world"]);
         }
-		// We initialize the camera controller system since it needs a pointer to the app
+				// We initialize the camera controller system since it needs a pointer to the app
         cameraController.enter(getApp());
 
-		// We initialize the car controller system since it needs a pointer to the app
-		carController.initialize(getApp(), &world);
+				// We initialize the car controller system since it needs a pointer to the app
+				carController.initialize(getApp(), &world);
 
         // Target number of deliveries that a player can make
         int numOfDeliveries = 5;
@@ -59,7 +61,7 @@ class Playstate: public our::State {
         deliverySystem.initialize(&world, numOfDeliveries);
         lightSystem.initialize(&world);
         energySystem.initialize(&world, &eventHandlerSystem);
-        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem);
+        crashingSystem.initialize(&world, &eventHandlerSystem, &energySystem, &deliverySystem, &batteryHandlerSystem);
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
@@ -70,9 +72,10 @@ class Playstate: public our::State {
         // Here, we just run a bunch of systems to control the world logic
         movementSystem.update(&world, (float)deltaTime);
         carController.update(&world, (float)deltaTime);
-		cameraController.update(&world, (float)deltaTime);
+				cameraController.update(&world, (float)deltaTime);
         crashingSystem.update(&world);
         energySystem.update(&world);
+				batteryHandlerSystem.update(&world);
 
         // And finally we use the renderer system to draw the scene
         renderer.render(&world);
@@ -89,7 +92,7 @@ class Playstate: public our::State {
     void onDestroy() override {
         // Don't forget to destroy the renderer
         renderer.destroy();
-		// On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
+				// On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
         cameraController.exit();
         // Clear the world
         world.clear();

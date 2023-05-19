@@ -71,20 +71,25 @@ namespace our
                 }
             }
             else{
-                if(this->carPositionSensitivity.z>=this->minSpeed){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
+                // if(this->carPositionSensitivity.z>=this->minSpeed){
+                //     this->carPositionSensitivity.z-=this->acceleration;
+                // }
+                this->carPositionSensitivity.z = 7.5;
             }
             //Brake
-			if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
-                if(this->carPositionSensitivity.z > 10){
-                    this->carPositionSensitivity.z=10;
-                }
-                position += front * (deltaTime * this->carPositionSensitivity.z);
-                if(this->carPositionSensitivity.z > 0){
-                    this->carPositionSensitivity.z-=this->acceleration;
-                }
-			}
+			// if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+            //     if(this->carPositionSensitivity.z > 10){
+            //         this->carPositionSensitivity.z=10;
+            //     }
+            //     position += front * (deltaTime * this->carPositionSensitivity.z);
+            //     if(this->carPositionSensitivity.z > 0){
+            //         this->carPositionSensitivity.z-=this->acceleration;
+            //     }
+			// }
+            // Move Backwards
+            if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
+                position -= front * (deltaTime * this->carPositionSensitivity.z);
+            }
 
             // A & D moves the car left or right 
             if(app->getKeyboard().isPressed(GLFW_KEY_D)){
