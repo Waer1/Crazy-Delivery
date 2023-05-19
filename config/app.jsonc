@@ -201,21 +201,6 @@
           "emissive": "black",
           "ambient_occlusion": "road"
         },
-        "fence": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "wood",
-          "sampler": "default"
-        },
         "battery": {
           "type": "textured",
           "shader": "textured",
@@ -259,9 +244,9 @@
           },
           "sampler": "default",
           "albedo": "building1",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building1",
           "ambient_occlusion": "building1"
         },
         "building2": {
@@ -277,9 +262,9 @@
           },
           "sampler": "default",
           "albedo": "building2",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building2",
           "ambient_occlusion": "building2"
         },
         "building3": {
@@ -295,9 +280,9 @@
           },
           "sampler": "default",
           "albedo": "building3",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building3",
           "ambient_occlusion": "building3"
         },
         "building4": {
@@ -313,9 +298,9 @@
           },
           "sampler": "default",
           "albedo": "building4",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building4",
           "ambient_occlusion": "building4"
         },
         "building5": {
@@ -331,9 +316,9 @@
           },
           "sampler": "default",
           "albedo": "building5",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building5",
           "ambient_occlusion": "building5"
         },
         "ground": {
