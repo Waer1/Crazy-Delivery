@@ -81,9 +81,9 @@ namespace our
             spotlightPositions.push_back(glm::vec2(-59.2, -47));
 
             spotlightPositions.push_back(glm::vec2(65.5, 40));
-            spotlightPositions.push_back(glm::vec2(65.5, 7));
-            spotlightPositions.push_back(glm::vec2(65.5, -17));
-            spotlightPositions.push_back(glm::vec2(65.5, -47));
+            spotlightPositions.push_back(glm::vec2(65.5, 10));
+            spotlightPositions.push_back(glm::vec2(65.5, -12));
+            spotlightPositions.push_back(glm::vec2(65.5, -34));
 
             for (int i = 0; i < numOfSpotLights; i++) {
                 glm::vec2 lightPosition = spotlightPositions[i];
