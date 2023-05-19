@@ -1194,26 +1194,6 @@
         ]
       }
       // ------------- Deliveries ------------------
-      // ------------- Obstacles ------------------
-      // {
-      // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
-      // 	"position": [0, 3.5, -3.75],
-      // 	"rotation": [0, 90, 0],
-      // 	"scale": [2, 2, 2],
-      // 	"components": [
-      // 		{
-      // 			"type": "Mesh Renderer",
-      // 			"mesh": "monkey",
-      // 			"material": "monkey"
-      // 		},
-      // 		{
-      // 			"type": "Movement",
-      // 			"linearVelocity": [30, 0, 0],
-      // 			"angularVelocity": [0, 0, 0]
-      // 		}
-      // 	]
-      // }
-      // ------------- Obstacles ------------------
     ]
   }
 }
