@@ -97,7 +97,6 @@ namespace our
                 energyBars.push_back(bar);
                 bar->parent = parent;
                 bar->deserialize(generateEnergybar(glm::vec3(x, 3.3, -4), "energybar-" + std::to_string(barIndex++)));
-                printf("bar: %s\n", bar->name.c_str());
             }
             energyBarsSize = energyBars.size();
         }
@@ -140,6 +139,12 @@ namespace our
             crashed = true;
         }
 
+        void streetPoleCrash()
+        {
+            decreaseEnergy(5);
+            crashed = true;
+        }
+
         void update(World* world)
         {
             auto currentTime = std::chrono::high_resolution_clock::now();
@@ -156,7 +161,6 @@ namespace our
                 if (crashed) {
                     Entity* car = getCar(world);
                     if (car) {
-                        printf("---Crashed---\n");
                         car->localTransform.position = glm::vec3(-52, 1.12, 43);
                         crashed = false;
                     }

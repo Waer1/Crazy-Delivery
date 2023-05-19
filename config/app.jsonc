@@ -201,21 +201,6 @@
           "emissive": "black",
           "ambient_occlusion": "road"
         },
-        "fence": {
-          "type": "textured",
-          "shader": "textured",
-          "pipelineState": {
-            "faceCulling": {
-              "enabled": false
-            },
-            "depthTesting": {
-              "enabled": true
-            }
-          },
-          "tint": [1, 1, 1, 1],
-          "texture": "wood",
-          "sampler": "default"
-        },
         "battery": {
           "type": "textured",
           "shader": "textured",
@@ -259,9 +244,9 @@
           },
           "sampler": "default",
           "albedo": "building1",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building1",
           "ambient_occlusion": "building1"
         },
         "building2": {
@@ -277,9 +262,9 @@
           },
           "sampler": "default",
           "albedo": "building2",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building2",
           "ambient_occlusion": "building2"
         },
         "building3": {
@@ -295,9 +280,9 @@
           },
           "sampler": "default",
           "albedo": "building3",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building3",
           "ambient_occlusion": "building3"
         },
         "building4": {
@@ -313,9 +298,9 @@
           },
           "sampler": "default",
           "albedo": "building4",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building4",
           "ambient_occlusion": "building4"
         },
         "building5": {
@@ -331,9 +316,9 @@
           },
           "sampler": "default",
           "albedo": "building5",
-          "specular": "white",
+          "specular": "black",
           "emissive": "black",
-          "roughness": "black",
+          "roughness": "building5",
           "ambient_occlusion": "building5"
         },
         "ground": {
@@ -496,9 +481,9 @@
           // ------------- Delivery -----------------
           {
             "name": "delivery-on-car",
-            "position": [0, 1.5, 0],
+            "position": [0, 1.2, 0],
             "rotation": [0, 0, 0],
-            "scale": [0.5, 0.5, 0.5],
+            "scale": [0.3, 0.3, 0.3],
             "components": [
               {
                 "type": "Mesh Renderer",
@@ -1157,28 +1142,154 @@
             "attenuation": [0.00095, 0.00095, 0.000095]
           }
         ]
-      }
+      },
       // ------------- Moon ------------------
-      // ------------- Obstacles ------------------
-      // {
-      // 	"name": "obstacles", // 1.25 => -3.75 (+-5)
-      // 	"position": [0, 3.5, -3.75],
-      // 	"rotation": [0, 90, 0],
-      // 	"scale": [2, 2, 2],
-      // 	"components": [
-      // 		{
-      // 			"type": "Mesh Renderer",
-      // 			"mesh": "monkey",
-      // 			"material": "monkey"
-      // 		},
-      // 		{
-      // 			"type": "Movement",
-      // 			"linearVelocity": [30, 0, 0],
-      // 			"angularVelocity": [0, 0, 0]
-      // 		}
-      // 	]
-      // }
-      // ------------- Obstacles ------------------
+      // ------------- Deliveries ------------------
+      {
+				"name": "deliveries",
+        "components": [
+          {
+            "type": "Position Point",
+						"position": [30, 1.8, -3.75]
+          },
+          {
+            "type": "Position Point",
+						"position": [-30, 1.8, 1]
+          },
+          {
+            "type": "Position Point",
+						"position": [-50, 1.8, -30]
+          },
+          {
+            "type": "Position Point",
+						"position": [-54, 1.8, 25]
+          },
+          {
+            "type": "Position Point",
+						"position": [-20, 1.8, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [60, 1.8, 37]
+          },
+          {
+            "type": "Position Point",
+						"position": [55, 1.8, 10]
+          }
+        ]
+      },
+      // ------------- Deliveries ------------------
+      // ------------- Lights ------------------
+			{
+				"name": "streetLight-position",
+				"components": [
+          {
+            "type": "Position Point",
+						"position": [-35, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -11]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -36]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, -52.7]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 6.4]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 29.8]
+          },
+          {
+            "type": "Position Point",
+						"position": [-40, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [0, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [40, 1.12, 46.5]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, 7]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, -17]
+          },
+          {
+            "type": "Position Point",
+						"position": [-59.2, 1.12, -47]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, 40]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, 10]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, -12]
+          },
+          {
+            "type": "Position Point",
+						"position": [65.5, 1.12, -34]
+          }
+				]
+			}
+      // ------------- Lights ------------------
     ]
   }
 }

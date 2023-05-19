@@ -10,13 +10,13 @@ namespace our
 {
 
     class LightSystem {
-		vector<glm::vec2> spotlightPositions; // Spotlight Positions
+				vector<glm::vec3> spotlightPositions; // Spotlight Positions
         int numOfSpotLights = 26;
 
-		nlohmann::json generatePole(glm::vec2 position, std::string name) {
+		nlohmann::json generatePole(glm::vec3 position, std::string name) {
 			return {
 				{"name", name},
-				{"position", {position.x, 1.12, position.y}},
+				{"position", {position.x, position.y, position.z}},
 				{"rotation", {0, 0, 0}},
 				{"scale", {1, 1, 1}},
 				{"components", nlohmann::json::array({
@@ -29,10 +29,10 @@ namespace our
 			};
 		}
 
-        nlohmann::json generateLights(glm::vec2 position, std::string name) {
+		nlohmann::json generateLights(glm::vec3 position, std::string name) {
 			return {
 				{"name", name},
-				{"position", {position.x, 5, position.y}},
+				{"position", {position.x, position.y + 4, position.z}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Light"},
@@ -49,44 +49,23 @@ namespace our
 
     public:
         void initialize(World* world) {
-            // Cross Road Lights
-            spotlightPositions.push_back(glm::vec2(-35, -11));
-            spotlightPositions.push_back(glm::vec2(0, -11));
-            spotlightPositions.push_back(glm::vec2(40, -11));
+						// Get the delivery points from the world
+						Entity* lightPoints;
+						for(auto entity : world->getEntities()){
+								if(entity->name == "streetLight-position"){
+										lightPoints = entity;
+										break;
+								}
+						}
 
-            spotlightPositions.push_back(glm::vec2(-40, -36));
-            spotlightPositions.push_back(glm::vec2(0, -36));
-            spotlightPositions.push_back(glm::vec2(40, -36));
-
-            spotlightPositions.push_back(glm::vec2(-40, -52.7));
-            spotlightPositions.push_back(glm::vec2(0, -52.7));
-            spotlightPositions.push_back(glm::vec2(40, -52.7));
-
-            spotlightPositions.push_back(glm::vec2(-40, 6.4));
-            spotlightPositions.push_back(glm::vec2(0, 6.4));
-            spotlightPositions.push_back(glm::vec2(40, 6.4));
-
-            spotlightPositions.push_back(glm::vec2(-40, 29.8));
-            spotlightPositions.push_back(glm::vec2(0, 29.8));
-            spotlightPositions.push_back(glm::vec2(40, 29.8));
-
-            spotlightPositions.push_back(glm::vec2(-40, 46.5));
-            spotlightPositions.push_back(glm::vec2(0, 46.5));
-            spotlightPositions.push_back(glm::vec2(40, 46.5));
-
-            // Side Road Lights
-            spotlightPositions.push_back(glm::vec2(-59.2, 40));
-            spotlightPositions.push_back(glm::vec2(-59.2, 7));
-            spotlightPositions.push_back(glm::vec2(-59.2, -17));
-            spotlightPositions.push_back(glm::vec2(-59.2, -47));
-
-            spotlightPositions.push_back(glm::vec2(65.5, 40));
-            spotlightPositions.push_back(glm::vec2(65.5, 10));
-            spotlightPositions.push_back(glm::vec2(65.5, -12));
-            spotlightPositions.push_back(glm::vec2(65.5, -34));
+						// Get the list of poistion point components
+						auto positionComponents = lightPoints->getComponents<PositionPointComponent>();
+						for (auto positionComponent : positionComponents) {
+								spotlightPositions.push_back(positionComponent->position);
+						}
 
             for (int i = 0; i < numOfSpotLights; i++) {
-                glm::vec2 lightPosition = spotlightPositions[i];
+                glm::vec3 lightPosition = spotlightPositions[i];
                 
                 Entity* spotLight = world->add();
                 spotLight->deserialize(generatePole(lightPosition, "StreetPole"));
