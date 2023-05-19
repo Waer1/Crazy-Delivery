@@ -140,6 +140,12 @@ namespace our
             crashed = true;
         }
 
+        void streetPoleCrash()
+        {
+            decreaseEnergy(5);
+            crashed = true;
+        }
+
         void update(World* world)
         {
             auto currentTime = std::chrono::high_resolution_clock::now();

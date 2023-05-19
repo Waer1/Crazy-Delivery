@@ -102,6 +102,8 @@ namespace our
 								energy->obstacleCrash();
 							} else if (entity->name == "building") {
 								energy->buildingCrash();
+							} else if (entity->name == "StreetPole") {
+								energy->streetPoleCrash();
 							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
 								events->deliverDelivery();
 								delivery->removeDeliveryOnCar();
