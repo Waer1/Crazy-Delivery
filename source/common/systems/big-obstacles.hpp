@@ -65,7 +65,7 @@ namespace our
                 Entity* obstacle = world->add();
                 obstacle->deserialize(
                         generateBigObstacle(glm::vec3(point.x, 3.5, point.y),
-                                            glm::vec3(20, 0, 0),
+                                            glm::vec3(1, 0, 0),
                                             glm::vec3(0, 0, 0),
                                             glm::vec2(-55, 60),
                                             glm::vec2(0, 0),
@@ -78,7 +78,7 @@ namespace our
                 Entity* obstacle = world->add();
                 obstacle->deserialize(
                         generateBigObstacle(glm::vec3(point.x, 3.5, point.y),
-                                            glm::vec3(0, 0, 20),
+                                            glm::vec3(0, 0, 1),
                                             glm::vec3(0, 0, 0),
                                             glm::vec2(0, 0),
                                             glm::vec2(0, 0),
