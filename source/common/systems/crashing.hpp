@@ -7,11 +7,15 @@
 #include <systems/energy.hpp>
 #include <systems/delivery.hpp>
 #include <systems/movement.hpp>
+#include <systems/car-movement.hpp>
 #include <systems/battery-handler.hpp>
 
 
 #include <iostream>
+
 using namespace std;
+
+#define CrashTime 1000
 
 namespace our
 {
@@ -22,8 +26,12 @@ namespace our
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
-				DeliverySystem *delivery;
-				BatterySystem *batterySystem;
+        DeliverySystem *delivery;
+        BatterySystem *batterySystem;
+        std::chrono::high_resolution_clock::time_point lastObstacleCrash, currentTime;
+        CarMovementSystem* carMovement;
+
+
 
         void getCar(World* world) {
             // For each entity in the world
@@ -78,15 +86,19 @@ namespace our
 				}
 
     public:
-        void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery) {
+        void initialize(World* world, EventHandlerSystem* events, EnergySystem* energy, DeliverySystem* delivery, BatterySystem* battery, CarMovementSystem* carMovement) {
             this->events = events;
             this->energy = energy;
-						this->delivery = delivery;
+            this->delivery = delivery;
             this->batterySystem = battery;
-						getCar(world);
+            this->carMovement = carMovement;
+            getCar(world);
+            // prevent crashing when start the game for CrashTime
+            lastObstacleCrash = std::chrono::high_resolution_clock::now();
         }
 
         void update(World* world) {
+
             // For each entity in the world
             for(auto entity : world->getEntities()) {
                 if(entity->name == "car"){
@@ -98,8 +110,14 @@ namespace our
 								energy->batteryCrash();
 								batterySystem->takeBattery(entity);
 							} else if (entity->name == "obstacles") {
-								printf("obstacles\n");
-								energy->obstacleCrash();
+                                currentTime = std::chrono::high_resolution_clock::now();
+                                auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastObstacleCrash).count();
+                                if(elapsedTime >= CrashTime){
+                                    printf("obstacles\n");
+                                    energy->obstacleCrash();
+                                    lastObstacleCrash = std::chrono::high_resolution_clock::now();
+                                    carMovement->decreaseCarSpeed();
+                                }
 							} else if (entity->name == "building") {
 								energy->buildingCrash();
 							} else if (entity->name == "arrow" && crashDestination(car, entity)) {
