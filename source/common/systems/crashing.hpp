@@ -22,8 +22,9 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any other entity.
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
-				Sound test = Sound("assets/sounds/Car Skidding-SoundBible.com-801319245.mp3", false);
-				// Save the car entity
+		Sound test = Sound("assets/sounds/Car Skidding-SoundBible.com-801319245.mp3", false);
+		Sound arrived=Sound("assets/sounds/destination.m4a",false);
+		// Save the car entity
         Entity *car;
         EventHandlerSystem *events;
         EnergySystem *energy;
@@ -120,8 +121,10 @@ namespace our
 					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
 						if (!checkTime())
 							continue;
-						if (events->isCarryDeliver())
+						if (events->isCarryDeliver()){
+							arrived.play();
 							energy->deliverMonkey();
+						}
 						events->deliverDelivery();
 						delivery->removeDeliveryOnCar();
 					}

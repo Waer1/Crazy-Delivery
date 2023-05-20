@@ -6,6 +6,7 @@
 #include <texture/texture-utils.hpp>
 #include <material/material.hpp>
 #include <mesh/mesh.hpp>
+#include <systems/sound.hpp>
 
 #include <functional>
 #include <array>
@@ -39,7 +40,8 @@ struct Button {
 
 // This state shows how to use some of the abstractions we created to make a menu.
 class Menustate: public our::State {
-
+    
+   // Sound introSound = Sound("assets/sounds/intro.mp3", true);
     // A meterial holding the menu shader and the menu texture to draw
     our::TexturedMaterial* menuMaterial;
     // A material to be used to highlight hovered buttons (we will use blending to create a negative effect).
@@ -63,7 +65,8 @@ class Menustate: public our::State {
         menuMaterial->texture = our::texture_utils::loadImage("assets/textures/start-menu.jpg");
         // Initially, the menu material will be black, then it will fade in
         menuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
-
+        //introSound.play();
+        std::cout<<"alo";
         // Second, we create a material to highlight the hovered buttons
         highlightMaterial = new our::TintedMaterial();
         // Since the highlight is not textured, we used the tinted material shaders
@@ -178,6 +181,8 @@ class Menustate: public our::State {
 
     void onDestroy() override {
         // Delete all the allocated resources
+        //std::cout<<"no3";
+        //introSound.stop();
         delete rectangle;
         delete menuMaterial->texture;
         delete menuMaterial->shader;

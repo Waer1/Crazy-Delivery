@@ -12,7 +12,7 @@
     "renderer": {
       "sky": "assets/textures/night-sky.jpg",
       "postprocess": "assets/shaders/postprocess/boosting.frag",
-      "energyPostProcess":"assets/shaders/postprocess/crashing.frag"
+      "energyPostProcess":"assets/shaders/postprocess/grayscale.frag"
     },
     "assets": {
       "shaders": {

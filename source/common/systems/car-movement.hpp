@@ -6,6 +6,7 @@
 #include "../application.hpp"
 #include <glm/glm.hpp>
 #include <iostream>
+#include <systems/sound.hpp>
 using namespace std;
 
 namespace our
@@ -14,8 +15,8 @@ namespace our
     // The car movement system is responsible for moving the car entity.
     class CarMovementSystem {
         Application* app; // The application in which the state runs
-
 		Entity* car = nullptr;
+        Sound peep = Sound("assets/sounds/Horn Honk-SoundBible.com-1162546405.mp3", false);
 
         float carRotationSensitivity = 0.01f;
         glm::vec3 carPositionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of car movement if WASD is pressed
@@ -86,7 +87,7 @@ namespace our
                 this->carPositionSensitivity.z = 7.5;
             }
             //Brake
-			if(app->getKeyboard().isPressed(GLFW_KEY_B)) {
+			/*if(app->getKeyboard().isPressed(GLFW_KEY_B)) {
                  if(this->carPositionSensitivity.z > 10){
                      this->carPositionSensitivity.z=10;
                  }
@@ -94,7 +95,11 @@ namespace our
                  if(this->carPositionSensitivity.z > 0){
                      this->carPositionSensitivity.z-=this->acceleration;
                  }
-			 }
+			 }*/
+
+             if(app->getKeyboard().isPressed(GLFW_KEY_SPACE)){
+                peep.play();
+             }
              
             // Move Backwards
             if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
