@@ -50,7 +50,8 @@
         "red": "assets/textures/red.jpg",
         "battery_bar": "assets/textures/battery bar.png",
         "barborder": "assets/textures/barborder.png",
-        "street-light": "assets/textures/street-light.png"
+        "street-light": "assets/textures/street-light.png",
+        "knife":"assets/textures/throwing_knife.png"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -61,7 +62,8 @@
         "battery": "assets/models/battery.obj",
         "arrow": "assets/models/arrow.obj",
         "car": "assets/models/Car.obj",
-        "street-light": "assets/models/street-light.obj"
+        "street-light": "assets/models/street-light.obj",
+        "knife":"assets/models/throwing_knife.obj"
       },
       "samplers": {
         "default": {},
@@ -215,6 +217,21 @@
           },
           "tint": [1, 1, 1, 1],
           "texture": "battery",
+          "sampler": "default"
+        },
+        "knife":{
+          "type": "textured",
+          "shader": "textured",
+          "pipelineState": {
+            "faceCulling": {
+              "enabled": false
+            },
+            "depthTesting": {
+              "enabled": true
+            }
+          },
+          "tint": [1, 1, 1, 1],
+          "texture": "knife",
           "sampler": "default"
         },
         "arrow": {
@@ -490,6 +507,23 @@
                 "type": "Mesh Renderer",
                 "mesh": "monkey",
                 "material": "monkey"
+              },
+              {
+                "type": "Movement",
+                "angularVelocity": [0, 30, 0]
+              }
+            ]
+          },
+          {
+            "name": "knife-on-car",
+            "position": [0, 1.5, 0],
+            "rotation": [0, 0, 0],
+            "scale": [0.3, 0.3, 0.3],
+            "components": [
+              {
+                "type": "Mesh Renderer",
+                "mesh": "knife",
+                "material": "knife"
               },
               {
                 "type": "Movement",
