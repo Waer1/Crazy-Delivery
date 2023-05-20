@@ -95,6 +95,8 @@ set(COMMON_SOURCES
 				source/common/systems/delivery.hpp
 				source/common/systems/big-obstacles.hpp
 				source/common/systems/car-movement.hpp
+				source/common/systems/street-lights.hpp
+				source/common/systems/knife.hpp
 				source/common/systems/battery-handler.hpp
 				source/common/systems/sound.hpp
 				source/common/systems/sound.cpp
