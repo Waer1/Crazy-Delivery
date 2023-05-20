@@ -11,26 +11,33 @@ using namespace std;
 
 namespace our
 {
-
     // The car movement system is responsible for moving the car entity.
     class CarMovementSystem {
         Application* app; // The application in which the state runs
 		Entity* car = nullptr;
+
+        // Sounds
         Sound peep = Sound("assets/sounds/Horn.mp3", false);
 
+        // Sensitivity
         float carRotationSensitivity = 0.01f;
         glm::vec3 carPositionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of car movement if WASD is pressed
+
         float defaultRotation=3.14159;
-        //float maxRightRotation=1.5;
-        //float maxLeftRotation=4.5;
         float maxSpeed=20;
         float minSpeed=2;
         float acceleration=0.1;
         float rateOfRotation=0.03;
         float centeringRate=0.02;
 
+        // Hit street pole
         bool streetPoleCrash = false;
 
+        // BOUNDARIES
+        float leftBoundary = -77;
+        float rightBoundary = 82;
+        float topBoundary = 65;
+        float bottomBoundary = -69;
 
     public:
         // When a state enters, it should call this function and give it the pointer to the application
@@ -60,7 +67,7 @@ namespace our
         void update(World* world, float deltaTime) {
 
             if(!(car)){
-                 return;
+                return;
             }
             // We get a reference to the camera entity's position and rotation and car rotation
             glm::vec3& position = car->localTransform.position;
@@ -70,11 +77,14 @@ namespace our
             glm::mat4 matrix = car->localTransform.toMat4();
 
             glm::vec3 front = glm::vec3(matrix * glm::vec4(0, 0, 1, 0)),
-                      right = glm::vec3(matrix * glm::vec4(-1, 0, 0, 0));
+            right = glm::vec3(matrix * glm::vec4(-1, 0, 0, 0));
+
+            bool outOfBounds = !(position.x > this->leftBoundary && position.x < this->rightBoundary && 
+                                position.z > this->bottomBoundary && position.z < this->topBoundary);
 
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
-            if(app->getKeyboard().isPressed(GLFW_KEY_W) && !streetPoleCrash) {
+            if(app->getKeyboard().isPressed(GLFW_KEY_W) && !streetPoleCrash && !outOfBounds) {
                 position += front * (deltaTime * this->carPositionSensitivity.z);
                 if(this->carPositionSensitivity.z <= this->maxSpeed){
                     this->carPositionSensitivity.z+=this->acceleration;
@@ -108,14 +118,14 @@ namespace our
             }
 
             // A & D moves the car left or right 
-            if(app->getKeyboard().isPressed(GLFW_KEY_D) && !streetPoleCrash){
+            if(app->getKeyboard().isPressed(GLFW_KEY_D) && !streetPoleCrash  && !outOfBounds){
                 //Moving the position of each entity in the space right
                 position += right * (deltaTime * this->carPositionSensitivity.x);
                 rotation.y -=this->rateOfRotation;
 
             }
     
-            if(app->getKeyboard().isPressed(GLFW_KEY_A) && !streetPoleCrash) {
+            if(app->getKeyboard().isPressed(GLFW_KEY_A) && !streetPoleCrash  && !outOfBounds) {
                 //Moving the position of each entity in the space left
                 position -= right * (deltaTime * this->carPositionSensitivity.x);
                 rotation.y +=this->rateOfRotation;
