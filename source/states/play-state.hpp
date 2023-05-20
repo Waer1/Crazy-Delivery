@@ -14,6 +14,7 @@
 #include <systems/car-movement.hpp>
 #include <systems/free-camera-controller.hpp>
 #include <systems/battery-handler.hpp>
+#include <systems/radio.hpp>
 #include <asset-loader.hpp>
 #include <string>
 
@@ -33,6 +34,7 @@ class Playstate: public our::State {
     our::BigObstaclesSystem* bigObstaclesSystem;
     our::FreeCameraControllerSystem* cameraController;
     our::BatterySystem* batteryHandlerSystem;
+    our::RadioSystem* radioSystem;
 
     int timer=0;
     std::string lastPostProcessEvent="";
@@ -50,6 +52,7 @@ class Playstate: public our::State {
         bigObstaclesSystem = new our::BigObstaclesSystem;
         cameraController = new our::FreeCameraControllerSystem;
         batteryHandlerSystem = new our::BatterySystem;
+				radioSystem = new our::RadioSystem;
 
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -79,6 +82,7 @@ class Playstate: public our::State {
         energySystem->initialize(world, eventHandlerSystem);
         crashingSystem->initialize(world, eventHandlerSystem, energySystem, deliverySystem, batteryHandlerSystem, carController);
         bigObstaclesSystem->initialize(world);
+				radioSystem->initialize(getApp());
 
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
@@ -90,6 +94,8 @@ class Playstate: public our::State {
         movementSystem->update(world, (float)deltaTime);
         carController->update(world, (float)deltaTime);
 				cameraController->update(world, (float)deltaTime);
+				radioSystem->update();
+
         std::string postProcessType="";
         bool applyPostProcess =crashingSystem->update(world,postProcessType);
         if(postProcessType!=""){
@@ -148,5 +154,6 @@ class Playstate: public our::State {
         delete bigObstaclesSystem;
         delete cameraController;
         delete batteryHandlerSystem;
+				delete radioSystem;
     }
 };
