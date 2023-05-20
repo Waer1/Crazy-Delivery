@@ -144,12 +144,6 @@ namespace our
             crashed = true;
         }
 
-        void streetPoleCrash()
-        {
-            decreaseEnergy(5);
-            crashed = true;
-        }
-
         void update(World* world)
         {
             auto currentTime = std::chrono::high_resolution_clock::now();
@@ -167,7 +161,7 @@ namespace our
                     Entity* car = getCar(world);
                     if (car) {
                         car->localTransform.position = glm::vec3(-52, 1.12, 43);
-												car->localTransform.rotation = glm::vec3(0, -180, 0);
+						car->localTransform.rotation = glm::vec3(0, -180, 0);
                         crashed = false;
                     }
                 }
