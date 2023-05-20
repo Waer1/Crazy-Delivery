@@ -45,7 +45,7 @@ namespace our
             }
         }
 
-		bool crash(Entity *object1, Entity *object2, bool destination, bool pole) {
+		bool crash(Entity *object1, Entity *object2, std::string type) {
 			// Get the car's max position, min position, current position, and size
 			glm::vec3 object1Position = object1->localTransform.position;
 			glm::vec3 object1Size = object1->localTransform.scale;
@@ -57,10 +57,12 @@ namespace our
 
 			glm::vec3 object2Size = object2->localTransform.scale;
 			// Set the object size
-			if (destination)
+			if (type == "destination")
 				object2Size = {1.5, 10.0, 1.5};
-			else if (pole)
+			else if (type == "pole")
 				object2Size = {0.2, 0.5, 0.2};
+			else if (type == "building")
+				object2Size += glm::vec3(0.2, 0, 0.2);
 
 			// Get the collider's max and min positions
 			glm::vec3 object2Max = object2Position + object2Size;
@@ -111,7 +113,7 @@ namespace our
 						continue;
 
 					// Delivery Pick-up
-					if (entity->name == "delivery" && crash(car, entity, false, false)) {
+					if (entity->name == "delivery" && crash(car, entity, "delivery")) {
 						if (!events->isCarryDeliver()) {
 							events->collectDeliver();
 							delivery->addDeliveryOnCar();
@@ -119,7 +121,7 @@ namespace our
 						}
 					}
 					// Knife Pick-up
-					if (entity->name == "knife" && crash(car, entity, false, false)) {
+					if (entity->name == "knife" && crash(car, entity, "knife")) {
 						printf("Knife Pick-up\n");
 						if (!events->carryingKnife()) {
 							printf("Collecting Knife\n");
@@ -128,7 +130,7 @@ namespace our
 						}
 					}
 					// Arrived at the destination
-					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
+					else if (entity->name == "arrow" && crash(car, entity, "destination")) {
 						if (!checkTime())
 							continue;
 						if (events->isCarryDeliver()){
@@ -139,35 +141,34 @@ namespace our
 						delivery->removeDeliveryOnCar();
 					}
 					// Hit a street pole
-					else if (entity->name == "StreetPole" && crash(car, entity, false, true)) {
+					else if (entity->name == "StreetPole" && crash(car, entity, "pole")) {
 						carMovement->poleCrash();
 					}
 					// Getting energy from a battery
-					else if (entity->name == "battery" && crash(car, entity, false, false)) {
+					else if (entity->name == "battery" && crash(car, entity, "battery")) {
 						energy->batteryCrash();
 						batterySystem->takeBattery(entity);
 						applyPostProcess=true;
 						postProcessIndicator="battery";
 					}
-					// Crashing with obstacles/buildings
-					else if (crash(car, entity, false, false)) {
+					// Crashing with a building
+					else if (entity->name == "building" && crash(car, entity, "building")) {
+						if (!checkTime())
+							continue;
+						energy->buildingCrash();
+						applyPostProcess=true;
+						postProcessIndicator="obstacle";
+					}
+					// Crashing with an obstacle
+					else if (entity->name == "obstacle" && crash(car, entity, "obstacle")) {
 						if (!checkTime())
 							continue;
 
-						// Now we made sure that a crash happened and after the specified time
-						// We need to check for the entity type and do something accordingly
-						if (entity->name == "obstacles") {
-							if (events->carryingKnife())
-								events->killMonkey();
-							else {
-								energy->obstacleCrash();
-								carMovement->decreaseCarSpeed();
-								applyPostProcess=true;
-								postProcessIndicator="obstacle";
-							}
-						}
-						else if (entity->name == "building") {
-							energy->buildingCrash();
+						if (events->carryingKnife())
+							events->killMonkey();
+						else {
+							energy->obstacleCrash();
+							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;
 							postProcessIndicator="obstacle";
 						}
