@@ -16,7 +16,7 @@ namespace our
     class CarMovementSystem {
         Application* app; // The application in which the state runs
 		Entity* car = nullptr;
-        Sound peep = Sound("assets/sounds/Horn Honk-SoundBible.com-1162546405.mp3", false);
+        Sound peep = Sound("assets/sounds/Horn.mp3", false);
 
         float carRotationSensitivity = 0.01f;
         glm::vec3 carPositionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of car movement if WASD is pressed
