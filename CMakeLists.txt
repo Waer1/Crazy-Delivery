@@ -98,6 +98,7 @@ set(COMMON_SOURCES
 				source/common/systems/battery-handler.hpp
 				source/common/systems/sound.hpp
 				source/common/systems/sound.cpp
+				source/common/systems/radio.hpp
 )
 
 # Define the directories in which to search for the included headers

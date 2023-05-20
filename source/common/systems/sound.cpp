@@ -43,5 +43,5 @@ void Sound::stop()
 }
 Sound::~Sound()
 {
-	BASS_Free();
+	BASS_ChannelStop(channel);
 }
