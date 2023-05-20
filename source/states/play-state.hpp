@@ -74,14 +74,14 @@ class Playstate: public our::State {
         int numOfDeliveries = 5;
 
         // initialize the event handler system
-        eventHandlerSystem->startHandler(getApp(), numOfDeliveries);
+        bigObstaclesSystem->initialize(world);
+        eventHandlerSystem->startHandler(getApp(), numOfDeliveries, bigObstaclesSystem);
 
-        // Get the car entity
+        // Initialize all other systems
         deliverySystem->initialize(world, numOfDeliveries);
         lightSystem->initialize(world);
         energySystem->initialize(world, eventHandlerSystem);
         crashingSystem->initialize(world, eventHandlerSystem, energySystem, deliverySystem, batteryHandlerSystem, carController);
-        bigObstaclesSystem->initialize(world);
 				radioSystem->initialize(getApp());
 
         // Then we initialize the renderer
