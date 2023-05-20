@@ -58,6 +58,11 @@ namespace our
         };
 
     public:
+
+        int getNumOfObstacles() {
+            return horizontalPoints.size() + verticalPoints.size();
+        }
+
         void initialize(World* world) {
             srand(static_cast<unsigned int>(time(nullptr))); // Call srand only once at the beginning
 
