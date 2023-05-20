@@ -23,7 +23,7 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any other entity.
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
-		Sound test = Sound("assets/sounds/Car Skidding-SoundBible.com-801319245.mp3", false);
+		Sound test = Sound("assets/sounds/Song.mp3", true);
 		Sound arrived=Sound("assets/sounds/destination.m4a",false);
 		// Save the car entity
         Entity *car;
@@ -85,6 +85,7 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
+				test.changeVolume(50);
 				test.play();
 				printf("Sound played\n");
 			}
@@ -121,7 +122,7 @@ namespace our
 						}
 					}
 					// Knife Pick-up
-					if (entity->name == "knife" && crash(car, entity, "knife")) {
+					else if (entity->name == "knife" && crash(car, entity, "knife")) {
 						printf("Knife Pick-up\n");
 						if (!events->carryingKnife()) {
 							printf("Collecting Knife\n");
@@ -160,7 +161,7 @@ namespace our
 						postProcessIndicator="obstacle";
 					}
 					// Crashing with an obstacle
-					else if (entity->name == "obstacle" && crash(car, entity, "obstacle")) {
+					else if (entity->name == "obstacles" && crash(car, entity, "obstacle")) {
 						if (!checkTime())
 							continue;
 
