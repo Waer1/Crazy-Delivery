@@ -230,7 +230,7 @@ namespace our
 		glColorMask(true, true, true, true);
 		glDepthMask(true);
 		// If there is a postprocess material, bind the framebuffer
-		if (postprocessMaterial && this->crashingEffect)
+		if (postprocessMaterial && (this->crashingEffect || this->boostingEffect) )
 		{
 			// TODO: (Req 11) bind the framebuffer
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, postprocessFrameBuffer);
@@ -380,6 +380,13 @@ namespace our
 		// If there is a postprocess material, apply postprocessing
 		if (this->crashingEffect && postprocessMaterial)
 		{
+
+            ShaderProgram *postprocessShader = new ShaderProgram();
+            postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+            postprocessShader->attach(this->crashingPath, GL_FRAGMENT_SHADER);
+            postprocessShader->link();
+
+            postprocessMaterial->shader=postprocessShader;
 			// TODO: (Req 11) Return to the default framebuffer
 			// Bind Frame buffer as default (0) using glBindFramebuffer openGL function
 			glBindFramebuffer(GL_DRAW_FRAMEBUFFER, 0);
@@ -395,22 +402,28 @@ namespace our
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 		}
 
-		/*  if(this->boostPath!=""){
-					if(this->boostingEffect && postprocessMaterial){
-							 // TODO: (Req 11) Return to the default framebuffer
-							// Bind Frame buffer as default (0) using glBindFramebuffer openGL function
-							glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
-							// TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
-							// Bind the Vertex Array
-							glBindVertexArray(postProcessVertexArray);
-							// Setup the post process material
-							postprocessMaterial->setup();
-							// Drawing the new triangles after postProcessing of the image
-							// By setting the mode as GL_TRIANGLES
-							// The first argument to 0 since we want to start from the beginning
-							// The count is set to 3
-							glDrawArrays(GL_TRIANGLES, 0, 3);
-					}
-			}*/
+        if(this->boostPath!="" && this->boostingEffect && postprocessMaterial){
+                
+                // Create the post processing shader
+                ShaderProgram *postprocessShader = new ShaderProgram();
+                postprocessShader->attach("assets/shaders/fullscreen.vert", GL_VERTEX_SHADER);
+                postprocessShader->attach(this->boostPath, GL_FRAGMENT_SHADER);
+                postprocessShader->link();
+
+                postprocessMaterial->shader=postprocessShader;
+                // TODO: (Req 11) Return to the default framebuffer
+                // Bind Frame buffer as default (0) using glBindFramebuffer openGL function
+                glBindFramebuffer(GL_DRAW_FRAMEBUFFER,0);
+                // TODO: (Req 11) Setup the postprocess material and draw the fullscreen triangle
+                // Bind the Vertex Array
+                glBindVertexArray(postProcessVertexArray);
+                // Setup the post process material
+                postprocessMaterial->setup();
+                // Drawing the new triangles after postProcessing of the image
+                // By setting the mode as GL_TRIANGLES
+                // The first argument to 0 since we want to start from the beginning
+                // The count is set to 3
+                glDrawArrays(GL_TRIANGLES, 0, 3);
+        }
 	}
 }
