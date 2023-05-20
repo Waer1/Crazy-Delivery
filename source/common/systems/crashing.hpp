@@ -24,6 +24,8 @@ namespace our
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
 		Sound test = Sound("assets/sounds/Song.mp3", true);
+		Sound monkeys = Sound("assets/sounds/Monkey-Noises.mp3", false);
+		Sound gorillas = Sound("assets/sounds/Gorilla-SoundBible.com-1576451741.mp3", false);
 		Sound arrived=Sound("assets/sounds/destination.m4a",false);
 		// Save the car entity
         Entity *car;
@@ -85,7 +87,7 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
-				test.changeVolume(50);
+				test.changeVolume(25);
 				test.play();
 				printf("Sound played\n");
 			}
@@ -116,6 +118,7 @@ namespace our
 					// Delivery Pick-up
 					if (entity->name == "delivery" && crash(car, entity, "delivery")) {
 						if (!events->isCarryDeliver()) {
+							monkeys.play();
 							events->collectDeliver();
 							delivery->addDeliveryOnCar();
 							delivery->removeDelivery(entity, world);
@@ -168,6 +171,7 @@ namespace our
 						if (events->carryingKnife())
 							events->killMonkey();
 						else {
+							gorillas.play();
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;
