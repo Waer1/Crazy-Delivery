@@ -6,6 +6,7 @@
 #include <systems/event-handler.hpp>
 #include <systems/energy.hpp>
 #include <systems/delivery.hpp>
+#include <systems/knife.hpp>
 #include <systems/movement.hpp>
 #include <systems/car-movement.hpp>
 #include <systems/battery-handler.hpp>
@@ -117,6 +118,15 @@ namespace our
 							delivery->removeDelivery(entity, world);
 						}
 					}
+					// Knife Pick-up
+					if (entity->name == "knife" && crash(car, entity, false, false)) {
+						printf("Knife Pick-up\n");
+						if (!events->carryingKnife()) {
+							printf("Collecting Knife\n");
+							events->collectKnife();
+							events->addKnife(entity, world);
+						}
+					}
 					// Arrived at the destination
 					else if (entity->name == "arrow" && crash(car, entity, true, false)) {
 						if (!checkTime())
@@ -125,7 +135,7 @@ namespace our
 							arrived.play();
 							energy->deliverMonkey();
 						}
-						events->deliverDelivery();
+						events->deliverDelivery(world);
 						delivery->removeDeliveryOnCar();
 					}
 					// Hit a street pole
@@ -147,10 +157,14 @@ namespace our
 						// Now we made sure that a crash happened and after the specified time
 						// We need to check for the entity type and do something accordingly
 						if (entity->name == "obstacles") {
-							energy->obstacleCrash();
-							carMovement->decreaseCarSpeed();
-							applyPostProcess=true;
-							postProcessIndicator="obstacle";
+							if (events->carryingKnife())
+								events->killMonkey();
+							else {
+								energy->obstacleCrash();
+								carMovement->decreaseCarSpeed();
+								applyPostProcess=true;
+								postProcessIndicator="obstacle";
+							}
 						}
 						else if (entity->name == "building") {
 							energy->buildingCrash();
