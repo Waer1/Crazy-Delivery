@@ -15,6 +15,8 @@ namespace our
     class CarMovementSystem {
         Application* app; // The application in which the state runs
 		Entity* car = nullptr;
+        Sound stoppedCar = Sound("assets/sounds/carEngineStopped.mp3", false);
+        Sound runningCar = Sound("assets/sounds/carEngineRunning.mp3", false);
 
         // Sensitivity
         float carRotationSensitivity = 0.01f;
@@ -81,6 +83,12 @@ namespace our
 
             // We change the camera position based on the keys WASD
             // S & W moves the player back and forth
+            if(app->getKeyboard().isPressed(GLFW_KEY_W) || app->getKeyboard().isPressed(GLFW_KEY_S)){
+                runningCar.play();
+            }else {
+                stoppedCar.play();
+            }
+
             if(app->getKeyboard().isPressed(GLFW_KEY_W) && !streetPoleCrash && !outOfBounds) {
                 position += front * (deltaTime * this->carPositionSensitivity.z);
                 if(this->carPositionSensitivity.z <= this->maxSpeed){
@@ -88,9 +96,6 @@ namespace our
                 }
             }
             else{
-                // if(this->carPositionSensitivity.z>=this->minSpeed){
-                //     this->carPositionSensitivity.z-=this->acceleration;
-                // }
                 this->carPositionSensitivity.z = 7.5;
             }
             //Brake

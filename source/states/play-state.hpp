@@ -54,8 +54,9 @@ class Playstate: public our::State {
         bigObstaclesSystem = new our::BigObstaclesSystem;
         cameraController = new our::FreeCameraControllerSystem;
         batteryHandlerSystem = new our::BatterySystem;
-				radioSystem = new our::RadioSystem;
+        radioSystem = new our::RadioSystem;
         knifeSystem = new our::KnifeSystem;
+
 
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -74,7 +75,7 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 1;
+        int numOfDeliveries = 5;
 
 
         // initialize the event handler system
@@ -87,7 +88,7 @@ class Playstate: public our::State {
         knifeSystem->initialize(world);
         eventHandlerSystem->initialize(getApp(), numOfDeliveries, bigObstaclesSystem, knifeSystem, world);
         crashingSystem->initialize(world, eventHandlerSystem, energySystem, deliverySystem, batteryHandlerSystem, carController);
-				radioSystem->initialize(getApp());
+        radioSystem->initialize(getApp());
         // Then we initialize the renderer
         auto size = getApp()->getFrameBufferSize();
         renderer->initialize(size, config["renderer"]);
@@ -157,7 +158,7 @@ class Playstate: public our::State {
         delete bigObstaclesSystem;
         delete cameraController;
         delete batteryHandlerSystem;
-				delete radioSystem;
+        delete radioSystem;
         delete crashingSystem;
         delete knifeSystem;
         delete eventHandlerSystem;
