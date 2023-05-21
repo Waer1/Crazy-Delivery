@@ -98,7 +98,7 @@ class Playstate: public our::State {
         movementSystem->update(world, (float)deltaTime);
         carController->update(world, (float)deltaTime);
 				cameraController->update(world, (float)deltaTime);
-				eventHandlerSystem->update();
+				eventHandlerSystem->update((float)deltaTime);
 				radioSystem->update();
 
         std::string postProcessType="";
@@ -117,7 +117,7 @@ class Playstate: public our::State {
             timer=1;
           }
         }
-        if(renderer->getEffect(lastPostProcessEvent) && timer==80){
+        if(renderer->getEffect(lastPostProcessEvent) && timer==50){
           renderer->ignoreEffect(lastPostProcessEvent);
           applyPostProcess=false;
           timer=0;

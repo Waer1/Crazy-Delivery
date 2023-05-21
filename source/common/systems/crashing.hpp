@@ -89,7 +89,7 @@ namespace our
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
 				test.changeVolume(25);
-				test.play();
+				//test.play();
 				printf("Sound played\n");
 			}
 
@@ -125,7 +125,7 @@ namespace our
 							delivery->removeDelivery(entity, world);
 						}
 					}
-					// Knife Pick-up
+					/*// Knife Pick-up
 					else if (entity->name == "knife" && crash(car, entity, "knife")) {
 						printf("Knife Pick-up\n");
 						if (!events->carryingKnife()) {
@@ -133,7 +133,7 @@ namespace our
 							events->collectKnife();
 							events->addKnife(entity, world);
 						}
-					}
+					}*/
 					// Arrived at the destination
 					else if (entity->name == "arrow" && crash(car, entity, "destination")) {
 						if (!checkTime())

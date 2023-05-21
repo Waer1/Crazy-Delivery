@@ -29,9 +29,9 @@ void main(){
     vec2(offset,  -offset)  // bottom-right
     );
     kernel = float[](
-    -1.0, -1.0, -1.0,
-    -1.0,  9.0, -1.0,
-    -1.0, -1.0, -1.0
+    1, 1.0, 1,
+    1, -9.0, 1,
+    1, 1.0, 1
     );
     col = vec3(0.0);
     for(int i = 0; i < 9; i++)

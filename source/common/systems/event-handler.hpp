@@ -18,6 +18,9 @@ namespace our
     Application * app;
     KnifeSystem* knife;
     Entity* frontLight, *backLight;
+    //Entity* knifeOnCar;
+    //bool moveKnifeForward=false;
+    //bool moveKnifeBackward=false;
 
     int targetDelivers;
     int numOfObstacles;
@@ -44,10 +47,19 @@ namespace our
                 } else if (entity->name == "backLight") {
                     backLight = entity;
                 }
-
                 if (frontLight && backLight)
                     break;
             }
+
+          /*  for(auto entity : world->getEntities()){
+                // if the entity is car then set the car
+				if (entity->name == "knife-on-car"){
+                    knifeOnCar=entity;
+                }
+                if (knifeOnCar)
+                    break;
+            }
+*/
         }
 
         void collectDeliver(){
@@ -100,9 +112,17 @@ namespace our
             app->changeState("win");
         }
 
-        void update() {
+        void update(float deltaTime) {
             auto currentTime = std::chrono::high_resolution_clock::now();
 			auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
+           /* glm::vec3& knifePosition = knifeOnCar->localTransform.position;
+            float lastXPos=knifePosition.x;
+            glm::vec3& knifeRotation = knifeOnCar->localTransform.rotation;
+
+              // We get the camera model matrix (relative to its parent) to compute the front, up and right directions
+            glm::mat4 knifeMatrix = knifeOnCar->localTransform.toMat4();
+            glm::vec3 front = glm::vec3(knifeMatrix * glm::vec4(0, 0, 1, 0));
+*/
 			if (elapsedTime > clickDelay) {
 				clickButton = true;
 			}
@@ -125,6 +145,34 @@ namespace our
                     backLight->localTransform.scale = glm::vec3(0, 0, 0);
                 }
             }
+/*
+            // Throwing knife
+            if(clickButton && app->getKeyboard().isPressed(GLFW_KEY_K)){
+                std::cout<<"PRESSED"<<std::endl; 
+                moveKnifeForward=true;
+            }
+            if(moveKnifeForward){
+                knifePosition -= front*(float(0.5));
+            }
+
+            if(knifePosition.z>7){
+                moveKnifeForward=false;
+                moveKnifeBackward=true;
+                knifePosition.z=7;
+            }
+
+            if(knifePosition.z<0){
+                moveKnifeBackward=false;
+                moveKnifeForward=false;
+                knifePosition.z=0;
+            }
+
+            if(moveKnifeBackward){
+                knifePosition += front*(float(0.5));
+            }
+
+            knifePosition.x=lastXPos;
+            */
         }
 
     };
