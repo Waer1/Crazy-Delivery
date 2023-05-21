@@ -74,7 +74,7 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 2;
+        int numOfDeliveries = 1;
 
 
         // initialize the event handler system
@@ -98,7 +98,7 @@ class Playstate: public our::State {
         movementSystem->update(world, (float)deltaTime);
         carController->update(world, (float)deltaTime);
 				cameraController->update(world, (float)deltaTime);
-				eventHandlerSystem->update((float)deltaTime);
+				eventHandlerSystem->update(world,(float)deltaTime);
 				radioSystem->update();
 
         std::string postProcessType="";

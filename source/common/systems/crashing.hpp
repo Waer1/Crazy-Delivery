@@ -170,6 +170,7 @@ namespace our
 
 						gorillas.play();
 						if (events->carryingKnife()) {
+							
 							events->killMonkey(entity, world);
 						}
 						else {
