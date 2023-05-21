@@ -27,6 +27,7 @@ namespace our
 		Sound monkeys = Sound("assets/sounds/Monkey-Noises.mp3", false);
 		Sound gorillas = Sound("assets/sounds/Gorilla-SoundBible.com-1576451741.mp3", false);
 		Sound arrived=Sound("assets/sounds/destination.m4a",false);
+		Sound slice=Sound("assets/sounds/slice.wav",false);
 		// Save the car entity
         Entity *car;
         EventHandlerSystem *events;
@@ -126,13 +127,13 @@ namespace our
 							delivery->removeDelivery(entity, world);
 						}
 					}
-					/*// Knife Pick-up
+					// Knife Pick-up
 					else if (entity->name == "knife" && crash(car, entity, "knife")) {
 						if (!events->carryingKnife()) {
 							events->collectKnife();
 							events->addKnife(entity, world);
 						}
-					}*/
+					}
 					// Arrived at the destination
 					else if (entity->name == "arrow" && crash(car, entity, "destination")) {
 						if (!checkTime())
@@ -168,11 +169,12 @@ namespace our
 						if (!checkTime())
 							continue;
 
-						gorillas.play();
 						if (events->carryingKnife()) {
+							slice.play();
 							events->killMonkey(entity, world);
 						}
 						else {
+							gorillas.play();
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;

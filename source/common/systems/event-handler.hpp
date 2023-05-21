@@ -99,7 +99,6 @@ namespace our
         void killMonkey(Entity* entity, World* world) {
             world->markForRemoval(entity);
             world->deleteMarkedEntities();
-            std::cout << numOfObstacles << std::endl;
             numOfObstacles--;
             if (numOfObstacles == 0) {
                 winGame();
