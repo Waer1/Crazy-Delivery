@@ -74,7 +74,7 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 1;
+        int numOfDeliveries = 2;
 
 
         // initialize the event handler system
@@ -106,7 +106,10 @@ class Playstate: public our::State {
         if(postProcessType!=""){
           lastPostProcessEvent=postProcessType;
         }
-        
+        std::cout<< applyPostProcess<<std::endl;
+        std::cout<< "--------------------------------"<<std::endl;
+        std::cout<<timer<<endl;
+        std::cout<< "******************************************************************************"<<std::endl;
         energySystem->update(world);
 				batteryHandlerSystem->update(world);
 
@@ -117,7 +120,7 @@ class Playstate: public our::State {
             timer=1;
           }
         }
-        if(renderer->getEffect(lastPostProcessEvent) && timer==50){
+        if(renderer->getEffect(lastPostProcessEvent) && timer>=30){
           renderer->ignoreEffect(lastPostProcessEvent);
           applyPostProcess=false;
           timer=0;
