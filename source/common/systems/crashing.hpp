@@ -50,17 +50,6 @@ namespace our
             }
         }
 
-		void setKnife(World* world) {
-            // For each entity in the world
-			// Check if it's name is "knife" and then set the knife entity we have
-            for (auto entity : world->getEntities()){
-                if (entity->name == "knife-on-car"){
-					KnifeOnCar = entity;
-					break;
-                }
-            }
-        }
-
 		bool crash(Entity *object1, Entity *object2, std::string type) {
 			// Get the car's max position, min position, current position, and size
 			glm::vec3 object1Position = object1->localTransform.position;
@@ -101,7 +90,6 @@ namespace our
 				this->batterySystem = battery;
 				this->carMovement = carMovement;
 				setCar(world);
-				setKnife(world);
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
@@ -198,13 +186,6 @@ namespace our
 							postProcessIndicator="obstacle";
 						}
 					}					
-					// Crashing with an and knife
-					else if (entity->name == "obstacles" && this->KnifeOnCar->localTransform.scale != glm::vec3(0, 0, 0) &&crash(KnifeOnCar, entity, "obstacle")) {
-						if (!checkTime())
-							continue;
-						slice.play();
-						events->killMonkey(entity, world);
-					}
 				}
 				return applyPostProcess;
 			}

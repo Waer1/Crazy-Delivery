@@ -1,5 +1,5 @@
 {
-  "start-scene": "play",
+  "start-scene": "menu",
   "window": {
     "title": "Crazy Delivery",
     "size": {
@@ -233,7 +233,7 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          "texture": "metal",
+          "texture": "knife",
           "sampler": "default"
         },
         "arrow": {
