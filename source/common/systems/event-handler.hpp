@@ -52,6 +52,12 @@ namespace our
                     break;
                 }
             }
+            for (auto entity : world->getEntities()){
+				if (entity->name == "knife-on-car"){
+                    knifeOnCar = entity;
+                    break;
+                }   
+            }
         }
 
         void collectDeliver(){
@@ -107,19 +113,9 @@ namespace our
             app->changeState("win");
         }
 
-        void update(World* world,float deltaTime) {
+        void update(World* world, float deltaTime) {
             auto currentTime = std::chrono::high_resolution_clock::now();
 			auto elapsedTime = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - lastTime).count();
-            if(!knifeOnCar){
-                for(auto entity : world->getEntities()){
-                // if the entity is car then set the car
-				if (entity->name == "knife-on-car"){
-                    knifeOnCar=entity;
-                    break;
-                    }   
-                }
-            }
-
 
 			if (elapsedTime > clickDelay) {
 				clickButton = true;
@@ -145,60 +141,43 @@ namespace our
             }
 
             // Throwing knife
-            if(knifeOnCar->localTransform.scale != glm::vec3(0, 0, 0)){
+            if (knifeOnCar && knifeOnCar->localTransform.scale != glm::vec3(0, 0, 0)){
 
-                glm::vec3& knifePosition = knifeOnCar->localTransform.position;
-                float lastXPos=knifePosition.x;
-                float lastYPos=knifePosition.y;
+                float lastXPos=knifeOnCar->localTransform.position.x;
+                float lastYPos=knifeOnCar->localTransform.position.y;
                 glm::mat4 knifeMatrix = knifeOnCar->localTransform.toMat4();
                 glm::vec3 front = glm::vec3(knifeMatrix * glm::vec4(0, 0, 1, 0));
 
 
-                if(clickButton && app->getKeyboard().isPressed(GLFW_KEY_K)){
-                    std::cout<<"PRESSED"<<std::endl; 
-                    cout<<"--------------------------------------------"<<endl;
-                    if(!moveKnifeBackward){
-                    moveKnifeForward=true;
+                if (clickButton && app->getKeyboard().isPressed(GLFW_KEY_K)){
+                    if(!moveKnifeBackward) {
+                        moveKnifeForward=true;
                     }
                 }
 
                 if(moveKnifeForward){
-                    knifePosition += front*(float(0.03));
-
-                    cout<<"ana fl knife forward"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
-                    
+                    knifeOnCar->localTransform.position += front*(float(0.03));
                 }
 
-                if(knifePosition.z>=7){
-                    cout<<"et7rk wara"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
+                if(knifeOnCar->localTransform.position.z>=7){
                     moveKnifeForward=false;
                     moveKnifeBackward=true;
-                    knifePosition.z=7;
+                    knifeOnCar->localTransform.position.z=7;
                 }
 
-                if(knifePosition.z<=0){
+                if(knifeOnCar->localTransform.position.z<=0){
                     moveKnifeBackward=false;
                     moveKnifeForward=false;
-                    knifePosition.z=0;
-                    cout<<"wslna l bet"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
+                    knifeOnCar->localTransform.position.z=0;
                 }
 
                 if(moveKnifeBackward){
-                    cout<<"ana fl knife backward"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
-                    knifePosition -= front*(float(0.05));
+                    knifeOnCar->localTransform.position -= front*(float(0.05));
                 }
 
-                knifePosition.x=lastXPos;
-                knifePosition.y=lastYPos;
-                cout<< knifePosition.x<<" "<< knifePosition.y<<" "<<knifePosition.z<<endl;
-
+                knifeOnCar->localTransform.position.x=lastXPos;
+                knifeOnCar->localTransform.position.y=lastYPos;
             }
-
         }
     };
-
 }

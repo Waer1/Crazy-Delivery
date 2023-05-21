@@ -51,7 +51,7 @@
         "battery_bar": "assets/textures/battery bar.png",
         "barborder": "assets/textures/barborder.png",
         "street-light": "assets/textures/street-light.png",
-        "knife": "assets/textures/throwing_knife.png"
+        "knife": "assets/textures/knife.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
