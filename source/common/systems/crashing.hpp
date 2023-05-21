@@ -54,7 +54,7 @@ namespace our
             // For each entity in the world
 			// Check if it's name is "knife" and then set the knife entity we have
             for (auto entity : world->getEntities()){
-                if (entity->name == "KnifeOnCar"){
+                if (entity->name == "knife-on-car"){
 					KnifeOnCar = entity;
 					break;
                 }
