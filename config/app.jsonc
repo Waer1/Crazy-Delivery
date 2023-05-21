@@ -551,17 +551,13 @@
           {
             "name": "knife-on-car",
             "position": [0, 1.5, 0],
-            "rotation": [0, 0, 0],
+            "rotation": [10, 0, 0],
             "scale": [0.3, 0.3, 0.3],
             "components": [
               {
                 "type": "Mesh Renderer",
                 "mesh": "knife",
                 "material": "knife"
-              },
-              {
-                "type": "Movement",
-                "angularVelocity": [0, 30, 0]
               }
             ]
           }
