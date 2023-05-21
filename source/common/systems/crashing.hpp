@@ -56,11 +56,9 @@ namespace our
 
 			// Get the collider's position
 			glm::vec3 object2Position = object2->localTransform.position;
-			std::cout<<"Knife position is "<< object2Position.x<<" "<<object2Position.y<<" "<<object2Position.z<<" "<<std::endl;
 
 			glm::vec3 object2Size = object2->localTransform.scale;
 			
-			std::cout<<"Knife Size is "<< object2Size.x<<" "<<object2Size.y<<" "<<object2Size.z<<" "<<std::endl;
 			// Set the object size
 			if (type == "destination")
 				object2Size = {1.5, 10.0, 1.5};

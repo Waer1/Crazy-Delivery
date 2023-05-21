@@ -539,8 +539,8 @@
             "components": [
               {
                 "type": "Mesh Renderer",
-                "mesh": "knife",
-                "material": "knife"
+                "mesh": "monkey",
+                "material": "monkey"
               },
               {
                 "type": "Movement",
