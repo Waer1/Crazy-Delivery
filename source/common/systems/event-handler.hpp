@@ -73,10 +73,8 @@ namespace our
                 targetDelivers--;
 
                 if(targetDelivers == 0){
-                    printf("Deliveries done\n");
                     knife = new our::KnifeSystem;
                     knife->initialize(world);
-                    printf("Knife initialized\n");
                 }
             }
         }
@@ -131,7 +129,8 @@ namespace our
         }
 
         void destroy() {
-            delete knife;
+            if (knife)
+                delete knife;
         }
 
     };
