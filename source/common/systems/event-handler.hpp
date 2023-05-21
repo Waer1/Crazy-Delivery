@@ -30,10 +30,11 @@ namespace our
     Sound peep = Sound("assets/sounds/Horn.mp3", false);
 
     public:
-        void initialize(Application* app, int targetDelivers, BigObstaclesSystem* obstacle, World* world){
+        void initialize(Application* app, int targetDelivers, BigObstaclesSystem* obstacle, KnifeSystem* knifeSystem, World* world){
             this->app = app;
             this->targetDelivers = targetDelivers;
             this->numOfObstacles = obstacle->getNumOfObstacles();
+            this->knife = knifeSystem;
 
             // Get front and back lights
             for (auto entity : world->getEntities()){
@@ -72,8 +73,7 @@ namespace our
                 targetDelivers--;
 
                 if(targetDelivers == 0){
-                    knife = new our::KnifeSystem;
-                    knife->initialize(world);
+                    knife->showKnife();
                 }
             }
         }
@@ -86,6 +86,7 @@ namespace our
         void killMonkey(Entity* entity, World* world) {
             world->markForRemoval(entity);
             world->deleteMarkedEntities();
+            std::cout << numOfObstacles << std::endl;
             numOfObstacles--;
             if (numOfObstacles == 0) {
                 winGame();
@@ -126,12 +127,6 @@ namespace our
                 }
             }
         }
-
-        void destroy() {
-            if (knife)
-                delete knife;
-        }
-
     };
 
 }

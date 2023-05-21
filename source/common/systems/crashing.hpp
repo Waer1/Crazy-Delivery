@@ -168,12 +168,11 @@ namespace our
 						if (!checkTime())
 							continue;
 
+						gorillas.play();
 						if (events->carryingKnife()) {
-							gorillas.play();
 							events->killMonkey(entity, world);
 						}
 						else {
-							gorillas.play();
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;

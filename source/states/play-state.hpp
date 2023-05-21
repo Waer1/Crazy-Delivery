@@ -29,6 +29,7 @@ class Playstate: public our::State {
     our::MovementSystem* movementSystem;
     our::CrashingSystem* crashingSystem;
     our::EnergySystem* energySystem;
+    our::KnifeSystem* knifeSystem;
     our::EventHandlerSystem* eventHandlerSystem;
     our::DeliverySystem* deliverySystem;
     our::LightSystem* lightSystem;
@@ -54,6 +55,7 @@ class Playstate: public our::State {
         cameraController = new our::FreeCameraControllerSystem;
         batteryHandlerSystem = new our::BatterySystem;
 				radioSystem = new our::RadioSystem;
+        knifeSystem = new our::KnifeSystem;
 
         // First of all, we get the scene configuration from the app config
         auto& config = getApp()->getConfig()["scene"];
@@ -72,17 +74,18 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 5;
+        int numOfDeliveries = 1;
 
 
         // initialize the event handler system
-        bigObstaclesSystem->initialize(world);
-        eventHandlerSystem->initialize(getApp(), numOfDeliveries, bigObstaclesSystem, world);
 
         // Initialize all other systems
         deliverySystem->initialize(world, numOfDeliveries);
         lightSystem->initialize(world);
         energySystem->initialize(world, eventHandlerSystem);
+        bigObstaclesSystem->initialize(world);
+        knifeSystem->initialize(world);
+        eventHandlerSystem->initialize(getApp(), numOfDeliveries, bigObstaclesSystem, knifeSystem, world);
         crashingSystem->initialize(world, eventHandlerSystem, energySystem, deliverySystem, batteryHandlerSystem, carController);
 				radioSystem->initialize(getApp());
         // Then we initialize the renderer
@@ -156,7 +159,7 @@ class Playstate: public our::State {
         delete batteryHandlerSystem;
 				delete radioSystem;
         delete crashingSystem;
-        eventHandlerSystem->destroy();
+        delete knifeSystem;
         delete eventHandlerSystem;
     }
 };

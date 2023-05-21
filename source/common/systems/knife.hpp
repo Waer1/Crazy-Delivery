@@ -12,6 +12,7 @@ namespace our
     // The knife appears when all monkeys have been delivered
     class KnifeSystem {
         Entity *knifeOnCar;
+        Entity *knife;
 		vector<glm::vec3> knifePoints;
 
         void getKnifeOnCar(World* world) {
@@ -29,7 +30,7 @@ namespace our
                 {"name", name},
                 {"position", {position.x, position.y, position.z}},
                 {"rotation", {30, 0, 0}},
-                {"scale", {15, 15, 15}},
+                {"scale", {0, 0, 0}},
                 {"components", nlohmann::json::array({
                     {
                         {"type", "Mesh Renderer"},
@@ -71,7 +72,7 @@ namespace our
                 glm::vec3 randomPoint = knifePoints[randomIndex];
 
                 // Adding the knife to the world
-                Entity* knife = world->add();
+                knife = world->add();
                 knife->deserialize(generateKnife(randomPoint, "knife"));
             }
 
@@ -81,6 +82,10 @@ namespace our
 
             void addKnifeOnCar() {
                 knifeOnCar->localTransform.scale = glm::vec3(10, 10, 10);
+            }
+
+            void showKnife() {
+                knife->localTransform.scale = glm::vec3(15, 15, 15);
             }
 
             void removeKnife(Entity* knife, World* world) {
