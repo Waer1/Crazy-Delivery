@@ -181,8 +181,6 @@ class Menustate: public our::State {
 
     void onDestroy() override {
         // Delete all the allocated resources
-        //std::cout<<"no3";
-        //introSound.stop();
         delete rectangle;
         delete menuMaterial->texture;
         delete menuMaterial->shader;

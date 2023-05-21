@@ -66,6 +66,8 @@ namespace our
 				object2Size = {0.2, 0.5, 0.2};
 			else if (type == "building")
 				object2Size += glm::vec3(0.2, 0, 0.2);
+			else if (type == "knife")
+				object2Size -= glm::vec3(12, 12, 12);
 
 			// Get the collider's max and min positions
 			glm::vec3 object2Max = object2Position + object2Size;
@@ -88,9 +90,8 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
-				test.changeVolume(25);
-				//test.play();
-				printf("Sound played\n");
+				// test.changeVolume(25);
+				// test.play();
 			}
 
 			bool checkTime() {
@@ -127,9 +128,7 @@ namespace our
 					}
 					/*// Knife Pick-up
 					else if (entity->name == "knife" && crash(car, entity, "knife")) {
-						printf("Knife Pick-up\n");
 						if (!events->carryingKnife()) {
-							printf("Collecting Knife\n");
 							events->collectKnife();
 							events->addKnife(entity, world);
 						}
@@ -169,8 +168,10 @@ namespace our
 						if (!checkTime())
 							continue;
 
-						if (events->carryingKnife())
-							events->killMonkey();
+						if (events->carryingKnife()) {
+							gorillas.play();
+							events->killMonkey(entity, world);
+						}
 						else {
 							gorillas.play();
 							energy->obstacleCrash();

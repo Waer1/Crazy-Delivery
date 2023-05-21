@@ -36,19 +36,20 @@ namespace our
         void initialize(Application* app, int targetDelivers, BigObstaclesSystem* obstacle, World* world){
             this->app = app;
             this->targetDelivers = targetDelivers;
-            our::BigObstaclesSystem* obstacleSystem = obstacle;
-            this->numOfObstacles = obstacleSystem->getNumOfObstacles();
+            this->numOfObstacles = obstacle->getNumOfObstacles();
 
             // Get front and back lights
-            for(auto entity : world->getEntities()){
-                // if the entity is car then set the car
-				if(entity->name == "frontLight"){
+            for (auto entity : world->getEntities()){
+				if (entity->name == "frontLight"){
                     frontLight = entity;
-                } else if (entity->name == "backLight") {
-                    backLight = entity;
-                }
-                if (frontLight && backLight)
                     break;
+                }
+            }
+            for (auto entity : world->getEntities()){
+                if (entity->name == "backLight") {
+                    backLight = entity;
+                    break;
+                }
             }
 
           /*  for(auto entity : world->getEntities()){
@@ -59,7 +60,7 @@ namespace our
                 if (knifeOnCar)
                     break;
             }
-*/
+        */
         }
 
         void collectDeliver(){
@@ -84,10 +85,8 @@ namespace our
                 targetDelivers--;
 
                 if(targetDelivers == 0){
-                    printf("Deliveries done\n");
                     knife = new our::KnifeSystem;
                     knife->initialize(world);
-                    printf("Knife initialized\n");
                 }
             }
         }
@@ -97,7 +96,9 @@ namespace our
 			knife->removeKnife(entity, world);
         }
 
-        void killMonkey() {
+        void killMonkey(Entity* entity, World* world) {
+            world->markForRemoval(entity);
+            world->deleteMarkedEntities();
             numOfObstacles--;
             if (numOfObstacles == 0) {
                 winGame();
@@ -173,6 +174,11 @@ namespace our
 
             knifePosition.x=lastXPos;
             */
+        }
+
+        void destroy() {
+            if (knife)
+                delete knife;
         }
 
     };
