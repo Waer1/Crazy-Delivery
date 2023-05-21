@@ -29,6 +29,7 @@ namespace our
 		Sound arrived = Sound("assets/sounds/destination.m4a", false);
 		Sound celebration = Sound("assets/sounds/celebrate.mp3", false);
 		Sound slice = Sound("assets/sounds/slice.wav", false);
+		Sound buildingCrash = Sound("assets/sounds/building-crash.mp3", false);
 
         // Save the car entity
         Entity *car;
@@ -165,6 +166,7 @@ namespace our
 					else if (entity->name == "building" && crash(car, entity, "building")) {
 						if (!checkTime())
 							continue;
+						buildingCrash.play();
 						energy->buildingCrash();
 						applyPostProcess=true;
 						postProcessIndicator="obstacle";
