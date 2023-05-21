@@ -17,7 +17,7 @@ namespace our
         void getKnifeOnCar(World* world) {
             // For each entity in the world
             for(auto entity : world->getEntities()){
-                if(entity->name == "knife-on-car"){
+                if(entity->name == "knife-on-car") {
 					knifeOnCar = entity;
 					break;
                 }
@@ -71,7 +71,6 @@ namespace our
                 glm::vec3 randomPoint = knifePoints[randomIndex];
 
                 // Adding the knife to the world
-                printf("Deserializing Knife\n");
                 Entity* knife = world->add();
                 knife->deserialize(generateKnife(randomPoint, "knife"));
             }

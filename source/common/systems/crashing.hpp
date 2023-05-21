@@ -66,6 +66,8 @@ namespace our
 				object2Size = {0.2, 0.5, 0.2};
 			else if (type == "building")
 				object2Size += glm::vec3(0.2, 0, 0.2);
+			else if (type == "knife")
+				object2Size -= glm::vec3(3, 3, 3);
 
 			// Get the collider's max and min positions
 			glm::vec3 object2Max = object2Position + object2Size;
@@ -169,8 +171,10 @@ namespace our
 						if (!checkTime())
 							continue;
 
-						if (events->carryingKnife())
-							events->killMonkey();
+						if (events->carryingKnife()) {
+							gorillas.play();
+							events->killMonkey(entity, world);
+						}
 						else {
 							gorillas.play();
 							energy->obstacleCrash();

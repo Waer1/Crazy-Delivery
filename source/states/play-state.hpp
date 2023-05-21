@@ -31,7 +31,6 @@ class Playstate: public our::State {
     our::EnergySystem* energySystem;
     our::EventHandlerSystem* eventHandlerSystem;
     our::DeliverySystem* deliverySystem;
-    our::KnifeSystem* knifeSystem;
     our::LightSystem* lightSystem;
     our::BigObstaclesSystem* bigObstaclesSystem;
     our::FreeCameraControllerSystem* cameraController;
@@ -50,7 +49,6 @@ class Playstate: public our::State {
         energySystem = new our::EnergySystem;
         eventHandlerSystem = new our::EventHandlerSystem;
         deliverySystem = new our::DeliverySystem;
-        knifeSystem=new our::KnifeSystem;
         lightSystem = new our::LightSystem;
         bigObstaclesSystem = new our::BigObstaclesSystem;
         cameraController = new our::FreeCameraControllerSystem;
@@ -74,7 +72,7 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 5;
+        int numOfDeliveries = 1;
 
 
         // initialize the event handler system
@@ -83,7 +81,7 @@ class Playstate: public our::State {
 
         // Initialize all other systems
         deliverySystem->initialize(world, numOfDeliveries);
-        knifeSystem->initialize(world);
+        // knifeSystem->initialize(world);
         lightSystem->initialize(world);
         energySystem->initialize(world, eventHandlerSystem);
         crashingSystem->initialize(world, eventHandlerSystem, energySystem, deliverySystem, batteryHandlerSystem, carController);
@@ -153,8 +151,8 @@ class Playstate: public our::State {
         delete movementSystem;
         delete crashingSystem;
         delete energySystem;
+        eventHandlerSystem->destroy();
         delete eventHandlerSystem;
-        delete knifeSystem;
         delete deliverySystem;
         delete lightSystem;
         delete bigObstaclesSystem;

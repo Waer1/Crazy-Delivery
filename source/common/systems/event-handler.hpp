@@ -37,16 +37,17 @@ namespace our
             this->numOfObstacles = obstacleSystem->getNumOfObstacles();
 
             // Get front and back lights
-            for(auto entity : world->getEntities()){
-                // if the entity is car then set the car
-				if(entity->name == "frontLight"){
+            for (auto entity : world->getEntities()){
+				if (entity->name == "frontLight"){
                     frontLight = entity;
-                } else if (entity->name == "backLight") {
-                    backLight = entity;
-                }
-
-                if (frontLight && backLight)
                     break;
+                }
+            }
+            for (auto entity : world->getEntities()){
+                if (entity->name == "backLight") {
+                    backLight = entity;
+                    break;
+                }
             }
         }
 
@@ -85,7 +86,9 @@ namespace our
 			knife->removeKnife(entity, world);
         }
 
-        void killMonkey() {
+        void killMonkey(Entity* entity, World* world) {
+            world->markForRemoval(entity);
+            world->deleteMarkedEntities();
             numOfObstacles--;
             if (numOfObstacles == 0) {
                 winGame();
@@ -125,6 +128,10 @@ namespace our
                     backLight->localTransform.scale = glm::vec3(0, 0, 0);
                 }
             }
+        }
+
+        void destroy() {
+            delete knife;
         }
 
     };
