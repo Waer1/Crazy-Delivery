@@ -16,9 +16,6 @@ namespace our
         Application* app; // The application in which the state runs
 		Entity* car = nullptr;
 
-        // Sounds
-        Sound peep = Sound("assets/sounds/Horn.mp3", false);
-
         // Sensitivity
         float carRotationSensitivity = 0.01f;
         glm::vec3 carPositionSensitivity = {3.0f, 3.0f, 3.0f}; // The unity per second of car movement if WASD is pressed
@@ -106,10 +103,6 @@ namespace our
                      this->carPositionSensitivity.z-=this->acceleration;
                  }
 			 }*/
-
-             if(app->getKeyboard().isPressed(GLFW_KEY_SPACE)){
-                peep.play();
-             }
              
             // Move Backwards
             if(app->getKeyboard().isPressed(GLFW_KEY_S)) {
