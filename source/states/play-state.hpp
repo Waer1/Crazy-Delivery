@@ -106,7 +106,7 @@ class Playstate: public our::State {
         if(postProcessType!=""){
           lastPostProcessEvent=postProcessType;
         }
-        
+
         energySystem->update(world);
 				batteryHandlerSystem->update(world);
 
@@ -117,7 +117,7 @@ class Playstate: public our::State {
             timer=1;
           }
         }
-        if(renderer->getEffect(lastPostProcessEvent) && timer==50){
+        if(renderer->getEffect(lastPostProcessEvent) && timer>=30){
           renderer->ignoreEffect(lastPostProcessEvent);
           applyPostProcess=false;
           timer=0;
