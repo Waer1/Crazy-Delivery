@@ -29,7 +29,7 @@ namespace our
 				{"name", name},
 				{"position", {position.x, position.y, position.z}},
 				{"rotation", {0, 0, 0}},
-				{"scale", {0.5, 0.5, 0.5}},
+				{"scale", {0.5, 0.5,0.5}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Mesh Renderer"},

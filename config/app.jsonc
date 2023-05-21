@@ -51,7 +51,7 @@
         "battery_bar": "assets/textures/battery bar.png",
         "barborder": "assets/textures/barborder.png",
         "street-light": "assets/textures/street-light.png",
-        "knife":"assets/textures/throwing_knife.png"
+        "w":"assets/textures/knife.jpg"
       },
       "meshes": {
         "cube": "assets/models/cube.obj",
@@ -505,8 +505,8 @@
             "components": [
               {
                 "type": "Mesh Renderer",
-                "mesh": "monkey",
-                "material": "monkey"
+                "mesh": "knife",
+                "material": "knife"
               },
               {
                 "type": "Movement",
@@ -1239,6 +1239,15 @@
           {
             "type": "Position Point",
             "position": [55, 1.8, 10]
+          }
+        ]
+      },
+      {
+        "name": "knives",
+        "components": [
+          {
+            "type": "Position Point",
+            "position": [-50, 2.8, -30]
           }
         ]
       },

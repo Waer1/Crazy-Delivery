@@ -1,7 +1,6 @@
 #pragma once
 
 #include "../ecs/world.hpp"
-#include <systems/delivery.hpp>
 #include "../components/position-point.hpp"
 #include <glm/glm.hpp>
 
@@ -29,18 +28,18 @@ namespace our
             return {
                 {"name", name},
                 {"position", {position.x, position.y, position.z}},
-                {"rotation", {0, 0, 0}},
-                {"scale", {1, 1, 1}},
+                {"rotation", {30, 0, 0}},
+                {"scale", {15, 15, 15}},
                 {"components", nlohmann::json::array({
                     {
                         {"type", "Mesh Renderer"},
                         {"mesh", "knife"},
                         {"material", "knife"}
                     },
-                    {
-                        {"type", "Movement"},
-                        {"angularVelocity", {0, 30, 0}}
-                    }
+					{
+						{"type", "Movement"},
+						{"angularVelocity", {0, 60, 0}}
+					}
                 })}
             };
         }
@@ -50,7 +49,7 @@ namespace our
                 // Get the random knife points from the world
                 Entity* KnifePoints;
                 for (auto entity : world->getEntities()){
-                    if(entity->name == "deliveries"){
+                    if(entity->name == "knives"){
                         KnifePoints = entity;
                         break;
                     }
@@ -82,7 +81,7 @@ namespace our
             }
 
             void addKnifeOnCar() {
-                knifeOnCar->localTransform.scale = glm::vec3(0.5, 0.5, 0.5);
+                knifeOnCar->localTransform.scale = glm::vec3(10, 10, 10);
             }
 
             void removeKnife(Entity* knife, World* world) {
