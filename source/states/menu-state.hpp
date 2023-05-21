@@ -180,6 +180,7 @@ class Menustate: public our::State {
     }
 
     void onDestroy() override {
+        introSound.stop();
         // Delete all the allocated resources
         delete rectangle;
         delete menuMaterial->texture;

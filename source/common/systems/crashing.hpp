@@ -92,7 +92,6 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
-				// test.changeVolume(25);
 				// test.play();
 			}
 
