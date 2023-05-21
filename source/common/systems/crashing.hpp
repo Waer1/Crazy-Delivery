@@ -29,9 +29,9 @@ namespace our
 		Sound arrived = Sound("assets/sounds/destination.m4a", false);
 		Sound celebration = Sound("assets/sounds/celebrate.mp3", false);
 		Sound slice = Sound("assets/sounds/slice.wav", false);
-		// Save the car entity
+
+        // Save the car entity
         Entity *car;
-		Entity *KnifeOnCar;
         EventHandlerSystem *events;
         EnergySystem *energy;
         DeliverySystem *delivery;
@@ -185,7 +185,7 @@ namespace our
 							applyPostProcess=true;
 							postProcessIndicator="obstacle";
 						}
-					}					
+					}
 				}
 				return applyPostProcess;
 			}
