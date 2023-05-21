@@ -100,6 +100,8 @@
           },
           "tint": [1, 1, 1, 1],
           // "albedo": "street-light",
+          "emissive": "red",
+          "albedo": "white",
           "sampler": "default"
         },
         "metal": {
@@ -231,7 +233,7 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          "texture": "knife",
+          "texture": "metal",
           "sampler": "default"
         },
         "arrow": {

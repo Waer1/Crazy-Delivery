@@ -18,7 +18,7 @@ namespace our
 				{"name", name},
 				{"position", {position.x, position.y, position.z}},
 				{"rotation", {0, 0, 0}},
-				{"scale", {1.5, 1.5, 1.5}},
+				{"scale", {3.2, 1.6, 3.2}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Mesh Renderer"},
@@ -38,7 +38,7 @@ namespace our
 						{"type", "Light"},
 						{"lightType", "spot"},
                         {"direction", {0, -1, 0}},
-                        {"diffuse", {0.25, 0.25, 0.25}},
+                        {"diffuse", {0.3, 0.3, 0.3}},
                         {"specular", {1, 1, 1}},
                         {"attenuation", {0.0095, 0.0095, 0.0095}},
                         {"cone_angles", {1.57, 1.85}}
