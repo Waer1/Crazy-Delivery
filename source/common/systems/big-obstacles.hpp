@@ -53,8 +53,8 @@ namespace our
         }, 
 
 				verticalPoints = {
-						glm::vec2(52, generateRandomNumber(-40, 40)), // up
-						glm::vec2(-54, generateRandomNumber(-40, 40)), // down
+						glm::vec2(52, generateRandomNumber(-40, 20)), // up
+						glm::vec2(-54, generateRandomNumber(-40, 20)), // down
         };
 
     public:
