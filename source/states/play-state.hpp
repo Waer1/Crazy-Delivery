@@ -98,7 +98,7 @@ class Playstate: public our::State {
         movementSystem->update(world, (float)deltaTime);
         carController->update(world, (float)deltaTime);
 				cameraController->update(world, (float)deltaTime);
-				eventHandlerSystem->update((float)deltaTime);
+				eventHandlerSystem->update(world,(float)deltaTime);
 				radioSystem->update();
 
         std::string postProcessType="";

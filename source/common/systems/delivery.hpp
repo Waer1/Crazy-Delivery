@@ -85,7 +85,7 @@ namespace our
 		}
 
 		void addDeliveryOnCar() {
-			deliveryOnCar->localTransform.scale = glm::vec3(0.5,0.5, 0.5);
+			deliveryOnCar->localTransform.scale = glm::vec3(0.35,0.35, 0.35);
 		}
 
 		void removeDelivery(Entity* delivery, World* world) {
