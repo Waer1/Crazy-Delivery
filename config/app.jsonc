@@ -1,5 +1,5 @@
 {
-  "start-scene": "menu",
+  "start-scene": "play",
   "window": {
     "title": "Crazy Delivery",
     "size": {

@@ -21,6 +21,7 @@ namespace our
     Entity* knifeOnCar;
     bool moveKnifeForward=false;
     bool moveKnifeBackward=false;
+    float knifeFrontSpeed=0.03,knifeBackSpeed=0.05;
 
     int targetDelivers;
     int numOfObstacles;
@@ -146,6 +147,7 @@ namespace our
                 float lastXPos=knifeOnCar->localTransform.position.x;
                 float lastYPos=knifeOnCar->localTransform.position.y;
                 glm::mat4 knifeMatrix = knifeOnCar->localTransform.toMat4();
+                //getting the value of the front vector which is vector in Z direction multiplied by the matrix calculated before
                 glm::vec3 front = glm::vec3(knifeMatrix * glm::vec4(0, 0, 1, 0));
 
 
@@ -154,7 +156,7 @@ namespace our
                         moveKnifeForward=true;
                     }
                 }
-
+                //If we enabled moving forward then we need to increase the value of Z to move forward
                 if(moveKnifeForward){
                     knifeOnCar->localTransform.position += front*(float(0.03));
                 }
@@ -170,7 +172,7 @@ namespace our
                     moveKnifeForward=false;
                     knifeOnCar->localTransform.position.z=0;
                 }
-
+                //If we reached our maximum position then we need to enable moving backward then returning back to initial position
                 if(moveKnifeBackward){
                     knifeOnCar->localTransform.position -= front*(float(0.05));
                 }

@@ -31,6 +31,7 @@ namespace our
 		Sound slice = Sound("assets/sounds/slice.wav", false);
 		// Save the car entity
         Entity *car;
+		Entity *KnifeOnCar;
         EventHandlerSystem *events;
         EnergySystem *energy;
         DeliverySystem *delivery;
@@ -44,6 +45,17 @@ namespace our
             for (auto entity : world->getEntities()){
                 if (entity->name == "car"){
 					car = entity;
+					break;
+                }
+            }
+        }
+
+		void setKnife(World* world) {
+            // For each entity in the world
+			// Check if it's name is "knife" and then set the knife entity we have
+            for (auto entity : world->getEntities()){
+                if (entity->name == "KnifeOnCar"){
+					KnifeOnCar = entity;
 					break;
                 }
             }
@@ -89,6 +101,7 @@ namespace our
 				this->batterySystem = battery;
 				this->carMovement = carMovement;
 				setCar(world);
+				setKnife(world);
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
@@ -184,6 +197,13 @@ namespace our
 							applyPostProcess=true;
 							postProcessIndicator="obstacle";
 						}
+					}					
+					// Crashing with an and knife
+					else if (entity->name == "obstacles" && this->KnifeOnCar->localTransform.scale != glm::vec3(0, 0, 0) &&crash(KnifeOnCar, entity, "obstacle")) {
+						if (!checkTime())
+							continue;
+						slice.play();
+						events->killMonkey(entity, world);
 					}
 				}
 				return applyPostProcess;
