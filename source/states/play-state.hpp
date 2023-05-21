@@ -106,10 +106,7 @@ class Playstate: public our::State {
         if(postProcessType!=""){
           lastPostProcessEvent=postProcessType;
         }
-        std::cout<< applyPostProcess<<std::endl;
-        std::cout<< "--------------------------------"<<std::endl;
-        std::cout<<timer<<endl;
-        std::cout<< "******************************************************************************"<<std::endl;
+
         energySystem->update(world);
 				batteryHandlerSystem->update(world);
 
