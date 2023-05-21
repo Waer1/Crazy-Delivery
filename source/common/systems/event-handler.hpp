@@ -80,6 +80,10 @@ namespace our
             return haveKnife;
         }
 
+        int getRemainingDeliveries() {
+            return targetDelivers;
+        }
+
         void deliverDelivery(World* world){
             if (haveDeliver) {
                 haveDeliver = 0;
