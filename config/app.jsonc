@@ -1278,6 +1278,14 @@
           {
             "type": "Position Point",
             "position": [-50, 2.8, -30]
+          },
+          {
+            "type": "Position Point",
+            "position": [55, 1.8, 10]
+          },
+          {
+            "type": "Position Point",
+            "position": [-20, 1.8, 40]
           }
         ]
       },

@@ -33,8 +33,7 @@ namespace our
         void initialize(Application* app, int targetDelivers, BigObstaclesSystem* obstacle, World* world){
             this->app = app;
             this->targetDelivers = targetDelivers;
-            our::BigObstaclesSystem* obstacleSystem = obstacle;
-            this->numOfObstacles = obstacleSystem->getNumOfObstacles();
+            this->numOfObstacles = obstacle->getNumOfObstacles();
 
             // Get front and back lights
             for (auto entity : world->getEntities()){
