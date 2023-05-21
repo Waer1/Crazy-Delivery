@@ -70,6 +70,10 @@ namespace our
             return haveKnife;
         }
 
+        int getRemainingDeliveries() {
+            return targetDelivers;
+        }
+
         void deliverDelivery(World* world){
             if (haveDeliver) {
                 haveDeliver = 0;
@@ -89,7 +93,6 @@ namespace our
         void killMonkey(Entity* entity, World* world) {
             world->markForRemoval(entity);
             world->deleteMarkedEntities();
-            std::cout << numOfObstacles << std::endl;
             numOfObstacles--;
             if (numOfObstacles == 0) {
                 winGame();

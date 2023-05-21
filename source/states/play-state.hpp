@@ -74,7 +74,7 @@ class Playstate: public our::State {
         carController->initialize(getApp(), world);
 
         // Target number of deliveries that a player can make
-        int numOfDeliveries = 1;
+        int numOfDeliveries = 5;
 
 
         // initialize the event handler system

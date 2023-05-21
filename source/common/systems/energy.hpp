@@ -125,7 +125,7 @@ namespace our
 
         void batteryCrash()
         {
-            increaseEnergy(30);
+            increaseEnergy(25);
         }
 
         void deliverMonkey()
@@ -135,12 +135,12 @@ namespace our
 
         void obstacleCrash()
         {
-            decreaseEnergy(20);
+            decreaseEnergy(15);
         }
 
         void buildingCrash()
         {
-            decreaseEnergy(10);
+            decreaseEnergy(20);
             crashed = true;
         }
 

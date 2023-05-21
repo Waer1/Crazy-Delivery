@@ -26,7 +26,9 @@ namespace our
 		Sound test = Sound("assets/sounds/Song.mp3", true);
 		Sound monkeys = Sound("assets/sounds/Monkey-Noises.mp3", false);
 		Sound gorillas = Sound("assets/sounds/Gorilla-SoundBible.com-1576451741.mp3", false);
-		Sound arrived=Sound("assets/sounds/destination.m4a",false);
+		Sound arrived = Sound("assets/sounds/destination.m4a", false);
+		Sound celebration = Sound("assets/sounds/celebrate.mp3", false);
+		Sound slice = Sound("assets/sounds/slice.wav", false);
 		// Save the car entity
         Entity *car;
         EventHandlerSystem *events;
@@ -90,7 +92,6 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
-				// test.changeVolume(25);
 				// test.play();
 			}
 
@@ -137,11 +138,15 @@ namespace our
 					else if (entity->name == "arrow" && crash(car, entity, "destination")) {
 						if (!checkTime())
 							continue;
-						if (events->isCarryDeliver()){
-							arrived.play();
+						bool carryingDelivery = events->isCarryDeliver();
+						events->deliverDelivery(world);
+						if (carryingDelivery){
+							if (events->getRemainingDeliveries() == 0)
+								celebration.play();
+							else
+								arrived.play();
 							energy->deliverMonkey();
 						}
-						events->deliverDelivery(world);
 						delivery->removeDeliveryOnCar();
 					}
 					// Hit a street pole
@@ -168,12 +173,12 @@ namespace our
 						if (!checkTime())
 							continue;
 
-						gorillas.play();
 						if (events->carryingKnife()) {
-							
+							slice.play();
 							events->killMonkey(entity, world);
 						}
 						else {
+							gorillas.play();
 							energy->obstacleCrash();
 							carMovement->decreaseCarSpeed();
 							applyPostProcess=true;
