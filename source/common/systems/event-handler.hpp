@@ -21,6 +21,7 @@ namespace our
     Entity* knifeOnCar;
     bool moveKnifeForward=false;
     bool moveKnifeBackward=false;
+    float knifeFrontSpeed=0.03,knifeBackSpeed=0.05;
 
     int targetDelivers;
     int numOfObstacles;
@@ -145,57 +146,49 @@ namespace our
             }
 
             // Throwing knife
+            // If the knife is on the car then we would apply the following logic
             if(knifeOnCar->localTransform.scale != glm::vec3(0, 0, 0)){
-
+                // firstly we need to get the position of the knife on the car
                 glm::vec3& knifePosition = knifeOnCar->localTransform.position;
+                //we only want to move it in Z direction then we will keep the values of X and Y as what they were before
                 float lastXPos=knifePosition.x;
                 float lastYPos=knifePosition.y;
+                //Getting the matrix to convert it to world space
                 glm::mat4 knifeMatrix = knifeOnCar->localTransform.toMat4();
+                //getting the value of the front vector which is vector in Z direction multiplied by the matrix calculated before
                 glm::vec3 front = glm::vec3(knifeMatrix * glm::vec4(0, 0, 1, 0));
 
-
+                //Then check if the user clicked on K
                 if(clickButton && app->getKeyboard().isPressed(GLFW_KEY_K)){
-                    std::cout<<"PRESSED"<<std::endl; 
-                    cout<<"--------------------------------------------"<<endl;
+                    //we need to check if the knife has been sent forward already and it's in the backward direction now to enable going forward
                     if(!moveKnifeBackward){
                     moveKnifeForward=true;
                     }
                 }
-
+                //If we enabled moving forward then we need to increase the value of Z to move forward
                 if(moveKnifeForward){
-                    knifePosition += front*(float(0.03));
-
-                    cout<<"ana fl knife forward"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
+                    knifePosition += front*(float(this->knifeFrontSpeed));
                     
                 }
-
+                //The maximum limit the knife can go to, after it we need to disable going forward and enabling going backward to return to its place
                 if(knifePosition.z>=7){
-                    cout<<"et7rk wara"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
                     moveKnifeForward=false;
                     moveKnifeBackward=true;
                     knifePosition.z=7;
                 }
-
+                // The minimum limit the knife can go to, which is its initial state at Z=0
                 if(knifePosition.z<=0){
                     moveKnifeBackward=false;
                     moveKnifeForward=false;
                     knifePosition.z=0;
-                    cout<<"wslna l bet"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
                 }
-
+                //If we reached our maximum position then we need to enable moving backward then returning back to initial position
                 if(moveKnifeBackward){
-                    cout<<"ana fl knife backward"<<endl;
-                    cout<<"--------------------------------------------"<<endl;
-                    knifePosition -= front*(float(0.05));
+                    knifePosition -= front*(float(this->knifeBackSpeed));
                 }
-
                 knifePosition.x=lastXPos;
                 knifePosition.y=lastYPos;
                 cout<< knifePosition.x<<" "<< knifePosition.y<<" "<<knifePosition.z<<endl;
-
             }
 
         }
