@@ -126,13 +126,13 @@ namespace our
 							delivery->removeDelivery(entity, world);
 						}
 					}
-					// Knife Pick-up
+					/*// Knife Pick-up
 					else if (entity->name == "knife" && crash(car, entity, "knife")) {
 						if (!events->carryingKnife()) {
 							events->collectKnife();
 							events->addKnife(entity, world);
 						}
-					}
+					}*/
 					// Arrived at the destination
 					else if (entity->name == "arrow" && crash(car, entity, "destination")) {
 						if (!checkTime())

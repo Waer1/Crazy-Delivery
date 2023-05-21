@@ -11,8 +11,8 @@
   "scene": {
     "renderer": {
       "sky": "assets/textures/night-sky.jpg",
-      "postprocess": "assets/shaders/postprocess/boosting.frag",
-      "energyPostProcess": "assets/shaders/postprocess/grayscale.frag"
+      "postprocess": "assets/shaders/postprocess/crashing.frag",
+      "energyPostProcess": "assets/shaders/postprocess/battery.frag"
     },
     "assets": {
       "shaders": {
@@ -534,8 +534,8 @@
           {
             "name": "delivery-on-car",
             "position": [0, 1.2, 0],
-            "rotation": [0, 0, 0],
-            "scale": [0.3, 0.3, 0.3],
+            "rotation": [0, 180, 0],
+            "scale": [0.5, 0.5, 0.5],
             "components": [
               {
                 "type": "Mesh Renderer",
@@ -544,7 +544,7 @@
               },
               {
                 "type": "Movement",
-                "angularVelocity": [0, 30, 0]
+                "angularVelocity": [0, 45, 0]
               }
             ]
           },
