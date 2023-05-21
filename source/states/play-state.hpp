@@ -75,7 +75,7 @@ class Playstate: public our::State {
 
         // initialize the event handler system
         bigObstaclesSystem->initialize(world);
-        eventHandlerSystem->startHandler(getApp(), numOfDeliveries, bigObstaclesSystem);
+        eventHandlerSystem->initialize(getApp(), numOfDeliveries, bigObstaclesSystem, world);
 
         // Initialize all other systems
         deliverySystem->initialize(world, numOfDeliveries);
@@ -94,6 +94,7 @@ class Playstate: public our::State {
         movementSystem->update(world, (float)deltaTime);
         carController->update(world, (float)deltaTime);
 				cameraController->update(world, (float)deltaTime);
+				eventHandlerSystem->update();
 				radioSystem->update();
 
         std::string postProcessType="";
