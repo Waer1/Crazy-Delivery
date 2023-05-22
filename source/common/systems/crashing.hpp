@@ -23,7 +23,6 @@ namespace our
     // The crashing system is responsible for checking if the car has crashed with any other entity.
 	// And act accordingly depending on what entity the car collided with
     class CrashingSystem {
-		Sound test = Sound("assets/sounds/Song.mp3", true);
 		Sound monkeys = Sound("assets/sounds/Monkey-Noises.mp3", false);
 		Sound gorillas = Sound("assets/sounds/Gorilla-SoundBible.com-1576451741.mp3", false);
 		Sound arrived = Sound("assets/sounds/destination.m4a", false);
@@ -94,7 +93,6 @@ namespace our
 
 				// Prevent the car from crashing at the start
 				lastCrashTime = std::chrono::high_resolution_clock::now();
-				// test.play();
 			}
 
 			bool checkTime() {
