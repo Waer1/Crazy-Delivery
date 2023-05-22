@@ -6,6 +6,7 @@
 #include <texture/texture-utils.hpp>
 #include <material/material.hpp>
 #include <mesh/mesh.hpp>
+#include <systems/sound.hpp>
 
 #include <functional>
 #include <array>
@@ -22,7 +23,11 @@ class Winstate: public our::State {
     // A variable to record the time since the state is entered (it will be used for the fading effect).
     float time;
 
+    Sound winSound = Sound("assets/sounds/win.mp3", true);
+
     void onInitialize() override {
+        winSound = Sound("assets/sounds/win.mp3", true);
+        winSound.play();
         // First, we create a material for the menu's background
         menuMaterial = new our::TexturedMaterial();
         // Here, we load the shader that will be used to draw the background
@@ -103,6 +108,7 @@ class Winstate: public our::State {
     }
 
     void onDestroy() override {
+        winSound.stop();
         // Delete all the allocated resources
         delete rectangle;
         delete menuMaterial->texture;

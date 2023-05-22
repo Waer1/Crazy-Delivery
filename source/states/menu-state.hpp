@@ -65,6 +65,7 @@ class Menustate: public our::State {
         menuMaterial->texture = our::texture_utils::loadImage("assets/textures/start-menu.jpg");
         // Initially, the menu material will be black, then it will fade in
         menuMaterial->tint = glm::vec4(0.0f, 0.0f, 0.0f, 0.0f);
+        introSound = Sound("assets/sounds/intro.mp3", true);
         introSound.play();
         std::cout<<"alo";
         // Second, we create a material to highlight the hovered buttons
