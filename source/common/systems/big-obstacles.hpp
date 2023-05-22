@@ -47,14 +47,14 @@ namespace our
         }
 
         vector<glm::vec2> horizontalPoints = {
-						glm::vec2(generateRandomNumber(-40, 40), -5), // middle
-						glm::vec2(generateRandomNumber(-40, 40), -47), // left
-						glm::vec2(generateRandomNumber(-40, 40), 34), // right
+						glm::vec2(generateRandomNumber(-30, 30), -5), // middle
+						glm::vec2(generateRandomNumber(-30, 30), -47), // left
+						glm::vec2(generateRandomNumber(-30, 30), 34), // right
         }, 
 
 				verticalPoints = {
-						glm::vec2(52, generateRandomNumber(-40, 20)), // up
-						glm::vec2(-54, generateRandomNumber(-40, 20)), // down
+						glm::vec2(52, generateRandomNumber(-30, 20)), // up
+						glm::vec2(-54, generateRandomNumber(-30, 20)), // down
         };
 
     public:

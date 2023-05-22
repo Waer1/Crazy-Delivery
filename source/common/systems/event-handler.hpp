@@ -101,7 +101,7 @@ namespace our
             world->markForRemoval(entity);
             world->deleteMarkedEntities();
             numOfObstacles--;
-            if (numOfObstacles == 0) {
+            if (numOfObstacles < 2) {
                 winGame();
             }
         }
