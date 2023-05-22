@@ -18,7 +18,7 @@ namespace our
 				{"name", name},
 				{"position", {position.x, position.y, position.z}},
 				{"rotation", {0, 0, 0}},
-				{"scale", {3.2, 1.6, 3.2}},
+				{"scale", {3.5, 1.65, 3.5}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Mesh Renderer"},
@@ -32,16 +32,16 @@ namespace our
 		nlohmann::json generateLights(glm::vec3 position, std::string name) {
 			return {
 				{"name", name},
-				{"position", {position.x, position.y + 4, position.z}},
+				{"position", {position.x, position.y + 5, position.z}},
 				{"components", nlohmann::json::array({
 					{
 						{"type", "Light"},
 						{"lightType", "spot"},
                         {"direction", {0, -1, 0}},
-                        {"diffuse", {0.3, 0.3, 0.3}},
+                        {"diffuse", {0.35, 0.35, 0.35}},
                         {"specular", {1, 1, 1}},
                         {"attenuation", {0.0095, 0.0095, 0.0095}},
-                        {"cone_angles", {1.57, 1.85}}
+                        {"cone_angles", {1.57, 1.9}}
 					}
 				})}
 			};

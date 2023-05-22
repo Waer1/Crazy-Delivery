@@ -50,7 +50,7 @@
         "red": "assets/textures/red.jpg",
         "battery_bar": "assets/textures/battery bar.png",
         "barborder": "assets/textures/barborder.png",
-        "street-light": "assets/textures/street-light.png",
+        "street-light": "assets/textures/pole.jpg",
         "knife": "assets/textures/knife.jpg"
       },
       "meshes": {
@@ -99,9 +99,11 @@
             }
           },
           "tint": [1, 1, 1, 1],
-          // "albedo": "street-light",
-          "emissive": "red",
-          "albedo": "white",
+          "albedo": "street-light",
+          "specular": "street-light",
+          "emissive": "street-light",
+          "ambient_occlusion": "street-light",
+          "roughness": "black",
           "sampler": "default"
         },
         "metal": {
