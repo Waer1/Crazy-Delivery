@@ -1,4 +1,5 @@
 # Crazy Delivery
+![Cover](https://github.com/Waer1/Crazy-Delivery/assets/82404564/01cf7c4f-9fae-47f8-9488-651dc0c5d749)
 
 ## 📝 Table of Contents
 
