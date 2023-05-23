@@ -98,4 +98,4 @@ https://github.com/Waer1/Crazy-Delivery/assets/82404564/13d5c15a-76f7-4163-9ae6-
 
 ## License
 
-> This software is licensed under MIT License, See [License]() for more information.
+> This software is licensed under MIT License, See [License](https://github.com/Waer1/Crazy-Delivery/blob/master/LICENSE.txt) for more information.
