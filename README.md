@@ -14,10 +14,10 @@
 ## 📙 About <a name = "about"></a>
 
 - The game consists of a car that aims to deliver all monkeys spawning at random locations on the map to their destination marked by an upside-down arrow.
-- Gorillas oscillate the map in different directions and the player should avoid hitting them or else he'll lose a considerable amount of energy and the car speed resets.
+- Gorillas oscillate the map in different directions and the player should avoid hitting them or else he'll lose a considerable amount of energy and the car speed will reset.
 - Crashing with a building also takes away energy and brings the car to the initial position when the game started.
-- Once all monkeys have been delivered, a knife spawns somewhere in the map and the last phase is finding it to go an kill the gorillas.
-- Gaining energy is done by delivering monkeys or getting one of the two batterieds in the 2 fixed positions on the map. Small details are shown in the demo video such as car lights flickering, peep sounds, lighting across the whole map from street poles and the moon, and much more to see.
+- Once all monkeys have been delivered, a knife spawns somewhere in the map and the last phase is finding it to go and kill the gorillas.
+- Gaining energy is done by delivering monkeys or getting one of the two batteries in the 2 fixed positions on the map. Small details are shown in the demo video such as car lights flickering, car horn sound, postprocessing effects, lighting across the whole map from street poles and the moon, and much more to see.
 
 ## 💻 Technology <a name = "technolgies"></a>
 
