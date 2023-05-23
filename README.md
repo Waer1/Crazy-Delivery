@@ -51,19 +51,16 @@ then follow up with
 
 ## Game Demo 🖥️ <a name = "demo"></a>
 
-https://github.com/Waer1/Crazy-Delivery/assets/82404564/8a216f69-06ec-45a7-a952-e705aa8a50f5
+![screenshot-2023-05-23-14-57-29](https://github.com/Waer1/Crazy-Delivery/assets/82404564/d69368ee-ecc1-4810-9ff8-30ddba08df64)
+![screenshot-2023-05-23-14-57-03](https://github.com/Waer1/Crazy-Delivery/assets/82404564/b2eed613-1cf4-4125-b964-383858ddd3e0)
+![screenshot-2023-05-23-14-57-31](https://github.com/Waer1/Crazy-Delivery/assets/82404564/bec67b53-5f65-4ea3-bac9-43a5dbe7f9e1)
+![screenshot-2023-05-23-14-57-39](https://github.com/Waer1/Crazy-Delivery/assets/82404564/132299dd-02d0-47c7-8e86-19e34060ec59)
+![screenshot-2023-05-23-14-57-45](https://github.com/Waer1/Crazy-Delivery/assets/82404564/5d706b36-18c0-4c03-807b-1b3ea773ea9c)
+![screenshot-2023-05-23-14-57-52](https://github.com/Waer1/Crazy-Delivery/assets/82404564/e392bcfc-a4ad-4292-b3bb-a457a5dd9679)
+![screenshot-2023-05-23-14-58-04](https://github.com/Waer1/Crazy-Delivery/assets/82404564/274ba2f2-f89d-4b63-97e4-7f837944cc0b)
+![screenshot-2023-05-23-14-58-51](https://github.com/Waer1/Crazy-Delivery/assets/82404564/c8b1b111-ed82-4638-aff9-44d9cae768bb)
+![screenshot-2023-05-23-14-58-53](https://github.com/Waer1/Crazy-Delivery/assets/82404564/7259f0c2-02ec-48a5-b360-62c7921a74af)
 
-https://github.com/Waer1/Crazy-Delivery/assets/82404564/13d5c15a-76f7-4163-9ae6-0883f5089313
-
-![screenshot-2023-05-23-14-57-29](https://github.com/Waer1/Crazy-Delivery/assets/82404564/cc42381a-43bf-44f0-9575-6deb91534a76)
-![screenshot-2023-05-23-14-57-03](https://github.com/Waer1/Crazy-Delivery/assets/82404564/5130525c-8561-4907-a681-43fdd3a15f98)
-![screenshot-2023-05-23-14-57-31](https://github.com/Waer1/Crazy-Delivery/assets/82404564/56968e2b-89da-4301-a8b3-44008c89c69e)
-![screenshot-2023-05-23-14-57-39](https://github.com/Waer1/Crazy-Delivery/assets/82404564/42a38953-c21f-418a-88e2-d9646e8457ce)
-![screenshot-2023-05-23-14-57-45](https://github.com/Waer1/Crazy-Delivery/assets/82404564/80f299e8-341e-4f48-b142-4964a7f8e1a1)
-![screenshot-2023-05-23-14-57-52](https://github.com/Waer1/Crazy-Delivery/assets/82404564/b5ac0efb-f5df-40e3-9d22-353580e795b6)
-![screenshot-2023-05-23-14-58-04](https://github.com/Waer1/Crazy-Delivery/assets/82404564/f058c027-ae88-405c-ae64-11eb6a17586a)
-![screenshot-2023-05-23-14-58-51](https://github.com/Waer1/Crazy-Delivery/assets/82404564/ef14db50-e41a-4c87-8667-2a31db64040a)
-![screenshot-2023-05-23-14-58-53](https://github.com/Waer1/Crazy-Delivery/assets/82404564/45eb22e8-2765-4e12-a55f-68799f488195)
 
 ## Contributors <a name = "contributors"></a>
 
