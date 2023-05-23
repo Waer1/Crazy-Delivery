@@ -1,6 +1,6 @@
 # Crazy Delivery
 
-![Cover](https://github.com/Waer1/Crazy-Delivery/assets/82404564/01cf7c4f-9fae-47f8-9488-651dc0c5d749)
+![cover](https://github.com/Waer1/Crazy-Delivery/assets/82404564/6d20cd07-a101-4ab4-9972-eb3718aa191a)
 
 ## 📝 Table of Contents
 
@@ -50,6 +50,10 @@ then follow up with
 ❇️ **K** to use the knife when you have it 🗡️.
 
 ## Game Demo 🖥️ <a name = "demo"></a>
+
+https://github.com/Waer1/Crazy-Delivery/assets/82404564/519fb7d2-a9e3-4387-9cfc-d841651c5f97
+
+https://github.com/Waer1/Crazy-Delivery/assets/82404564/3ee5f68e-120c-4ab0-a8b9-c8b847c28c61
 
 ![screenshot-2023-05-23-14-57-29](https://github.com/Waer1/Crazy-Delivery/assets/82404564/d69368ee-ecc1-4810-9ff8-30ddba08df64)
 ![screenshot-2023-05-23-14-57-03](https://github.com/Waer1/Crazy-Delivery/assets/82404564/b2eed613-1cf4-4125-b964-383858ddd3e0)
