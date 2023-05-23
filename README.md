@@ -1,4 +1,5 @@
 # Crazy Delivery
+
 ![Cover](https://github.com/Waer1/Crazy-Delivery/assets/82404564/01cf7c4f-9fae-47f8-9488-651dc0c5d749)
 
 ## 📝 Table of Contents
@@ -64,7 +65,6 @@ https://github.com/Waer1/Crazy-Delivery/assets/82404564/13d5c15a-76f7-4163-9ae6-
 ![screenshot-2023-05-23-14-58-51](https://github.com/Waer1/Crazy-Delivery/assets/82404564/ef14db50-e41a-4c87-8667-2a31db64040a)
 ![screenshot-2023-05-23-14-58-53](https://github.com/Waer1/Crazy-Delivery/assets/82404564/45eb22e8-2765-4e12-a55f-68799f488195)
 
-
 ## Contributors <a name = "contributors"></a>
 
 <table>
@@ -95,3 +95,7 @@ https://github.com/Waer1/Crazy-Delivery/assets/82404564/13d5c15a-76f7-4163-9ae6-
     </td>
   </tr>
  </table>
+
+## License
+
+> This software is licensed under MIT License, See [License]() for more information.
