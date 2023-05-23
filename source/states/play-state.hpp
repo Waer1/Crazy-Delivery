@@ -42,11 +42,7 @@ class Playstate: public our::State {
     int timer=0;
     std::string lastPostProcessEvent="";
 
-    Sound music = Sound("assets/sounds/Song.mp3", true);
-
     void onInitialize() override {
-        music = Sound("assets/sounds/Song.mp3", true);
-        music.play();
         world = new our::World;
         renderer = new our::ForwardRenderer;
         carController = new our::CarMovementSystem;
@@ -144,7 +140,6 @@ class Playstate: public our::State {
     }
 
     void onDestroy() override {
-        music.stop();
         // Don't forget to destroy the renderer
         renderer->destroy();
         // On exit, we call exit for the camera controller system to make sure that the mouse is unlocked
